@@ -14,9 +14,9 @@ class Nilai extends Model
     protected $primaryKey='id_nilai';
     protected $fillable=['id_siswa','id_mata_pelajaran','101','102','111','112'];
 
-    protected $attributes=[
-        'rata_rata'=>('101'+'102'+'111'+'112')/4,
-    ];
+    // protected $attributes=[
+    //     'rata_rata'=>('101'+'102'+'111'+'112')/4,
+    // ];
     
 
     public $timestamps=false;

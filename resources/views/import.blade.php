@@ -25,7 +25,7 @@
 </div>
 
 
-<div class="container mt-5" >
+<!-- <div class="container mt-5" >
         <h3>Daftar Peserta PMDK</h3>
         <table class="table" border="1">
             <tr>
@@ -50,7 +50,7 @@
         </table>
     
     <span> {{$nilais->links()}}</span> 
-</div>
+</div> -->
 
 
 

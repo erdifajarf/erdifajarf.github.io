@@ -7,7 +7,7 @@ use App\Models\Sekolah;
 
 use Illuminate\Support\Facades\DB;
 
-use Maatwebsite\Excel\Concerns\ToModel;
+use Maatwebsite\Excel\Concerns\ToModel;g
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
 class DataSekolahImport implements ToModel, WithHeadingRow

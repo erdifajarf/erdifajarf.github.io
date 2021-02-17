@@ -23,7 +23,6 @@ class CreateNilaiTable extends Migration
             $table->double('102');
             $table->double('111');
             $table->double('112');
-            $table->double('rata_rata');
    
         });
     }
