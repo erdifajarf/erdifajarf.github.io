@@ -11,16 +11,9 @@ use Illuminate\Support\Facades\DB;
 
 class NilaiController extends Controller
 {
-    //
-    public function index()
-    {
-        return view('import', [
-            'users' => DB::table('nilai')->paginate(5)
-        ]);
-    }
-
-    public function show(){
-        $data = Nilai::paginate(2);
+    //MENAMPILKAN DATA PMDK DI HALAMAN UTAMA
+    function show(){
+        $data=Nilai::paginate(10);
         return view('import',['nilais'=>$data]);
     }
 }

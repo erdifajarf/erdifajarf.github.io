@@ -3,72 +3,79 @@
 <x-header/>
 <head>
     <title>Laravel</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" 
+    integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    
+         <link rel="stylesheet" href="\css\app.css" >
+
+  
 </head>
+
+
 <body>
    
 <div class="container">
     <div class="card bg-light mt-3">
         <div class="card-header">
-            Unggah data siswa peminat PMDK dengan format file Excel.
+            Unggah data sekolah peminat PMDK dengan format file Excel.
         </div>
         <div class="card-body">
-            <form action="{{ route('import') }}"  enctype="multipart/form-data" method="POST">
+            <form action="{{ route('importData') }}"  enctype="multipart/form-data" method="POST">
                 @csrf
                 <input type="file" name="file" class="form-control">
                 <br>
-                <button class="btn btn-success">Import Data Siswa</button>
+                <button class="btn btn-success">Import Data Sekolah</button>
                 <!-- <a class="btn btn-warning" href="/export">Export Data Siswa</a> -->
             </form>
         </div>
     </div>
 </div>
 
-
-<!-- <div class="container mt-5" >
-        <h3>Daftar Peserta PMDK</h3>
-        <table class="table" border="1">
-            <tr>
-                <td>Id_Siswa</td>
-                <td>Mata Pelajaran</td>
-                <td>Kelas X (smt 1)</td>
-                <td>Kelas X (smt 2)</td>
-                <td>Kelas XI (smt 1)</td>
-                <td>Kelas XI (smt 2)</td>
-            </tr>
-
-        @foreach($nilais as $nilai)
+<div class="kolom">
+    <table class="table table-striped">
         <tr>
-                <td>{{$nilai['id_siswa']}}</td>
-                <td>{{$nilai['id_mata_pelajaran']}}</td>
-                <td>{{$nilai['101']}}</td>
-                <td>{{$nilai['102']}}</td>
-                <td>{{$nilai['111']}}</td>
-                <td>{{$nilai['112']}}</td>
+            <th rowspan=2 class="table-primary">ID NILAI</th>
+            <th rowspan=2 class="table-primary">ID SISWA</th>
+            <th rowspan=2 class="table-primary">ID MATA PELAJARAN</th>
+            <th colspan=2 class="table-primary">Kelas X</th>
+            <th colspan=2 class="table-primary">Kelas XI</th>
+
+
         </tr>
-        @endforeach
-        </table>
-    
-    <span> {{$nilais->links()}}</span> 
-</div> -->
 
+    <div class="semester">
+        <tr>
+                <th class="table-primary">Semester 1</th>
+                <th class="table-primary">Semester 2</th>
+                <th class="table-primary">Semester 1</th>
+                <th class="table-primary">Semester 2</th>
+        </tr>
+    </div>
 
-
-
-<div>
-    <a href=""></a>
 </div>
 
 
+@foreach($nilais as $nilai)
+    <tr>
+        <td>{{$nilai['id_nilai']}}</td>
+        <td>{{$nilai['id_siswa']}}</td>
+        <td>{{$nilai['id_mata_pelajaran']}}</td>
+        <td>{{$nilai['101']}}</td>
+        <td>{{$nilai['102']}}</td>
+        <td>{{$nilai['111']}}</td>
+        <td>{{$nilai['112']}}</td>
+    </tr>
+@endforeach
+</table>
 
 
+<span>
+    {{$nilais->links()}}
+</span>
 
-<style>
-    .w-5{
-        display:none
-    }
-</style>
+<a href="#" class="next round">&#8250;</a>
 
 
 </body>
 </html>
+

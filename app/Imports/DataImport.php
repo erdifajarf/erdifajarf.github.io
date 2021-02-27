@@ -23,25 +23,22 @@ class DataImport implements ToModel, WithHeadingRow
 
     public function model(array $row)
     {
-        // $dataSekolah=null;
+        $dataSekolah=null;
         $dataSiswa=null;
         $dataNilai=null;
         
-
-        // $nama_sekolah_sama = Sekolah::where('nama_sekolah','=',$row['asal_sma'])->get();
         
-        // $jumlah_sekolah = $nama_sekolah_sama->count();
-
-        // if($jumlah_sekolah===0)
-        // {
-        //     $dataSekolah= new Sekolah([
-        //         'nama_sekolah'  => $row['asal_sma'],
-        //     ]);
+        $nama_sekolah_sama = Sekolah::where('nama_sekolah','=',$row['asal_sma'])->get()->count();
+        if($nama_sekolah_sama===0)
+        {
+            $dataSekolah=new Sekolah([
+                'nama_sekolah'  => $row['asal_sma'],
+            ]);
               
-        // }
+        }
 
-         $jumlah_siswa_sama = Siswa::where('nama_siswa','=',$row['nama'])->get()->count();
-         if ($jumlah_siswa_sama==0){
+         $nama_siswa_sama = Siswa::where('nama_siswa','=',$row['nama'])->get()->count();
+         if ($nama_siswa_sama==0){
          
             $dataSiswa=new Siswa([
                 'id_sekolah' => DB::table('sekolah')->
@@ -51,10 +48,13 @@ class DataImport implements ToModel, WithHeadingRow
                 
                 'nama_siswa' => $row['nama'],
                 
-            ]);
+            ]) ;
         }
 
-         $dataNilai=new Nilai([
+
+  
+        $dataNilai=new Nilai([
+           
             'id_siswa' => DB::table('siswa')->
                             select('id_siswa')->
                             where('nama_siswa','=',$row['nama'])->
@@ -65,24 +65,25 @@ class DataImport implements ToModel, WithHeadingRow
                             where('nama_mata_pelajaran','=',$row['mata_pelajaran'])->
                             value('id_mata_pelajaran'),
              
-            '101'=>$row['nilai'],
-            '102'=>$row['nilai'],
-            '111'=>$row['nilai'],
-            '112'=>$row['nilai'],
-            'rata_rata'=>2.5,
+            '101'=>$row['101'],
+            '102'=>$row['102'],
+            '111'=>$row['111'],
+            '112'=>$row['112'],
          ]);
 
         
-      
-        if($dataSiswa===null){
-            
+
+        // if($dataSekolah!=null){
+        //     return array($dataSekolah);
+        // }
+        // else if($dataSiswa!=null){
+        //     return array($dataSiswa);
+        // }
+        
+        
+        if($dataNilai!=null){
             return array($dataNilai);
-        }
-        else {
-            return array($dataSiswa,$dataNilai);
         }
 
     }
-
- 
 }

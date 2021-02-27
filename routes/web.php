@@ -27,7 +27,6 @@ use App\Http\Controllers\NilaiController;
 // Route::get('export', [MyController::class, 'export'])->name('export');
 
 Route::get('/', [MyController::class, 'halamanImport']);
-// Route::post('import', [MyController::class,'importDataSekolah'])->name('import');
-Route::post('import', [MyController::class,'importDataSiswa'])->name('import');
+Route::post('/', [MyController::class,'importDataSiswa'])->name('importData');
 
-Route::get('/', [NilaiController::class, 'show']);
+Route::get('/',[NilaiController::class,'show']);

@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
-
 use Illuminate\Http\Request;
 // use App\Exports\UsersExport;
 use App\Imports\DataImport;
 use App\Imports\DataSekolahImport;
 use Maatwebsite\Excel\Facades\Excel;
 
+
+Use App\Http\Controllers\Redirect;
 
 class MyController extends Controller
 {
@@ -43,8 +44,8 @@ class MyController extends Controller
 
     public function importDataSekolah(){
         Excel::import(new DataSekolahImport,request()->file('file'));
-        
-        return back()->with('success','Project created successfully');
+        return back();
+
     }
 
 }

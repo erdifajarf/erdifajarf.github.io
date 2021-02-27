@@ -7,7 +7,7 @@ use App\Models\Sekolah;
 
 use Illuminate\Support\Facades\DB;
 
-use Maatwebsite\Excel\Concerns\ToModel;g
+use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
 class DataSekolahImport implements ToModel, WithHeadingRow
@@ -17,21 +17,23 @@ class DataSekolahImport implements ToModel, WithHeadingRow
     *
     * @return \Illuminate\Database\Eloquent\Model|null
     */
-
+    
 
     public function model(array $row)
     {
+        $dataSekolah=null;
 
-        $nama_sekolah_sama = Sekolah::where('nama_sekolah','=',$row['asal_sma'])->get();
-        
-        $jumlah_sekolah = $nama_sekolah_sama->count();
-
-        if($jumlah_sekolah===0)
+        $nama_sekolah_sama = Sekolah::where('nama_sekolah','=',$row['asal_sma'])->get()->count();
+        if($nama_sekolah_sama===0)
         {
-            return new Sekolah([
+            $dataSekolah=new Sekolah([
                 'nama_sekolah'  => $row['asal_sma'],
             ]);
               
+        }
+
+        if($dataSekolah!=null){
+            return array($dataSekolah);
         }
 
 
