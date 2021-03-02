@@ -4,16 +4,16 @@
 <head>
     <title>Laravel</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" 
-    integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
-    
-         <link rel="stylesheet" href="\css\app.css" >
+        integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <link rel="stylesheet" href="\css\app.css" >
 
-  
 </head>
 
 
 <body>
-   
+
+
+
 <div class="container">
     <div class="card bg-light mt-3">
         <div class="card-header">
@@ -29,18 +29,15 @@
             </form>
         </div>
     </div>
-</div>
+
 
 <div class="kolom">
     <table class="table table-striped">
         <tr>
-            <th rowspan=2 class="table-primary">ID NILAI</th>
             <th rowspan=2 class="table-primary">ID SISWA</th>
             <th rowspan=2 class="table-primary">ID MATA PELAJARAN</th>
             <th colspan=2 class="table-primary">Kelas X</th>
             <th colspan=2 class="table-primary">Kelas XI</th>
-
-
         </tr>
 
     <div class="semester">
@@ -53,13 +50,19 @@
     </div>
 
 </div>
-
+    </div>
 
 @foreach($nilais as $nilai)
+
     <tr>
-        <td>{{$nilai['id_nilai']}}</td>
         <td>{{$nilai['id_siswa']}}</td>
-        <td>{{$nilai['id_mata_pelajaran']}}</td>
+        @if($nilai['id_mata_pelajaran']=='1')
+            <td>Matematika</td>
+        @else
+            <td>B.Ingrris</td>
+        @endif 
+        
+
         <td>{{$nilai['101']}}</td>
         <td>{{$nilai['102']}}</td>
         <td>{{$nilai['111']}}</td>
@@ -68,12 +71,31 @@
 @endforeach
 </table>
 
+<nav aria-label="...">
+  <ul class="pagination">
+    <li class="page-item disabled">
+      <a class="page-link" href="#" tabindex="-1">Previous</a>
+    </li>
+    <li class="page-item"><a class="page-link" href="?page=1">1</a></li>
+    <li class="page-item active">
+      <a class="page-link" href="?page=2">2 <span class="sr-only"></span></a>
+    </li>
+    <li class="page-item"><a class="page-link" href="?page=3">3</a></li>
+    <li class="page-item">
+      <a class="page-link" href="#">Next</a>
+    </li>
+  </ul>
+</nav>
 
-<span>
+
+<!-- <span>
     {{$nilais->links()}}
-</span>
+</span> -->
 
-<a href="#" class="next round">&#8250;</a>
+
+<div class="tombolNext">
+    <a href="{{('halamanPenentuanBobotDanKuota')}}" class="next round">&#8250;</a>
+</div>
 
 
 </body>

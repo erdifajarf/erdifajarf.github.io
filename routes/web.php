@@ -28,5 +28,6 @@ use App\Http\Controllers\NilaiController;
 
 Route::get('/', [MyController::class, 'halamanImport']);
 Route::post('/', [MyController::class,'importDataSiswa'])->name('importData');
-
 Route::get('/',[NilaiController::class,'show']);
+
+Route::get('/halamanPenentuanBobotDanKuota',[MyController::class,'halamanPenentuanBobot']);

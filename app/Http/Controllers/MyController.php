@@ -35,6 +35,10 @@ class MyController extends Controller
         return view('import');
     }
 
+    public function halamanPenentuanBobot(){
+        return view('halamanPenentuanBobotDanKuota');
+    }
+
 
     public function importDataSiswa() 
     {
