@@ -32,7 +32,7 @@ class MyController extends Controller
     */
     
     public function halamanImport(){
-        return view('import');
+        return view('halamanUtama');
     }
 
     public function halamanPenentuanBobot(){

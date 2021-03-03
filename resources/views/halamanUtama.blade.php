@@ -93,7 +93,7 @@
 </span> -->
 
 
-<div class="tombolNext">
+<div class="tombolNextPrev">
     <a href="{{('halamanPenentuanBobotDanKuota')}}" class="next round">&#8250;</a>
 </div>
 

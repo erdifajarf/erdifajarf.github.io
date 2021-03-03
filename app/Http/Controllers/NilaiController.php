@@ -14,6 +14,6 @@ class NilaiController extends Controller
     //MENAMPILKAN DATA PMDK DI HALAMAN UTAMA
     function show(){
         $data=Nilai::paginate(10);
-        return view('import',['nilais'=>$data]);
+        return view('halamanUtama',['nilais'=>$data]);
     }
 }
