@@ -31,3 +31,7 @@ Route::post('/', [MyController::class,'importDataSiswa'])->name('importData');
 Route::get('/',[NilaiController::class,'show']);
 
 Route::get('/halamanPenentuanBobotDanKuota',[MyController::class,'halamanPenentuanBobot']);
+
+
+
+Route::get('/print',[NilaiController::class,'print']);

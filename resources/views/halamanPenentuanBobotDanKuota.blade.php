@@ -68,15 +68,17 @@
             <div class="opsi4">
                 <form>
                     <label for=""> <h5>Jumlah Kuota</h5> </label>
-                    <input type="text"  name="kuota" placeholder="Angka..">
+                    <input type="text"  name="kuota" placeholder="...">
                 </form>
             </div>
         </div>
 
 
-        <div class="tombolSeleksi">
-            <button type="button" class="btn btn-success">Jalankan Seleksi</button>
-        </div>
+        <!-- <div class="tombolSeleksi">
+            <button type="button" class="btn btn-success" onclick="{{('print')}}">Jalankan Seleksi</button>
+        </div> -->
+
+        <a href="{{('/print')}}">run!</a>
 
 
         <div class="tombolNextPrev">

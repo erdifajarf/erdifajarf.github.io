@@ -35,7 +35,7 @@
     <table class="table table-striped">
         <tr>
             <th rowspan=2 class="table-primary">ID SISWA</th>
-            <th rowspan=2 class="table-primary">ID MATA PELAJARAN</th>
+            <th rowspan=2 class="table-primary">MATA PELAJARAN</th>
             <th colspan=2 class="table-primary">Kelas X</th>
             <th colspan=2 class="table-primary">Kelas XI</th>
         </tr>

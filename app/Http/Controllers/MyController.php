@@ -40,6 +40,7 @@ class MyController extends Controller
     }
 
 
+
     public function importDataSiswa() 
     {
         Excel::import(new DataImport,request()->file('file'));
