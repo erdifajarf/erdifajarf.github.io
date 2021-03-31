@@ -20,6 +20,7 @@ class CreateMataPelajaranTable extends Migration
         });
     }
 
+
     /**
      * Reverse the migrations.
      *

@@ -41,16 +41,13 @@ class MyController extends Controller
 
 
 
-    public function importDataSiswa() 
+    public function importData() 
     {
         Excel::import(new DataImport,request()->file('file'));
         return back();
-    }
-
-    public function importDataSekolah(){
-        Excel::import(new DataSekolahImport,request()->file('file'));
-        return back();
 
     }
+
+
 
 }

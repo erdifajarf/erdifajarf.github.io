@@ -11,53 +11,35 @@ use Illuminate\Http\Request;
 
 class SiswaController extends Controller
 {
+    private $noPmb;
     private $namaSiswa;
     private $skl;
-    private $nlMat;
-    private $nlIng;
+    private $nilai;
+    
 
-    // private $RataRataMat;
-    // private $RataRataIng;
-
-
-    function __construct($namaSiswa,$skl,$nlMat,$nlIng){
+    function __construct($noPmb,$namaSiswa,$skl,$nilai){
+        $this->noPmb = $noPmb;
         $this->namaSiswa = $namaSiswa;
         $this->skl = $skl;
-        $this->nlMat = $nlMat;
-        $this->nlIng= $nlIng;
+        $this->nilai = $nilai;
+    }
+    function getNoPmb(){
+        return $this->noPmb;
+    }
+    function getNamaSiswa(){
+        return $this->namaSiswa;
     }
 
-    function getNamaSiswa(){
-        return $this->namaSiswa->nama_siswa;
-    }
 
 
     function getSekolah(){
+        //Mengembalikan tipe data sekolah seorang siswa
         return $this->skl;
     }
 
-    function getNilaiMat(){
-
-        return $this->nlMat;
+    function getNilai(){
+        return $this->nilai;
     }
-
-    function getNilaiIng(){
-
-        return $this->nlIng;
-    }
-
-    function hitungRataRata($nlMatpel){
-        $total=0;
-
-        $total = $nlMatpel[0]->{'101'}+
-        $nlMatpel[1]->{'102'}+
-        $nlMatpel[2]->{'111'}+ 
-        $nlMatpel[3]->{'112'};
-
-        $total = $total/4;
-        return $total;
-    }
-
 
 
 

@@ -11,11 +11,12 @@ class Siswa extends Model
     use HasFactory;
     
     protected $primaryKey='id_siswa';
-    protected $fillable=['id_sekolah','nama_siswa'];
+    protected $fillable=['id_siswa','id_sekolah','nama_siswa'];
 
 
     public $table ="siswa";
     public $timestamps=false;
+
 
 
 }

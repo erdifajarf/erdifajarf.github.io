@@ -19,10 +19,18 @@ class CreateNilaiTable extends Migration
             $table->foreign('id_siswa')->references('id_siswa')->on('siswa');
             $table->unsignedBigInteger('id_mata_pelajaran')->nullable();
             $table->foreign('id_mata_pelajaran')->references('id_mata_pelajaran')->on('mata_pelajaran');
-            $table->double('101');
-            $table->double('102');
-            $table->double('111');
-            $table->double('112');
+            $table->double('101_KKM');
+            $table->double('101_p');
+            $table->double('101_t');
+            $table->double('102_KKM');
+            $table->double('102_p');
+            $table->double('102_t');
+            $table->double('111_KKM');
+            $table->double('111_p');
+            $table->double('111_t');
+            $table->double('112_KKM');
+            $table->double('112_p');
+            $table->double('112_t');
    
         });
     }

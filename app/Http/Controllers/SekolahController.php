@@ -12,16 +12,16 @@ class SekolahController extends Controller
     private $namaSekolah;
     private $peringkat;
 
-    function __construct($namaSekolah='', $peringkat=''){
+    public function __construct($namaSekolah='', $peringkat=''){
         $this->namaSekolah = $namaSekolah;
         $this->peringkat = $peringkat;
     }
 
-    function getNamaSekolah(){
+    public function getNamaSekolah(){
         return $this->namaSekolah;
     }
 
-    function getPeringkat(){
+    public function getPeringkat(){
         return $this->peringkat;
     }
 }

@@ -10,7 +10,7 @@ class Sekolah extends Model
     use HasFactory;
 
     protected $primaryKey='id_sekolah';
-    protected $fillable=['nama_sekolah'];
+    protected $fillable=['nama_sekolah','peringkat_sekolah'];
 
     
     public $table ="sekolah";

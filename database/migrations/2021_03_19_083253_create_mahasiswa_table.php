@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSiswaTable extends Migration
+class CreateMahasiswaTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,14 @@ class CreateSiswaTable extends Migration
      */
     public function up()
     {
-        Schema::create('siswa', function (Blueprint $table) {
-            $table->bigIncrements('id_siswa');
+        Schema::create('mahasiswa', function (Blueprint $table) {
+            $table->bigIncrements('id_mahasiswa');
             $table->unsignedBigInteger('id_sekolah')->nullable();
             $table->foreign('id_sekolah')->references('id_sekolah')->on('sekolah');
-            $table->String('nama_siswa');
+            $table->String('nama_mahasiswa');
+            $table->float('IPK');
 
         });
-
-
-
     }
 
     /**
@@ -32,6 +30,6 @@ class CreateSiswaTable extends Migration
      */
     public function down()
     {
-        Schema::drop('siswa');
+        Schema::dropIfExists('alumni_sekolah');
     }
 }

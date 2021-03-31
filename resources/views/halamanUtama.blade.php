@@ -24,7 +24,7 @@
                 @csrf
                 <input type="file" name="file" class="form-control">
                 <br>
-                <button class="btn btn-success">Import Data Sekolah</button>
+                <button class="btn btn-success">Import Data</button>
                 <!-- <a class="btn btn-warning" href="/export">Export Data Siswa</a> -->
             </form>
         </div>
@@ -34,18 +34,31 @@
 <div class="kolom">
     <table class="table table-striped">
         <tr>
-            <th rowspan=2 class="table-primary">ID SISWA</th>
-            <th rowspan=2 class="table-primary">MATA PELAJARAN</th>
-            <th colspan=2 class="table-primary">Kelas X</th>
-            <th colspan=2 class="table-primary">Kelas XI</th>
+            <th rowspan=3 class="table-primary">No.PMB</th>
+            <th rowspan=3 class="table-primary">MATA PELAJARAN</th>
+            <th colspan=4 class="table-primary">Kelas X</th>
+            <th colspan=4 class="table-primary">Kelas XI</th>
         </tr>
 
     <div class="semester">
         <tr>
-                <th class="table-primary">Semester 1</th>
-                <th class="table-primary">Semester 2</th>
-                <th class="table-primary">Semester 1</th>
-                <th class="table-primary">Semester 2</th>
+                <th colspan=2 class="table-primary">Semester 1</th>
+                <th colspan=2 class="table-primary">Semester 2</th>
+                <th colspan=2 class="table-primary">Semester 1</th>
+                <th colspan=2 class="table-primary">Semester 2</th>
+        </tr>
+    </div>
+
+    <div class="jenis_nilai">
+        <tr>
+                <th class="table-primary">Praktik</th>
+                <th class="table-primary">Teori</th>
+                <th class="table-primary">Praktik</th>
+                <th class="table-primary">Teori</th>
+                <th class="table-primary">Praktik</th>
+                <th class="table-primary">Teori</th>
+                <th class="table-primary">Praktik</th>
+                <th class="table-primary">Teori</th>
         </tr>
     </div>
 
@@ -59,14 +72,18 @@
         @if($nilai['id_mata_pelajaran']=='1')
             <td>Matematika</td>
         @else
-            <td>B.Ingrris</td>
+            <td>B.Ingriss</td>
         @endif 
         
 
-        <td>{{$nilai['101']}}</td>
-        <td>{{$nilai['102']}}</td>
-        <td>{{$nilai['111']}}</td>
-        <td>{{$nilai['112']}}</td>
+        <td>{{$nilai['101_p']}}</td>
+        <td>{{$nilai['101_t']}}</td>
+        <td>{{$nilai['102_p']}}</td>
+        <td>{{$nilai['102_t']}}</td>
+        <td>{{$nilai['111_p']}}</td>
+        <td>{{$nilai['111_t']}}</td>
+        <td>{{$nilai['112_p']}}</td>
+        <td>{{$nilai['112_t']}}</td>
     </tr>
 @endforeach
 </table>
