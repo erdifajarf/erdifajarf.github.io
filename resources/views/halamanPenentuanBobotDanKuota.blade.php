@@ -78,7 +78,7 @@
             <button type="button" class="btn btn-success" onclick="{{('print')}}">Jalankan Seleksi</button>
         </div> -->
 
-        <a href="{{('/print')}}">run!</a>
+        <a href="{{('/halamanHasilSeleksi')}}">run!</a>
 
 
         <div class="tombolNextPrev">

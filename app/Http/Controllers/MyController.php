@@ -39,6 +39,10 @@ class MyController extends Controller
         return view('halamanPenentuanBobotDanKuota');
     }
 
+    public function halamanHasilSeleksi(){
+        return view('halamanHasilSeleksi');
+    }
+
 
 
     public function importData() 

@@ -4,6 +4,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MyController;
 use App\Http\Controllers\NilaiController;
+use App\Http\Controllers\MainController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -34,4 +36,7 @@ Route::get('/halamanPenentuanBobotDanKuota',[MyController::class,'halamanPenentu
 
 
 
-Route::get('/print',[NilaiController::class,'print']);
+// Route::get('/halamanHasilSeleksi',[MyController::class,'halamanHasilSeleksi']);
+Route::get('/halamanHasilSeleksi',[MainController::class,'showHasilSeleksiPMDK']);
+
+
