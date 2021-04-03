@@ -183,8 +183,18 @@ class MainController extends Controller
         // }
         
 
+        $kelasFuzzy = new FuzzyController($hasilKriteria);
+        $hasilKategori = $kelasFuzzy->getHasilKategori();
+
+        $ntp = 2;
+        $nti = 3;
+        $pti = 4;
+        $kelasFuzzyAhp = new FuzzyAhpController($hasilKategori,$ntp,$nti,$pti);
+        
+        $cekNilaiNtp = $kelasFuzzyAhp->getNtp();
         //HARUS DIRETURN OBJECT BERTIPE ARRAY, KARNA AKAN DIPANGGIL DI BLADE
-        return $hasilKriteria;
+        
+        return $cekNilaiNtp;
     }
 
     function showHasilSeleksiPMDK(){

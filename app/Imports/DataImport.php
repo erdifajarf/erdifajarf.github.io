@@ -44,25 +44,25 @@ class DataImport implements ToModel, WithHeadingRow
         {
             $dataSekolah=new Sekolah([
                 'nama_sekolah'  => $row['asal_sma'],
-                'peringkat_sekolah'=> '15',
+                'peringkat_sekolah'=> $row['peringkat_sekolah'],
             ]);
               
         }
 
-         $nama_siswa_sama = Siswa::where('nama_siswa','=',$row['nama'])->get()->count();
-         if ($nama_siswa_sama==0){
+        //  $nama_siswa_sama = Siswa::where('nama_siswa','=',$row['nama'])->get()->count();
+        //  if ($nama_siswa_sama==0){
          
-            $dataSiswa=new Siswa([
-                'id_siswa'=>$row['no_pmb'],
-                'id_sekolah' => DB::table('sekolah')->
-                                select('id_sekolah')->
-                                where('nama_sekolah','=',$row['asal_sma'])->
-                                value('id_sekolah'),
+        //     $dataSiswa=new Siswa([
+        //         'id_siswa'=>$row['no_pmb'],
+        //         'id_sekolah' => DB::table('sekolah')->
+        //                         select('id_sekolah')->
+        //                         where('nama_sekolah','=',$row['asal_sma'])->
+        //                         value('id_sekolah'),
                 
-                'nama_siswa' => $row['nama'],
+        //         'nama_siswa' => $row['nama'],
                 
-            ]) ;
-        }
+        //     ]) ;
+        // }
 
 
   
@@ -78,16 +78,16 @@ class DataImport implements ToModel, WithHeadingRow
                             where('nama_mata_pelajaran','=',$row['mata_pelajaran'])->
                             value('id_mata_pelajaran'),
              
-            '101_kkm'=>$row['101_kkm'],
+            '101_KKM'=>$row['101_kkm'],
             '101_p'=>$row['101_p'],
             '101_t'=>$row['101_t'],
-            '102_kkm'=>$row['102_kkm'],
+            '102_KKM'=>$row['102_kkm'],
             '102_p'=>$row['102_p'],
             '102_t'=>$row['102_t'],
-            '111_kkm'=>$row['111_kkm'],
+            '111_KKM'=>$row['111_kkm'],
             '111_p'=>$row['111_p'],
             '111_t'=>$row['111_t'],
-            '112_kkm'=>$row['112_kkm'],
+            '112_KKM'=>$row['112_kkm'],
             '112_p'=>$row['112_p'],
             '112_t'=>$row['112_t'],
          ]);
@@ -138,9 +138,9 @@ class DataImport implements ToModel, WithHeadingRow
 
 
         //STEP 5  
-        // if($dataNilai!=null){
-        //     return array($dataNilai);
-        // }
+        if($dataNilai!=null){
+            return array($dataNilai);
+        }
 
     }
 }

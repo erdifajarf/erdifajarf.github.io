@@ -23,20 +23,19 @@
         <table class="table table-striped">
 
             <tr>
-                <th class="table-primary">Peringkat</th>
+                <!-- <th class="table-primary">Peringkat</th> -->
                 <th class="table-primary">No.PMB</th>
                 <th class="table-primary">Nama</th>
             </tr>
 
     </div>
 
-        <!-- @foreach ($siswas[1] as $siswa)
-            <tr>
-                <td> {{$siswa}}</td>
-            </tr>
-        @endforeach -->
-
         </table>
+
+
+        <div class="tombolNextPrev">
+            <a href="{{('/halamanPenentuanBobotDanKuota')}}" class="previous round">&#8249;</a>
+        </div>
 
 
 </div>

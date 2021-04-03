@@ -31,45 +31,53 @@
     </div>
 
 
-<div class="kolom">
-    <table class="table table-striped">
-        <tr>
-            <th rowspan=3 class="table-primary">No.PMB</th>
-            <th rowspan=3 class="table-primary">MATA PELAJARAN</th>
-            <th colspan=4 class="table-primary">Kelas X</th>
-            <th colspan=4 class="table-primary">Kelas XI</th>
-        </tr>
+    <div class="kolom">
+        <table class="table table-striped">
+            <tr>
+                <th rowspan=3 class="table-primary">No.PMB</th>
+                <th rowspan=3 class="table-primary">MATA PELAJARAN</th>
+                <th colspan=4 class="table-primary">Kelas X</th>
+                <th colspan=4 class="table-primary">Kelas XI</th>
+            </tr>
 
-    <div class="semester">
-        <tr>
-                <th colspan=2 class="table-primary">Semester 1</th>
-                <th colspan=2 class="table-primary">Semester 2</th>
-                <th colspan=2 class="table-primary">Semester 1</th>
-                <th colspan=2 class="table-primary">Semester 2</th>
-        </tr>
+        <div class="semester">
+            <tr>
+                    <th colspan=2 class="table-primary">Semester 1</th>
+                    <th colspan=2 class="table-primary">Semester 2</th>
+                    <th colspan=2 class="table-primary">Semester 1</th>
+                    <th colspan=2 class="table-primary">Semester 2</th>
+            </tr>
+        </div>
+
+        <div class="jenis_nilai">
+            <tr>
+                    <th class="table-primary">Praktik</th>
+                    <th class="table-primary">Teori</th>
+                    <th class="table-primary">Praktik</th>
+                    <th class="table-primary">Teori</th>
+                    <th class="table-primary">Praktik</th>
+                    <th class="table-primary">Teori</th>
+                    <th class="table-primary">Praktik</th>
+                    <th class="table-primary">Teori</th>
+            </tr>
+        </div>
+
     </div>
-
-    <div class="jenis_nilai">
-        <tr>
-                <th class="table-primary">Praktik</th>
-                <th class="table-primary">Teori</th>
-                <th class="table-primary">Praktik</th>
-                <th class="table-primary">Teori</th>
-                <th class="table-primary">Praktik</th>
-                <th class="table-primary">Teori</th>
-                <th class="table-primary">Praktik</th>
-                <th class="table-primary">Teori</th>
-        </tr>
-    </div>
-
-</div>
 
 
 
 @foreach($nilais as $nilai)
 
     <tr>
+
+
         <td>{{$nilai['id_siswa']}}</td>
+
+
+
+
+
+
         @if($nilai['id_mata_pelajaran']=='1')
             <td>Matematika</td>
         @else
@@ -91,11 +99,11 @@
 
     <nav aria-label="...">
     <ul class="pagination">
-        <li class="page-item disabled">
-        <a class="page-link" href="#" tabindex="-1">Previous</a>
+        <li class="page-item">
+        <a class="page-link" href="?page=1" tabindex="-1">Previous</a>
         </li>
         <li class="page-item"><a class="page-link" href="?page=1">1</a></li>
-        <li class="page-item active">
+        <li class="page-item ">
         <a class="page-link" href="?page=2">2 <span class="sr-only"></span></a>
         </li>
         <li class="page-item"><a class="page-link" href="?page=3">3</a></li>

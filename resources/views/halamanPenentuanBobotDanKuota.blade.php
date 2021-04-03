@@ -74,11 +74,10 @@
         </div>
 
 
-        <!-- <div class="tombolSeleksi">
-            <button type="button" class="btn btn-success" onclick="{{('print')}}">Jalankan Seleksi</button>
-        </div> -->
+        <div class="tombolSeleksi">
+            <a class="btn btn-success" href="{{('/halamanHasilSeleksi')}}">Jalankan Seleksi</a>
+        </div>
 
-        <a href="{{('/halamanHasilSeleksi')}}">run!</a>
 
 
         <div class="tombolNextPrev">

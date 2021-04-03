@@ -10,7 +10,7 @@
 .header .judulWeb{
   margin-left:15%;
   margin-top:-12%;
-  padding:5%;
+  padding:2.5%;
 }
 
 .header .judulWeb h1{
@@ -36,6 +36,10 @@
     text-align:center;
     vertical-align:middle;
 }
+
+/* .pagination{
+  background-color: rgb(255, 255, 255);
+} */
 
 .tombolNextPrev a {
     text-decoration: none;
@@ -67,6 +71,7 @@
 
 
 .headerPenentuanBobot h2{
+  margin-top:5%;
   margin-left: 15%;;
 }
 
@@ -126,9 +131,10 @@
 }
 
 .tombolSeleksi{
-  text-align:center;
-  margin-top:-5%;
+  margin-left:45%;
+  margin-top:-10%;
 }
+
 
 
 
