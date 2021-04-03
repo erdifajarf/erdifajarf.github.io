@@ -18,10 +18,12 @@
          <h2>Penentuan Bobot Antar Kriteria & Jumlah Kuota Penerimaan</h2>
     </div> 
 
+    <form action="/halamanHasilSeleksi" method="POST">
+        @csrf
         <div class="penentuanBobot">
-            <div class="opsi1">
+            <div class="opsi1" >
                 <h5>Nilai Raport -> Peringkat Sekolah<h5> 
-                    <select>
+                    <select name="ntp">
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
@@ -36,7 +38,7 @@
             
             <div class="opsi2">
                 <h5>Nilai Raport -> IPK Alumni</h5>
-                    <select>
+                    <select name="nti">
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
@@ -52,7 +54,7 @@
 
             <div class="opsi3">
                 <h5>Peringkat Sekolah -> IPK Alumni</h5>
-                    <select>
+                    <select name="pti">
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
@@ -66,17 +68,23 @@
             </div>
 
             <div class="opsi4">
-                <form>
                     <label for=""> <h5>Jumlah Kuota</h5> </label>
                     <input type="text"  name="kuota" placeholder="...">
-                </form>
             </div>
         </div>
 
-
+        
         <div class="tombolSeleksi">
-            <a class="btn btn-success" href="{{('/halamanHasilSeleksi')}}">Jalankan Seleksi</a>
+            <button type="submit" class="btn btn-success" href="{{route('main')}}">Jalankan Seleksi</a>
         </div>
+
+    </form>
+
+        
+
+
+
+
 
 
 

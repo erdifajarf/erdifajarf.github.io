@@ -67,7 +67,6 @@ class DataImport implements ToModel, WithHeadingRow
 
   
         $dataNilai=new Nilai([
-           
             'id_siswa' => DB::table('siswa')->
                             select('id_siswa')->
                             where('nama_siswa','=',$row['nama'])->

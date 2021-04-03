@@ -28,15 +28,11 @@ use App\Http\Controllers\MainController;
 
 // Route::get('export', [MyController::class, 'export'])->name('export');
 
-Route::get('/', [MyController::class, 'halamanImport']);
-Route::post('/', [MyController::class,'importData'])->name('importData');
+Route::get('/', [MainController::class, 'pindahHalamanImport']);
+Route::post('/', [MainController::class,'importData'])->name('importData');
 Route::get('/',[NilaiController::class,'show']);
 
-Route::get('/halamanPenentuanBobotDanKuota',[MyController::class,'halamanPenentuanBobot']);
+Route::get('/halamanPenentuanBobotDanKuota',[MainController::class,'pindahHalamanPenentuanBobot']);
 
 
-
-// Route::get('/halamanHasilSeleksi',[MyController::class,'halamanHasilSeleksi']);
-Route::get('/halamanHasilSeleksi',[MainController::class,'showHasilSeleksiPMDK']);
-
-
+Route::post('/halamanHasilSeleksi',[MainController::class,'main'])->name('main');

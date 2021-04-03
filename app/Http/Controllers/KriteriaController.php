@@ -8,16 +8,12 @@ class KriteriaController extends Controller
 {
     private $hasilSeleksiKkm; // Array Siswa, dari yang sudah di seleksiKKM
     private $alumniSekolah; //Array kumpulan mahasiswa di DB
-
-    // private $namaPeminat;
-    // private $rataRataNilaiAkhir; // Rata rata nilai mat dan ing
     private $ipkAlumni; //Array ipk para alumni sekolah yg sama dengan peminat PMDK
 
     function __construct($hasilSeleksiKkm,$alumniSekolah){
         $this->hasilSeleksiKkm = $hasilSeleksiKkm;
         $this->alumniSekolah = $alumniSekolah;
     }
-
 
 
     function hitungRataRataNilaiAkhir($idx){
@@ -38,8 +34,7 @@ class KriteriaController extends Controller
                     if($this->hasilSeleksiKkm[$idx]->getSekolah()->getNamaSekolah()->nama_sekolah == $this->alumniSekolah[$j]->getSekolah()->getNamaSekolah()->nama_sekolah){
                          $jumlahIPK+=$this->alumniSekolah[$j]->getIpk()->IPK;
                          $hitungJumlahAlumni+=1;
-                    }
-                    
+                    }   
                 }
 
                 if($hitungJumlahAlumni==0)
@@ -54,10 +49,6 @@ class KriteriaController extends Controller
 
                 return $ipkAlumni;
         }
-
-    
-
-
 
     function getHasilKriteria(){
         $hasilSeleksi;

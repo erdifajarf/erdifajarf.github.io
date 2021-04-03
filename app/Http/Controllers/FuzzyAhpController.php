@@ -19,4 +19,12 @@ class FuzzyAhpController extends Controller
     function getNtp(){
         return $this->ntp;
     }
+
+    function getNti(){
+        return $this->nti;
+    }
+
+    function getPti(){
+        return $this->pti;
+    }
 }

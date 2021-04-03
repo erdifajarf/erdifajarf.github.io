@@ -9,7 +9,7 @@ class MainController extends Controller
 {
     private $hasilSeleksiPMDK;
 
-    function main(){
+    function main(Request $req){
         
         $count_ing=1;
         $count_mat=2;
@@ -186,21 +186,48 @@ class MainController extends Controller
         $kelasFuzzy = new FuzzyController($hasilKriteria);
         $hasilKategori = $kelasFuzzy->getHasilKategori();
 
-        $ntp = 2;
-        $nti = 3;
-        $pti = 4;
-        $kelasFuzzyAhp = new FuzzyAhpController($hasilKategori,$ntp,$nti,$pti);
+        dump($hasilKategori);
+
+
+        $selectNtp = $req->ntp;
+        $selectNti = $req->nti;
+        $selectPti = $req->pti;
+        $kelasFuzzyAhp = new FuzzyAhpController($hasilKategori,$selectNtp,$selectNti,$selectPti);
         
         $cekNilaiNtp = $kelasFuzzyAhp->getNtp();
-        //HARUS DIRETURN OBJECT BERTIPE ARRAY, KARNA AKAN DIPANGGIL DI BLADE
-        
-        return $cekNilaiNtp;
+        $cekNilaiNti = $kelasFuzzyAhp->getNti();
+        $cekNilaiPti = $kelasFuzzyAhp->getPti();
+
+        dump($cekNilaiNtp);
+        dump($cekNilaiNti);
+        dump($cekNilaiPti);
+
+
+        return view('halamanHasilSeleksi');
     }
 
-    function showHasilSeleksiPMDK(){
-        $data=$this->main();
-        dump($data);
-        return view('halamanHasilSeleksi',['siswas'=>$data]);
+
+
+
+
+    public function pindahHalamanImport(){
+        return view('halamanUtama');
+    }
+
+    public function pindahHalamanPenentuanBobot(){
+        return view('halamanPenentuanBobotDanKuota');
+    }
+
+    public function pindahHalamanHasilSeleksi(){
+        return view('halamanHasilSeleksi');
+    }
+
+
+    public function importData() 
+    {
+        Excel::import(new DataImport,request()->file('file'));
+        return back();
+
     }
 
 
