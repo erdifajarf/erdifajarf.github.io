@@ -69,11 +69,11 @@
 
             <div class="opsi4">
                     <label for=""> <h5>Jumlah Kuota</h5> </label>
-                    <input type="text"  name="kuota" placeholder="...">
+                    <input type="text"  name="kuota" placeholder="Jumlah kuota..">
             </div>
         </div>
 
-        
+    
         <div class="tombolSeleksi">
             <button type="submit" class="btn btn-success" href="{{route('main')}}">Jalankan Seleksi</a>
         </div>

@@ -186,7 +186,7 @@ class MainController extends Controller
         $kelasFuzzy = new FuzzyController($hasilKriteria);
         $hasilKategori = $kelasFuzzy->getHasilKategori();
 
-        dump($hasilKategori);
+        // dump($hasilKategori);
 
 
         $selectNtp = $req->ntp;
@@ -195,15 +195,48 @@ class MainController extends Controller
         $kelasFuzzyAhp = new FuzzyAhpController($hasilKategori,$selectNtp,$selectNti,$selectPti);
         
         $cekNilaiNtp = $kelasFuzzyAhp->getNtp();
-        $cekNilaiNti = $kelasFuzzyAhp->getNti();
-        $cekNilaiPti = $kelasFuzzyAhp->getPti();
+        // $cekNilaiNti = $kelasFuzzyAhp->getNti();
+        // $cekNilaiPti = $kelasFuzzyAhp->getPti();
 
-        dump($cekNilaiNtp);
-        dump($cekNilaiNti);
-        dump($cekNilaiPti);
+        // dump($cekNilaiNtp);
+        // dump($cekNilaiNti);
+        // dump($cekNilaiPti);
+
+        
+        $bobotAwalKriteria = $kelasFuzzyAhp->getBobotAwalkriteria();
+        //LIHAT HASIL PERHITUNG BOBOT AWAL KRITERIA
+        // for($i=0; $i<3; $i++){
+        //     for($j=0; $j<3; $j++){
+        //         echo number_format($bobotAwalKriteria[$i][$j],1). " ";
+        //     }
+        //     echo '<br>';
+        // }
+        
+        //Hitung CR kriteria
+        $CR = $kelasFuzzyAhp->hitungConsistencyRatio($bobotAwalKriteria);
+        
+        dump($CR);
+
+        //hitungBobotPrioritasKriteria
+        $bobotPrioritasAntarKriteria = $kelasFuzzyAhp->hitungBobotPrioritasAntarKriteria();
+        
+        //LIHAT HASIL PERHITUNG BOBOT AWAL KRITERIA
+        // for($i=0; $i<count($bobotPrioritasAntarKriteria); $i++){
+        //     for($j=0; $j<count($bobotPrioritasAntarKriteria[0]); $j++){
+        //         echo number_format($bobotPrioritasAntarKriteria[$i][$j],2). " ". " ";
+        //     }
+        //     echo '<br>';
+        // }
+
+        dump($bobotPrioritasAntarKriteria);
+        
+
+
 
 
         return view('halamanHasilSeleksi');
+
+
     }
 
 
