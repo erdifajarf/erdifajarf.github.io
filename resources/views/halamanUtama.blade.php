@@ -12,30 +12,65 @@
 
 <body>
 
-
-
 <div class="container">
-    <div class="card bg-light mt-3">
-        <div class="card-header">
-            Unggah data sekolah peminat PMDK dengan format file Excel.
+        <div class="headerUpload">
+            <h4> Unggah data sekolah peminat PMDK dengan format file Excel. </h4>
         </div>
-        <div class="card-body">
-            <form action="{{ route('importData') }}"  enctype="multipart/form-data" method="POST">
-                @csrf
-                <input type="file" name="file" class="form-control">
-                <br>
-                <button class="btn btn-success">Import Data</button>
-                <!-- <a class="btn btn-warning" href="/export">Export Data Siswa</a> -->
-            </form>
-        </div>
-    </div>
+
+        
+
+
+        <form action="{{ route('importData') }}"  enctype="multipart/form-data" method="POST" class="tabelUpload">
+            @csrf
+
+
+
+            <input type="file" name="file" id="fileInput">
+            <label for="fileInput">Pilih file</label>
+            
+   
+                <span >
+                    <strong>File dipilih:</strong>
+                    <span id="namaFile">Kosong</span>
+                </span>
+
+
+
+            <script>
+                let fileInput = document.getElementById('fileInput');
+                let areaNamaFile = document.getElementById('namaFile');
+                fileInput.addEventListener('change', function(event){
+                    let namaFileUploaded = event.target.files[0].name;
+                    areaNamaFile.textContent = namaFileUploaded;
+                })
+            </script>
+
+
+
+     
+            <button class="btn btn-success tombolUpload">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-upload" viewBox="0 0 16 16">
+                <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                <path d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708l3-3z"/>
+                </svg>
+            </button>
+
+        </form>
+
+
+
+
+    
+
+    @include('sweetalert::alert')
 
 
     <div class="kolom">
         <table class="table table-striped">
             <tr>
                 <th rowspan=3 class="table-primary">No.PMB</th>
-                <th rowspan=3 class="table-primary">MATA PELAJARAN</th>
+                <th rowspan=3 class="table-primary">Nama</th>
+                <th rowspan=3 class="table-primary">Mata Pelajaran</th>
                 <th colspan=4 class="table-primary">Kelas X</th>
                 <th colspan=4 class="table-primary">Kelas XI</th>
             </tr>
@@ -66,36 +101,38 @@
 
 
 
-@foreach($nilais as $nilai)
 
-    <tr>
+        @php
+        $index=0;
+        @endphp
+        @foreach($nilais as $nilai)
+            <tr>
+                @if($index%2=='0')
+                    <td rowspan=2>{{$nilai['id_siswa']}}</td>
+                    <td rowspan=2>{{$namaSiswa[$index]->nama_siswa}}</td>
+                @endif
+                
 
-
-        <td>{{$nilai['id_siswa']}}</td>
-
-
-
-
-
-
-        @if($nilai['id_mata_pelajaran']=='1')
-            <td>Matematika</td>
-        @else
-            <td>B.Ingriss</td>
-        @endif 
-        
-
-        <td>{{$nilai['101_p']}}</td>
-        <td>{{$nilai['101_t']}}</td>
-        <td>{{$nilai['102_p']}}</td>
-        <td>{{$nilai['102_t']}}</td>
-        <td>{{$nilai['111_p']}}</td>
-        <td>{{$nilai['111_t']}}</td>
-        <td>{{$nilai['112_p']}}</td>
-        <td>{{$nilai['112_t']}}</td>
-    </tr>
-@endforeach
-</table>
+                @if($nilai['id_mata_pelajaran']=='1')
+                    <td>Matematika</td>
+                @else
+                    <td>B.Ingriss</td>
+                @endif 
+                
+                <td>{{$nilai['101_p']}}</td>
+                <td>{{$nilai['101_t']}}</td>
+                <td>{{$nilai['102_p']}}</td>
+                <td>{{$nilai['102_t']}}</td>
+                <td>{{$nilai['111_p']}}</td>
+                <td>{{$nilai['111_t']}}</td>
+                <td>{{$nilai['112_p']}}</td>
+                <td>{{$nilai['112_t']}}</td>
+            </tr>
+        @php
+        $index++;
+        @endphp
+        @endforeach
+    </table>
 
     <nav aria-label="...">
     <ul class="pagination">
@@ -114,9 +151,7 @@
     </nav>
 
 
-<!-- <span>
-    {{$nilais->links()}}
-</span> -->
+
 
 
     <div class="tombolNextPrev">

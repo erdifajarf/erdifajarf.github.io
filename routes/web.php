@@ -30,7 +30,7 @@ use App\Http\Controllers\MainController;
 
 Route::get('/', [MainController::class, 'pindahHalamanImport']);
 Route::post('/', [MainController::class,'importData'])->name('importData');
-Route::get('/',[NilaiController::class,'show']);
+Route::get('/',[MainController::class,'showDataPeminat']);
 
 Route::get('/halamanPenentuanBobotDanKuota',[MainController::class,'pindahHalamanPenentuanBobot']);
 

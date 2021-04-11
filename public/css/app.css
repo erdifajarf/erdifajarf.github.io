@@ -29,6 +29,10 @@
     display:none;
 }
 
+.headerUpload h4{
+  padding:3% 2% 2% 0%;
+}
+
 .kolom{
     margin-top:5%;
 }
@@ -37,9 +41,41 @@
     vertical-align:middle;
 }
 
-/* .pagination{
-  background-color: rgb(255, 255, 255);
+
+.border{
+ padding:0.4%;
+ /* padding-right:60%; */
+ position:relative;
+}
+
+/* .inputFile{
+  width:50%;
 } */
+
+input#fileInput{
+  display:none;
+}
+
+input#fileInput + label{
+  background-color:green;
+  padding:8px;
+  color:white;
+  border:2px solid;
+  border-radius:9px;
+}
+
+input#fileInput + label:hover{
+  background-color:darkgreen;
+
+  cursor:pointer;
+}
+
+.tombolUpload{
+  position: relative;
+  float:right;
+}
+
+
 
 .tombolNextPrev a {
     text-decoration: none;
@@ -54,7 +90,7 @@
   }
   
 .tombolNextPrev .previous {
-    margin-top: 5%;
+    margin-top:5%;
     background-color: green;
     color: white;
     float:left;
@@ -70,76 +106,111 @@
   }
 
 
-.headerPenentuanBobot h2{
-  margin-top:5%;
-  margin-left: 15%;;
+.headerPenentuanBobot h3{
+  margin-top:2%;
+  margin-left: 5%;;
 }
 
 
 .penentuanBobot {
-  margin-left:25%;
-  padding:5%;
+  margin-left:30%;
+  padding:1%;
 }
 
 
-.opsi1 h5{
-  display:inline;
-}
-
-.opsi1 select{
-  margin-left: 5%;
-}
-
-.opsi2 h5{
-  display:inline;
-}
-
-.opsi2 select{
-  margin-left: 12.4%;
-}
-
-.opsi2{
-  margin-top:3%;
+.opsi1,.opsi2,.opsi3{
+  padding:2%;
+  margin-bottom:-3%;
 }
 
 
-.opsi3 select{
-  margin-left: 6%;
+
+
+.opsi1 .logoPenentuanBobot  img{
+  width:12%;
+  margin-left:-5%;
 }
 
-.opsi3 h5{
-  display:inline;
+.opsi1 .logoPenentuanBobot .logoNilai{
+  margin-right:5%;
+}
+.opsi1 .logoPenentuanBobot .logoSekolah{
+  margin-left:5%;
 }
 
-.opsi3{
-  margin-top:3%;
+
+.opsi2 .logoPenentuanBobot img{
+  width:12%;
+  margin-left:-5%;
+
 }
+
+.opsi2 .logoPenentuanBobot .logoSekolah{
+  margin-right:5%;
+}
+
+.opsi2 .logoPenentuanBobot .logoIpk{
+  margin-left:6%;
+  width:10%;
+}
+
+.opsi3 .logoPenentuanBobot img{
+  width:12%;
+  margin-left:-5%;
+
+}
+
+.opsi3 .logoPenentuanBobot .logoNilai{
+  margin-right:5%;
+}
+
+.opsi3 .logoPenentuanBobot .logoIpk{
+  margin-left:6%;
+  width:10%;
+
+}
+
+.jumlahBobot{
+  margin-left:14%;
+  margin-top:-2%;
+}
+
+
+select{
+  width:5%;
+}
+
 
 
 .opsi4 input{
-  margin-left: 25%;
   margin-bottom:15%;
-  width: 7%;
+  width: 10%;
 }
 
-.opsi4 h5{
-  display:inline;
-}
 
 .opsi4{
   margin-top:3%;
 }
 
 .tombolSeleksi{
-  margin-left:45%;
-  margin-top:-10%;
+  margin-left:40%;
+  margin-top:-8%;
 }
 
 
+.tabelKeterangan{
+  width:42%;
+  margin-left:75%;
+  margin-top:-40%;
+}
 
+.tabelKeterangan th{
+  height:2px;
+}
 
 .headerHasilSeleksi h2{
-  margin-left: 25%;;
+  margin-left: 30%;;
+  margin-top:5%;
 }
 
 
