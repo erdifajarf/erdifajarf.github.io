@@ -110,12 +110,16 @@ class FuzzyAhpController extends Controller
 
         $CR= $CI/$RI[count($arrKriteria)-1]; //nilai consistency ratio
         
-        if($CR<=0.1){
+        // if($CR<=0.1){
+        //     return number_format($CR,2);
+        // }
+        // else{
+        //     echo 'ULANGI PENILAIAN ANDA';
+        // }
+
+
             return number_format($CR,2);
-        }
-        else{
-            echo 'ULANGI PENILAIAN ANDA';
-        }
+ 
       
     }
 
@@ -289,6 +293,7 @@ class FuzzyAhpController extends Controller
             }
            $countJ=0;
        }
+      
 
        //menghitung nilai rata-rata geometris dari tfn
        $rataRataGeo;

@@ -171,7 +171,7 @@ class MainController extends Controller
         $hasilKriteria = $kelasKriteria->getHasilKriteria();
         
 
-        // dump($hasilKriteria);
+        dump($hasilKriteria);
 
         // for($i=0; $i<count($hasilKriteria[0]); $i++){
         //     echo $i+1;
@@ -214,6 +214,7 @@ class MainController extends Controller
         //     }
         //     echo '<br>';
         // }
+        // dump($bobotAwalKriteria);
         
         // Hitung CR kriteria
         $CR = $kelasFuzzyAhp->hitungConsistencyRatio($bobotAwalKriteria);
@@ -229,7 +230,7 @@ class MainController extends Controller
         
         //Cek hasil kategori
         $hasilKategoriAlternatif = $kelasFuzzyAhp->getHasilKategori();
-        // dump($hasilKategoriAlternatif);
+        dump($hasilKategoriAlternatif);
         
 
 
@@ -269,6 +270,12 @@ class MainController extends Controller
                                                             $bobotPrioAltfIpk);
 
         // dump($hasilPemeringkatan);
+        
+        // $hasilKategoriPemeringkatan;
+        // for($i=0; $i<count($hasilPemeringkatan); $i++){
+        //     $hasilKategoriPemeringkatan=
+        // }
+
         
 
 

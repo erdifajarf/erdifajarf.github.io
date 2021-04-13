@@ -167,9 +167,17 @@
         function changeLink() {
             var id = window.location.href;
             var lastChar = id.substr(id.length - 1);
-
+            
+            var next = parseInt(lastChar)+1;
             var pageNext = document.getElementById('pageNext');
-            pageNext.setAttribute('href', '?page='lastChar+=1);
+
+            pageNext.setAttribute('href', '?page='+next);
+
+            
+
+            // if(pageNext=='?page=4'){
+            //     pageNext.style.visibility = "hidden";
+            // }
 
             return false;
         }
