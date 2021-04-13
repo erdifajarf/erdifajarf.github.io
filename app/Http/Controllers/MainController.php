@@ -6,6 +6,7 @@ use App\Models\Nilai;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
+
 use App\Imports\DataImport;
 use Maatwebsite\Excel\Facades\Excel;
 use Alert;
@@ -281,8 +282,6 @@ class MainController extends Controller
         }
         
 
-
-
         return view('halamanHasilSeleksi',['hasilPMDK'=>$hasilPMDK,'kuotaPMDK'=>$kuotaPmdk]);
 
 
@@ -292,19 +291,10 @@ class MainController extends Controller
     
     //MENAMPILKAN DATA PMDK DI HALAMAN UTAMA
     function showDataPeminat(){
-        $data=Nilai::paginate(10);
+        $data=Nilai::join('siswa','nilai.id_siswa','=','siswa.id_siswa')->
+        paginate(10);
 
-        $pmbNilai = DB::table('nilai')->select('id_siswa')->get()->toArray();
-
-        $namaSiswa = array_fill(0,4,'kosong');
-        for($i=0; $i<count($pmbNilai); $i++){
-            $namaSiswa[$i]= DB::table('nilai')->join('siswa','nilai.id_siswa','=','siswa.id_siswa')->
-                select('nama_siswa')->where('siswa.id_siswa','=',$pmbNilai[$i]->id_siswa)->first();
-        }
-
-
-
-        return view('halamanUtama',['nilais'=>$data,'namaSiswa'=>$namaSiswa]);
+        return view('halamanUtama',['nilais'=>$data]);
 
     }
 

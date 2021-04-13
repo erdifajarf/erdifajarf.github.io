@@ -8,209 +8,213 @@
 } */
 
 .header .judulWeb{
-  margin-left:15%;
-  margin-top:-12%;
-  padding:2.5%;
-}
+    margin-left:15%;
+    margin-top:-12%;
+    padding:2.5%;
+  }
+  
+  .header .judulWeb h1{
+    font-size: 350%;
+  }
+  
+  
+  .header .logoUnpar{
+    width:11%;
+    margin-left:5%;
+  }
+  
+  
+  
+  .w-5{
+      display:none;
+  }
+  
+  .headerUpload h4{
+    padding:3% 2% 2% 0%;
+  }
+  
+  .kolom{
+      margin-top:5%;
+  }
+  .table{
+      text-align:center;
+      vertical-align:middle;
+  }
+  
+  
+  .border{
+   padding:0.4%;
+   /* padding-right:60%; */
+   position:relative;
+  }
+  
 
-.header .judulWeb h1{
-  font-size: 350%;
-}
-
-
-.header .logoUnpar{
-  width:11%;
-  margin-left:5%;
-}
-
-
-
-.w-5{
+  input#fileInput{
     display:none;
-}
-
-.headerUpload h4{
-  padding:3% 2% 2% 0%;
-}
-
-.kolom{
-    margin-top:5%;
-}
-.table{
-    text-align:center;
-    vertical-align:middle;
-}
-
-
-.border{
- padding:0.4%;
- /* padding-right:60%; */
- position:relative;
-}
-
-/* .inputFile{
-  width:50%;
-} */
-
-input#fileInput{
-  display:none;
-}
-
-input#fileInput + label{
-  background-color:green;
-  padding:8px;
-  color:white;
-  border:2px solid;
-  border-radius:9px;
-}
-
-input#fileInput + label:hover{
-  background-color:darkgreen;
-
-  cursor:pointer;
-}
-
-.tombolUpload{
-  position: relative;
-  float:right;
-}
-
-
-
-.tombolNextPrev a {
-    text-decoration: none;
-    /* display: inline-block; */
-    padding: 10px 18px;
-    float:right ;
   }
   
-.tombolNextPrev a:hover {
-    background-color:darkgreen;
+  input#fileInput + label{
+    background-color:green;
+    padding:8px;
     color:white;
+    border:2px solid;
+    border-radius:9px;
   }
   
-.tombolNextPrev .previous {
+  input#fileInput + label:hover{
+    background-color:darkgreen;
+  
+    cursor:pointer;
+  }
+  
+  .tombolUpload{
+    position: relative;
+    float:right;
+  }
+
+    
+  .areaNamaFile{
+      display:inline-block;
+      border:1px solid;
+      width:75%;
+  }
+  
+  
+  
+  .tombolNextPrev a {
+      text-decoration: none;
+      /* display: inline-block; */
+      padding: 10px 18px;
+      float:right ;
+    }
+    
+  .tombolNextPrev a:hover {
+      background-color:darkgreen;
+      color:white;
+    }
+    
+  .tombolNextPrev .previous {
+      margin-top:5%;
+      background-color: green;
+      color: white;
+      float:left;
+    }
+    
+  .tombolNextPrev .next {
+      background-color: green;
+      color: white;
+    }
+    
+  .tombolNextPrev .round {
+      border-radius: 50%;
+    }
+  
+  
+  .headerPenentuanBobot h3{
+    margin-top:2%;
+    margin-left: 5%;;
+  }
+  
+  
+  .penentuanBobot {
+    margin-left:30%;
+    padding:1%;
+  }
+  
+  
+  .opsi1,.opsi2,.opsi3{
+    padding:2%;
+    margin-bottom:-3%;
+  }
+
+  
+  
+  .opsi1 .logoPenentuanBobot  img{
+    width:12%;
+    margin-left:-5%;
+  }
+  
+  .opsi1 .logoPenentuanBobot .logoNilai{
+    margin-right:5%;
+  }
+  .opsi1 .logoPenentuanBobot .logoSekolah{
+    margin-left:5%;
+  }
+  
+  
+  .opsi2 .logoPenentuanBobot img{
+    width:12%;
+    margin-left:-5%;
+  
+  }
+  
+  .opsi2 .logoPenentuanBobot .logoSekolah{
+    margin-right:5%;
+  }
+  
+  .opsi2 .logoPenentuanBobot .logoIpk{
+    margin-left:6%;
+    width:10%;
+  }
+  
+  .opsi3 .logoPenentuanBobot img{
+    width:12%;
+    margin-left:-5%;
+  
+  }
+  
+  .opsi3 .logoPenentuanBobot .logoNilai{
+    margin-right:5%;
+  }
+  
+  .opsi3 .logoPenentuanBobot .logoIpk{
+    margin-left:6%;
+    width:10%;
+  
+  }
+  
+  .jumlahBobot{
+    margin-left:14%;
+    margin-top:-2%;
+  }
+  
+  
+  select{
+    width:5%;
+  }
+  
+  
+  
+  .opsi4 input{
+    margin-bottom:15%;
+    width: 10%;
+  }
+  
+  
+  .opsi4{
+    margin-top:3%;
+  }
+  
+  .tombolSeleksi{
+    margin-left:40%;
+    margin-top:-8%;
+  }
+  
+  
+  .tabelKeterangan{
+    width:42%;
+    margin-left:75%;
+    margin-top:-40%;
+  }
+  
+  .tabelKeterangan th{
+    height:2px;
+  }
+  
+  .headerHasilSeleksi h2{
+    margin-left: 30%;;
     margin-top:5%;
-    background-color: green;
-    color: white;
-    float:left;
   }
   
-.tombolNextPrev .next {
-    background-color: green;
-    color: white;
-  }
   
-.tombolNextPrev .round {
-    border-radius: 50%;
-  }
-
-
-.headerPenentuanBobot h3{
-  margin-top:2%;
-  margin-left: 5%;;
-}
-
-
-.penentuanBobot {
-  margin-left:30%;
-  padding:1%;
-}
-
-
-.opsi1,.opsi2,.opsi3{
-  padding:2%;
-  margin-bottom:-3%;
-}
-
-
-
-
-.opsi1 .logoPenentuanBobot  img{
-  width:12%;
-  margin-left:-5%;
-}
-
-.opsi1 .logoPenentuanBobot .logoNilai{
-  margin-right:5%;
-}
-.opsi1 .logoPenentuanBobot .logoSekolah{
-  margin-left:5%;
-}
-
-
-.opsi2 .logoPenentuanBobot img{
-  width:12%;
-  margin-left:-5%;
-
-}
-
-.opsi2 .logoPenentuanBobot .logoSekolah{
-  margin-right:5%;
-}
-
-.opsi2 .logoPenentuanBobot .logoIpk{
-  margin-left:6%;
-  width:10%;
-}
-
-.opsi3 .logoPenentuanBobot img{
-  width:12%;
-  margin-left:-5%;
-
-}
-
-.opsi3 .logoPenentuanBobot .logoNilai{
-  margin-right:5%;
-}
-
-.opsi3 .logoPenentuanBobot .logoIpk{
-  margin-left:6%;
-  width:10%;
-
-}
-
-.jumlahBobot{
-  margin-left:14%;
-  margin-top:-2%;
-}
-
-
-select{
-  width:5%;
-}
-
-
-
-.opsi4 input{
-  margin-bottom:15%;
-  width: 10%;
-}
-
-
-.opsi4{
-  margin-top:3%;
-}
-
-.tombolSeleksi{
-  margin-left:40%;
-  margin-top:-8%;
-}
-
-
-.tabelKeterangan{
-  width:42%;
-  margin-left:75%;
-  margin-top:-40%;
-}
-
-.tabelKeterangan th{
-  height:2px;
-}
-
-.headerHasilSeleksi h2{
-  margin-left: 30%;;
-  margin-top:5%;
-}
-
-
+  

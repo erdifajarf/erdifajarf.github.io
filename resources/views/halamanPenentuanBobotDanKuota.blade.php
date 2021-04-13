@@ -153,10 +153,10 @@
         <a href="{{('/')}}" class="previous round">&#8249;</a>
     </div>
 
-    <table class="table table-striped tabelKeterangan">
+    <table class="table tabelKeterangan">
     <tr>
-        <th class="table-info">Input (AHP)</th>
-        <th class="table-info">Keterangan</th>
+        <th class="table-light">Input (AHP)</th>
+        <th class="table-light">Keterangan</th>
     </tr>
 
     <tr>

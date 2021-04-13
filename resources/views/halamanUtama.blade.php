@@ -18,21 +18,21 @@
         </div>
 
         
-
+        <i class="far fa-folder-open"></i>
 
         <form action="{{ route('importData') }}"  enctype="multipart/form-data" method="POST" class="tabelUpload">
             @csrf
-
-
+       
 
             <input type="file" name="file" id="fileInput">
             <label for="fileInput">Pilih file</label>
             
-   
+                <div  class="areaNamaFile">
                 <span >
                     <strong>File dipilih:</strong>
                     <span id="namaFile">Kosong</span>
                 </span>
+                </div>
 
 
 
@@ -66,7 +66,7 @@
 
 
     <div class="kolom">
-        <table class="table table-striped">
+        <table class="table">
             <tr>
                 <th rowspan=3 class="table-primary">No.PMB</th>
                 <th rowspan=3 class="table-primary">Nama</th>
@@ -100,20 +100,23 @@
     </div>
 
 
-
-
         @php
         $index=0;
         @endphp
         @foreach($nilais as $nilai)
             <tr>
+   
+
                 @if($index%2=='0')
                     <td rowspan=2>{{$nilai['id_siswa']}}</td>
-                    <td rowspan=2>{{$namaSiswa[$index]->nama_siswa}}</td>
+                    <div class="tes">
+                    <td rowspan=2>{{$nilai['nama_siswa']}}</td>
+
+                    </div>
                 @endif
                 
 
-                @if($nilai['id_mata_pelajaran']=='1')
+                @if($nilai['id_mata_pelajaran']=='2')
                     <td>Matematika</td>
                 @else
                     <td>B.Ingriss</td>
@@ -137,18 +140,43 @@
     <nav aria-label="...">
     <ul class="pagination">
         <li class="page-item">
-        <a class="page-link" href="?page=1" tabindex="-1">Previous</a>
+            <a class="page-link" id="pagePrev" href="?page=1" tabindex="-1">Previous</a>
         </li>
-        <li class="page-item"><a class="page-link" href="?page=1">1</a></li>
-        <li class="page-item ">
-        <a class="page-link" href="?page=2">2 <span class="sr-only"></span></a>
-        </li>
-        <li class="page-item"><a class="page-link" href="?page=3">3</a></li>
+
         <li class="page-item">
-        <a class="page-link" href="#">Next</a>
+            <a class="page-link" href="?page=1">1</a> 
         </li>
+       
+        <li class="page-item ">
+            <a class="page-link" href="?page=2">2 <span class="sr-only"></span></a>
+        </li>
+
+        <li class="page-item">
+            <a class="page-link" href="?page=3">3</a>
+        </li>
+
+        <li class="page-item">
+            <a class="page-link" id="pageNext" href="#" onclick="changeLink();" >Next</a>
+        </li>
+        
     </ul>
     </nav>
+
+    <script>
+           
+        function changeLink() {
+            var id = window.location.href;
+            var lastChar = id.substr(id.length - 1);
+
+            var pageNext = document.getElementById('pageNext');
+            pageNext.setAttribute('href', '?page='lastChar+=1);
+
+            return false;
+        }
+  
+    </script>
+
+
 
 
 
