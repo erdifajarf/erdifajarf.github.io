@@ -15,7 +15,19 @@
 <div class="container">
 
     <div class="headerHasilSeleksi">
-         <h2>Hasil Seleksi PMDK Siswa Tahun 2019</h2>
+        <div class="keteranganHasil">
+            <h2>Hasil Seleksi PMDK Siswa Tahun 2019</h2>
+            <p>Total pendaftar : {{$jumlahPeminat}} orang </p> 
+            <p>Total lolos KKM : {{$jumlahLolosKKM}} orang  </p>
+
+            @if($kuotaPMDK<=$jumlahLolosKKM)
+                <p>Hasil Seleksi PMDK : {{$kuotaPMDK}} orang  </p>
+            @else
+                <p>Hasil Seleksi PMDK : {{$jumlahLolosKKM}} orang  </p>
+            @endif
+         </div>
+
+
     </div> 
 
     <div class="kolom">
@@ -37,8 +49,9 @@
     </div>
 
         @for($i=0; $i<$kuotaPMDK; $i++)
+
+            <tr>    
             @if($i<count($hasilPMDK))
-            <tr>
                     <td>{{$i+1}}</td>
                     <td>{{$hasilPMDK[$i][0]->getNoPmb()->id_siswa}}</td>
                     <td>{{$hasilPMDK[$i][0]->getNamaSiswa()->nama_siswa}}</td>

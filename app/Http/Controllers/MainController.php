@@ -289,7 +289,7 @@ class MainController extends Controller
         }
         
 
-        return view('halamanHasilSeleksi',['hasilPMDK'=>$hasilPMDK,'kuotaPMDK'=>$kuotaPmdk]);
+        return view('halamanHasilSeleksi',['hasilPMDK'=>$hasilPMDK,'kuotaPMDK'=>$kuotaPmdk,'jumlahPeminat'=>$jumlah_peminat_PMDK,'jumlahLolosKKM'=>count($hasilSeleksiKkm)]);
 
 
     }
@@ -299,7 +299,7 @@ class MainController extends Controller
     //MENAMPILKAN DATA PMDK DI HALAMAN UTAMA
     function showDataPeminat(){
         $data=Nilai::join('siswa','nilai.id_siswa','=','siswa.id_siswa')->
-        paginate(10);
+        paginate(14);
 
         return view('halamanUtama',['nilais'=>$data]);
 

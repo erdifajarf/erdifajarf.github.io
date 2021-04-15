@@ -208,8 +208,16 @@
   }
   
   .headerHasilSeleksi h2{
-    margin-left: 30%;;
-    margin-top:5%;
+    margin-left: 30%;
+    margin-top:3%;
+  }
+
+  .keteranganHasil{
+    margin-bottom:-4%;
+    padding:1%;
+  }
+  .headerHasilSeleksi p{
+    margin-top:-1%;
   }
   
   
