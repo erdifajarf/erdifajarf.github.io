@@ -13,6 +13,7 @@
 <body>
     
 <div class="container">
+    @include('sweetalert::alert')
 
     <div class="headerHasilSeleksi">
         <div class="keteranganHasil">
@@ -25,10 +26,17 @@
             @else
                 <p>Hasil Seleksi PMDK : {{$jumlahLolosKKM}} orang  </p>
             @endif
-         </div>
-
+        </div>
 
     </div> 
+
+
+        <div class="tombolDownload">
+            <form action="{{ route('exportData') }}"  enctype="multipart/form-data" method="POST" class="tabelDownload">
+                @csrf
+                <button class="submit">download</button>
+            </form>
+        </div>
 
     <div class="kolom">
 
@@ -92,7 +100,7 @@
 
 
         <div class="tombolNextPrev">
-            <a href="{{('/halamanPenentuanBobotDanKuota')}}" class="previous round">&#8249;</a>
+            <a href="{{('\halamanPenentuanBobotDanKuota')}}" class="previous round">&#8249;</a>
         </div>
 
 

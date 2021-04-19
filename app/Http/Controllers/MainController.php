@@ -1,15 +1,17 @@
 <?php
-
 namespace App\Http\Controllers;
 use App\Models\Nilai;
+use App\Models\HasilSeleksi;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-
 use App\Imports\DataImport;
 use Maatwebsite\Excel\Facades\Excel;
 use Alert;
+
+use App\Imports\DataExport;
+
 
 
 class MainController extends Controller
@@ -78,7 +80,7 @@ class MainController extends Controller
             $xi2_ing_t=DB::table('nilai')->select('112_t')->where('id_nilai','=',$count_ing)->first();
 
 
-            
+
              //Nilai b.inggris siswa
              $siswa_ing = new NilaiController($matpel_ing,$x1_ing_kkm,$x1_ing_p,$x1_ing_t ,
              $x2_ing_kkm,$x2_ing_p,$x2_ing_t,
@@ -169,9 +171,8 @@ class MainController extends Controller
 
         $kelasKriteria = new KriteriaController($hasilSeleksiKkm,$kumpulanMahasiswa);
         $hasilKriteria = $kelasKriteria->getHasilKriteria();
-        
 
-        dump($hasilKriteria);
+        // dump($hasilKriteria);
 
         // for($i=0; $i<count($hasilKriteria[0]); $i++){
         //     echo $i+1;
@@ -218,7 +219,11 @@ class MainController extends Controller
         
         // Hitung CR kriteria
         $CR = $kelasFuzzyAhp->hitungConsistencyRatio($bobotAwalKriteria);
-        // dump($CR);
+        dump($CR);
+        
+        if($CR<=0.1){
+            Alert::success('Berhasil','Lihat hasil seleksi');
+
 
 
 
@@ -230,13 +235,12 @@ class MainController extends Controller
         
         //Cek hasil kategori
         $hasilKategoriAlternatif = $kelasFuzzyAhp->getHasilKategori();
-        dump($hasilKategoriAlternatif);
+        // dump($hasilKategoriAlternatif);
         
 
 
         //Bobot Awal alternatif Raport
         // $bobotAwalAlternatifRaport = $kelasFuzzyAhp->getBobotAwalAlternatif(0);
-
 
         // for($i=0; $i<count($hasilKategoriAlternatif); $i++){
         //     for($j=0; $j<count($hasilKategoriAlternatif); $j++){
@@ -246,6 +250,8 @@ class MainController extends Controller
         // }
 
         // echo '<br>';
+
+        // $tfnAlternatifRaport= $kelasFuzzyAhp->getTfnAlternatif(0);
 
         // for($i=0; $i<count($hasilKategoriAlternatif); $i++){
         //     for($j=0; $j<count($hasilKategoriAlternatif); $j++){
@@ -271,26 +277,36 @@ class MainController extends Controller
 
         // dump($hasilPemeringkatan);
         
-        // $hasilKategoriPemeringkatan;
-        // for($i=0; $i<count($hasilPemeringkatan); $i++){
-        //     $hasilKategoriPemeringkatan=
-        // }
+ 
 
         
-
-
         $hasilPMDK;
         for($i=0; $i<count($hasilPemeringkatan); $i++){
             $hasilPMDK[$i][0]=$hasilKriteria[0][$hasilPemeringkatan[$i][0]];    // data siswa
             $hasilPMDK[$i][1]=number_format($hasilKriteria[1][$hasilPemeringkatan[$i][0]],3);    // rata-rata nilai akhir
             $hasilPMDK[$i][2]=number_format($hasilKriteria[2][$hasilPemeringkatan[$i][0]],2);    // rata-rata ipk alumni
             $hasilPMDK[$i][3]=number_format($hasilPemeringkatan[$i][1],5);
-
         }
         
 
+        HasilSeleksi::truncate();
+        for($i=0; $i<$kuotaPmdk; $i++){
+
+            DB::insert('insert into hasil_seleksi(no_pmb,nama,asal_sekolah,peringkat_sekolah,rata_rata_nilai,rata_rata_ipk,bobot_akhir) 
+            values (?,?,?,?,?,?,?)', 
+            [$hasilPMDK[$i][0]->getNoPmb()->id_siswa,$hasilPMDK[$i][0]->getNamaSiswa()->nama_siswa, 
+            $hasilPMDK[$i][0]->getSekolah()->getNamaSekolah()->nama_sekolah, $hasilPMDK[$i][0]->getSekolah()->getPeringkat()->peringkat_sekolah,
+            $hasilPMDK[$i][1],$hasilPMDK[$i][2],$hasilPMDK[$i][3]]);
+        }
+
+
         return view('halamanHasilSeleksi',['hasilPMDK'=>$hasilPMDK,'kuotaPMDK'=>$kuotaPmdk,'jumlahPeminat'=>$jumlah_peminat_PMDK,'jumlahLolosKKM'=>count($hasilSeleksiKkm)]);
 
+    }
+    else{
+        Alert::error('Penilaian salah','Silakan ulangi penilaian');
+        return back();
+    }
 
     }
 
@@ -323,15 +339,22 @@ class MainController extends Controller
 
     public function importData() 
     {   
-
         Excel::import(new DataImport,request()->file('file'));
         Alert::success('Import data siswa berhasil','Lanjutkan ke halaman selanjutnya');
 
         // Alert::error('GAGAL','import gagal');
-        
+
+
+
         return back();
 
+    }
 
+
+    public function exportData() 
+    {
+
+        return Excel::download(new dataExport, 'hasilSeleksiPMDK.xlsx');
 
     }
 

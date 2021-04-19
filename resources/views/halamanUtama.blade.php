@@ -105,8 +105,6 @@
         @endphp
         @foreach($nilais as $nilai)
             <tr>
-   
-
                 @if($index%2=='0')
                     <td rowspan=2>{{$nilai['id_siswa']}}</td>
                     <div class="tes">
@@ -119,7 +117,7 @@
                 @if($nilai['id_mata_pelajaran']=='2')
                     <td>Matematika</td>
                 @else
-                    <td>B.Ingriss</td>
+                    <td>B.Inggris</td>
                 @endif 
                 
                 <td>{{$nilai['101_p']}}</td>
@@ -191,7 +189,7 @@
 
 
     <div class="tombolNextPrev">
-        <a href="{{('halamanPenentuanBobotDanKuota')}}" class="next round">&#8250;</a>
+        <a href="{{('\halamanPenentuanBobotDanKuota')}}" class="next round">&#8250;</a>
     </div>
 
 

@@ -32,7 +32,11 @@ Route::get('/', [MainController::class, 'pindahHalamanImport']);
 Route::post('/', [MainController::class,'importData'])->name('importData');
 Route::get('/',[MainController::class,'showDataPeminat']);
 
+
 Route::get('/halamanPenentuanBobotDanKuota',[MainController::class,'pindahHalamanPenentuanBobot']);
+Route::post('/halamanHasilSeleksi',[MainController::class,'main'])->name('jalankanSeleksi');
 
 
-Route::post('/halamanHasilSeleksi',[MainController::class,'main'])->name('main');
+Route::post('/halamanPenentuaBobotDanKuota',[MainController::class,'exportData'])->name('exportData');
+
+

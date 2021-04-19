@@ -13,6 +13,7 @@
 <body>
     
 <div class="container">
+@include('sweetalert::alert')
 
     <div class="headerPenentuanBobot">
          <h3>Penentuan Bobot Antar Kriteria (Nilai Raport, Peringkat Sekolah, IPK)</h3>
@@ -139,7 +140,7 @@
         </div>
 
         <div class="tombolSeleksi">
-            <button type="submit" class="btn btn-success" href="{{route('main')}}">Jalankan Seleksi </a>
+            <button type="submit" class="btn btn-success" href="{{ route('jalankanSeleksi') }}">Jalankan Seleksi </a>
         </div>
 
     </form>

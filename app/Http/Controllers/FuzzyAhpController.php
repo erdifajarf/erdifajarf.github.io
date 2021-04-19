@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+
 class FuzzyAhpController extends Controller
 {
     //
@@ -19,7 +20,7 @@ class FuzzyAhpController extends Controller
 
     function __construct($hasilKategori,$ntp, $nti, $pti){
         //Ngetes pake dataset kecil, gunakan array splice
-        // $this->hasilKategori= array_splice($hasilKategori,0,5);
+        // $this->hasilKategori= array_splice($hasilKategori,0,50);
         $this->hasilKategori=$hasilKategori;
         $this->ntp = $ntp;
         $this->nti = $nti;
@@ -110,16 +111,10 @@ class FuzzyAhpController extends Controller
 
         $CR= $CI/$RI[count($arrKriteria)-1]; //nilai consistency ratio
         
-        // if($CR<=0.1){
-        //     return number_format($CR,2);
-        // }
-        // else{
-        //     echo 'ULANGI PENILAIAN ANDA';
-        // }
+
+        return number_format($CR,2);
 
 
-            return number_format($CR,2);
- 
       
     }
 
@@ -204,6 +199,7 @@ class FuzzyAhpController extends Controller
             }
         }
 
+
         $perbandinganHasilPemetaan;
         $idx=0;
         
@@ -220,6 +216,9 @@ class FuzzyAhpController extends Controller
                 }
             }
         }
+
+
+
         
         //SUSUN BILANGAN SECARA PERBANDINGAN BERPASANGAN
         $idxIsi=0;
@@ -248,6 +247,7 @@ class FuzzyAhpController extends Controller
             }
         }
 
+
         //bilangan dengan nilai negatif, diubah ke 1/bilangan tersebut.
         for ($i = 0; $i < count($this->bobotAwalAlternatif); $i++) {
             for ($j = 0; $j < count($this->bobotAwalAlternatif); $j++) {
@@ -269,97 +269,96 @@ class FuzzyAhpController extends Controller
        $tfn;
        $countJ=0;
 
-    //bentuk triangular fuzzy number
-       for ($i = 0; $i < count($this->tempTfnKriteria); $i++) {
-           for ($j = 0; $j < count($this->tempTfnKriteria)*3; $j+=3) { 
-                
-                if($this->tempTfnKriteria[$i][$countJ]==1)
-                    {
-                        $tfn[$i][$j]=$this->tempTfnKriteria[$i][$countJ];
-                        $tfn[$i][$j+1]=$this->tempTfnKriteria[$i][$countJ];
-                        $tfn[$i][$j+2]=$this->tempTfnKriteria[$i][$countJ];
-                    }
-                else if($this->tempTfnKriteria[$i][$countJ]>1){
-                        $tfn[$i][$j]=$this->tempTfnKriteria[$i][$countJ]-$delta;
-                        $tfn[$i][$j+1]=$this->tempTfnKriteria[$i][$countJ];
-                        $tfn[$i][$j+2]=$this->tempTfnKriteria[$i][$countJ]+$delta;
-                    }
-                else{
-                        $tfn[$i][$j]=1/(abs($this->tempTfnKriteria[$i][$countJ])+$delta);
-                        $tfn[$i][$j+1]=1/(abs($this->tempTfnKriteria[$i][$countJ]));
-                        $tfn[$i][$j+2]=1/(abs($this->tempTfnKriteria[$i][$countJ])-$delta);
-                    }
-                    $countJ+=1; 
-            }
-           $countJ=0;
-       }
-      
 
-       //menghitung nilai rata-rata geometris dari tfn
-       $rataRataGeo;
-       $a=0;
-       $b=3;
-       $c=6;
-       $jumlahKolom = 1.0/count($this->tempTfnKriteria[0]);
-       
+        //bentuk triangular fuzzy number
         for ($i = 0; $i < count($this->tempTfnKriteria); $i++) {
-            for ($j = 0; $j < 3; $j++) {
+            for ($j = 0; $j < count($this->tempTfnKriteria)*3; $j+=3) { 
+                    
+                    if($this->tempTfnKriteria[$i][$countJ]==1)
+                        {
+                            $tfn[$i][$j]=$this->tempTfnKriteria[$i][$countJ];
+                            $tfn[$i][$j+1]=$this->tempTfnKriteria[$i][$countJ];
+                            $tfn[$i][$j+2]=$this->tempTfnKriteria[$i][$countJ];
+                        }
+                    else if($this->tempTfnKriteria[$i][$countJ]>1){
+                            $tfn[$i][$j]=$this->tempTfnKriteria[$i][$countJ]-$delta;
+                            $tfn[$i][$j+1]=$this->tempTfnKriteria[$i][$countJ];
+                            $tfn[$i][$j+2]=$this->tempTfnKriteria[$i][$countJ]+$delta;
+                        }
+                    else{
+                            $tfn[$i][$j]=1/(abs($this->tempTfnKriteria[$i][$countJ])+$delta);
+                            $tfn[$i][$j+1]=1/(abs($this->tempTfnKriteria[$i][$countJ]));
+                            $tfn[$i][$j+2]=1/(abs($this->tempTfnKriteria[$i][$countJ])-$delta);
+                        }
+                        $countJ+=1; 
+                }
+            $countJ=0;
+        }
         
-                $rataRataGeo[$i][$j]=pow($tfn[$i][$a]*$tfn[$i][$b]*$tfn[$i][$c],$jumlahKolom);
-                $a++;
-                $b++;
-                $c++;
-            }
-            $a=0;
-            $b=3;
-            $c=6;
-        }
-       
-        //menghitung hasil jumlah nilai geometris
-       $jumlahNilaiGeo=array_fill(0,3,0);
-       
-        for ($i = 0; $i < count($jumlahNilaiGeo); $i++) {
-           for ($j = 0; $j < count($rataRataGeo); $j++) {
-               $jumlahNilaiGeo[$i]+=$rataRataGeo[$j][$i];
-           }
-         
-        }
 
-        //menghitung bobot fuzzy untuk setiap kriteria
-        $bobotFuzzy;
-    
-        $idxGeo=2;
-        for ($i = 0; $i < count($rataRataGeo); $i++) {
-            for ($j = 0; $j < count($rataRataGeo[0]); $j++) {
-                $bobotFuzzy[$i][$j]=number_format($rataRataGeo[$i][$j]*1/$jumlahNilaiGeo[$idxGeo],2);
-                $idxGeo--;
+        //menghitung nilai rata-rata geometris dari tfn
+        $rataRataGeo;
+        $a=0;
+        $b=3;
+        $c=6;
+        $jumlahKolom = 1.0/count($this->tempTfnKriteria[0]);
+        
+            for ($i = 0; $i < count($this->tempTfnKriteria); $i++) {
+                for ($j = 0; $j < 3; $j++) {
+            
+                    $rataRataGeo[$i][$j]=pow($tfn[$i][$a]*$tfn[$i][$b]*$tfn[$i][$c],$jumlahKolom);
+                    $a++;
+                    $b++;
+                    $c++;
+                }
+                $a=0;
+                $b=3;
+                $c=6;
             }
+        
+            //menghitung hasil jumlah nilai geometris
+        $jumlahNilaiGeo=array_fill(0,3,0);
+        
+            for ($i = 0; $i < count($jumlahNilaiGeo); $i++) {
+            for ($j = 0; $j < count($rataRataGeo); $j++) {
+                $jumlahNilaiGeo[$i]+=$rataRataGeo[$j][$i];
+            }
+            
+            }
+
+            //menghitung bobot fuzzy untuk setiap kriteria
+            $bobotFuzzy;
+        
             $idxGeo=2;
+            for ($i = 0; $i < count($rataRataGeo); $i++) {
+                for ($j = 0; $j < count($rataRataGeo[0]); $j++) {
+                    $bobotFuzzy[$i][$j]=number_format($rataRataGeo[$i][$j]*1/$jumlahNilaiGeo[$idxGeo],2);
+                    $idxGeo--;
+                }
+                $idxGeo=2;
+            }
+
+        //hasil defuzifikasi atau bobot prioritas setiap kriteria
+        $hasilDefuzzifikasi=array_fill(0,count($bobotFuzzy),0);
+        $jumlahBobot=0;
+        $hasilNormalisasi;
+        
+        for ($i = 0; $i <count($bobotFuzzy); $i++) {
+            for ($j = 0; $j < count($bobotFuzzy[0]); $j++) {
+                $hasilDefuzzifikasi[$i]+=number_format($bobotFuzzy[$i][$j],3);
+            }
+            $hasilDefuzzifikasi[$i]=number_format($hasilDefuzzifikasi[$i]/3,3);
         }
-
-       //hasil defuzifikasi atau bobot prioritas setiap kriteria
-       $hasilDefuzzifikasi=array_fill(0,count($bobotFuzzy),0);
-       $jumlahBobot=0;
-       $hasilNormalisasi;
-       
-       for ($i = 0; $i <count($bobotFuzzy); $i++) {
-           for ($j = 0; $j < count($bobotFuzzy[0]); $j++) {
-               $hasilDefuzzifikasi[$i]+=number_format($bobotFuzzy[$i][$j],3);
-           }
-           $hasilDefuzzifikasi[$i]=number_format($hasilDefuzzifikasi[$i]/3,3);
-       }
-       
-       foreach ($hasilDefuzzifikasi as $nilai){
-           $jumlahBobot+=number_format($nilai,3);
-       }
-       
-       for ($i = 0; $i < count($bobotFuzzy); $i++) {
-           $hasilNormalisasi[$i]=number_format($hasilDefuzzifikasi[$i]/$jumlahBobot,3);
-       }
-       
-    return $hasilNormalisasi;
-
-    
+        
+        foreach ($hasilDefuzzifikasi as $nilai){
+            $jumlahBobot+=number_format($nilai,3);
+        }
+        
+        for ($i = 0; $i < count($bobotFuzzy); $i++) {
+            $hasilNormalisasi[$i]=number_format($hasilDefuzzifikasi[$i]/$jumlahBobot,3);
+        }
+        
+        return $hasilNormalisasi;
     }
 
 
@@ -394,48 +393,80 @@ class FuzzyAhpController extends Controller
              }
             $countJ=0;
         }
+
+  
  
+        // // menghitung nilai rata-rata geometris dari tfn alternatif
+        $lower=array_fill(0,count($tfn),1);
+        $middle=array_fill(0,count($tfn),1);
+        $upper= array_fill(0,count($tfn),1);     
+
+
+        for ($i = 0; $i < count($tfn); $i++) {
+            for ($j = 0; $j < count($tfn[0]); $j+=3) {
+                $lower[$i]*=$tfn[$i][$j];
+            }
+        }
+
+        for ($i = 0; $i < count($tfn); $i++) {
+            for ($j = 1; $j < count($tfn[0]); $j+=3) {
+                $middle[$i]*=$tfn[$i][$j];
+            }
+        }
+
+        for ($i = 0; $i < count($tfn); $i++) {
+            for ($j = 2; $j < count($tfn[0]); $j+=3) {
+                $upper[$i]*=$tfn[$i][$j];
+            }
+        }
+
+   
         //menghitung nilai rata-rata geometris dari tfn alternatif
         $rataRataGeo;
-        $a=0;
-        $b=3;
-        $c=6;
         $jumlahKolom = 1.0/count($this->tempTfnAlternatif[0]);
         
-         for ($i = 0; $i < count($this->tempTfnAlternatif); $i++) {
-             for ($j = 0; $j < 3; $j++) {
-         
-                 $rataRataGeo[$i][$j]=pow($tfn[$i][$a]*$tfn[$i][$b]*$tfn[$i][$c],$jumlahKolom);
-                 $a++;
-                 $b++;
-                 $c++;
-             }
-             $a=0;
-             $b=3;
-             $c=6;
-         }
+        for ($i = 0; $i < count($tfn); $i++) {
+            for ($j = 0; $j < 3; $j++) {
+                if($j==0){
+                    $rataRataGeo[$i][$j]=pow($lower[$i],$jumlahKolom);
+                }
+                else if($j==1){
+                    $rataRataGeo[$i][$j]=pow($middle[$i],$jumlahKolom);
+                }
+                else{
+                    $rataRataGeo[$i][$j]=pow($upper[$i],$jumlahKolom);
+                }
+
+            }
+        }
         
-         //menghitung hasil jumlah nilai geometris
+    
+        
+        //  menghitung hasil jumlah nilai geometris
         $jumlahNilaiGeo=array_fill(0,3,0);
-        
+
          for ($i = 0; $i < count($jumlahNilaiGeo); $i++) {
             for ($j = 0; $j < count($rataRataGeo); $j++) {
                 $jumlahNilaiGeo[$i]+=$rataRataGeo[$j][$i];
             }
-          
          }
+
+        //  dump($jumlahNilaiGeo);
  
          //menghitung bobot fuzzy untuk setiap alternatif
          $bobotFuzzy;
          $idxGeo=2;
          for ($i = 0; $i < count($rataRataGeo); $i++) {
              for ($j = 0; $j < count($rataRataGeo[0]); $j++) {
-                 $bobotFuzzy[$i][$j]=number_format($rataRataGeo[$i][$j]*1/$jumlahNilaiGeo[$idxGeo],2);
+                 $bobotFuzzy[$i][$j]=$rataRataGeo[$i][$j]*1/$jumlahNilaiGeo[$idxGeo];
                  $idxGeo--;
              }
              $idxGeo=2;
          }
- 
+        //  dump($bobotFuzzy);
+
+        
+
         //hasil defuzifikasi atau bobot prioritas setiap alternatif
         $hasilDefuzzifikasi=array_fill(0,count($bobotFuzzy),0);
         $jumlahBobot=0;
@@ -445,7 +476,7 @@ class FuzzyAhpController extends Controller
             for ($j = 0; $j < count($bobotFuzzy[0]); $j++) {
                 $hasilDefuzzifikasi[$i]+=number_format($bobotFuzzy[$i][$j],3);
             }
-            $hasilDefuzzifikasi[$i]=number_format($hasilDefuzzifikasi[$i]/3,3);
+            $hasilDefuzzifikasi[$i]=$hasilDefuzzifikasi[$i]/3;
         }
         
         foreach ($hasilDefuzzifikasi as $nilai){
@@ -457,7 +488,16 @@ class FuzzyAhpController extends Controller
         }
         
         return $hasilNormalisasi; 
+
+
     }
+
+
+
+
+
+
+
 
 
     function hasilPemeringkatan(array $bobotPrioKrit, array $bobotPrioAlt1, array $bobotPrioAlt2, array $bobotPrioAlt3){
