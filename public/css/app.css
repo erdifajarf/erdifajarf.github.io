@@ -34,7 +34,7 @@
   }
   
   .kolom{
-      margin-top:5%;
+      margin-top:2%;
   }
   .table{
       text-align:center;
@@ -51,25 +51,33 @@
 
   input#fileInput{
     display:none;
+    
   }
   
   input#fileInput + label{
-    background-color:green;
-    padding:8px;
+    padding:5px;
     color:white;
     border:2px solid;
     border-radius:9px;
+    width:3.5%;
+
   }
   
   input#fileInput + label:hover{
-    background-color:darkgreen;
-  
+    background-color:gray;
     cursor:pointer;
   }
+
+    
+  .logoBrowse {
+    width:130%;
+  }
+  
   
   .tombolUpload{
     position: relative;
     float:right;
+    margin-top:0.2%;
   }
 
     
@@ -77,18 +85,18 @@
       display:inline-block;
       border:1px solid;
       width:75%;
+      margin-left:1%;
   }
+
   
-  
-  
-  .tombolNextPrev a ,.tombolLihatKeterangan button {
+  .tombolNextPrev a {
       text-decoration: none;
       /* display: inline-block; */
       padding: 10px 18px;
       float:right ;
     }
     
-  .tombolNextPrev a:hover, .tombolLihatKeterangan button:hover {
+  .tombolNextPrev a:hover{
       background-color:darkgreen;
       color:white;
     }
@@ -113,6 +121,7 @@
   .headerPenentuanBobot h3{
     margin-top:2%;
     margin-left: 5%;;
+    padding:2%;
   }
   
   
@@ -199,22 +208,21 @@
   
   .tabelKeterangan {
     width:42%;
-    margin-left:75%;
+    margin-left:79%;
     margin-top:-35%;
   }
 
   .tombolLihatKeterangan{
     float:right;
-    margin-top:-40%;
-    margin-right:21%;
+    margin-top:-39.5%;
+    margin-right:14%;
     display:inline-block;
   }
 
   .tagKeteranganInput h5{
     float:right;
-
     margin-top:-39%;
-    margin-right:-7%;
+    margin-right:-14%;
 
   }
   
@@ -237,6 +245,11 @@
 
   .tombolDownload{
     float:right;
+    margin-top:-2%;
+  }
+
+  .tabelHasilSeleksi{
+    margin-top:5%;
   }
   
   

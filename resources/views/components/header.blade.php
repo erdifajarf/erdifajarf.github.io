@@ -1,4 +1,4 @@
-<nav class="navbar navbar-light" style="background-color: #e3f2fd;">
+<nav class="navbar navbar-light" style="background-color: #bee5eb;">
 
 <div class="header">
     <img src="/img/Logo_UNPAR.png" class="logoUnpar">

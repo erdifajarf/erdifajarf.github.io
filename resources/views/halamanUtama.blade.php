@@ -25,7 +25,7 @@
        
 
             <input type="file" name="file" id="fileInput">
-            <label for="fileInput">Pilih file</label>
+            <label for="fileInput"> <img src="/img/logo_browse.png" class="logoBrowse"> </label>
             
                 <div  class="areaNamaFile">
                 <span >
@@ -68,32 +68,32 @@
     <div class="kolom">
         <table class="table">
             <tr>
-                <th rowspan=3 class="table-primary">No.PMB</th>
-                <th rowspan=3 class="table-primary">Nama</th>
-                <th rowspan=3 class="table-primary">Mata Pelajaran</th>
-                <th colspan=4 class="table-primary">Kelas X</th>
-                <th colspan=4 class="table-primary">Kelas XI</th>
+                <th rowspan=3 class="table-info">No.PMB</th>
+                <th rowspan=3 class="table-info">Nama</th>
+                <th rowspan=3 class="table-info">Mata Pelajaran</th>
+                <th colspan=4 class="table-info">Kelas X</th>
+                <th colspan=4 class="table-info">Kelas XI</th>
             </tr>
 
         <div class="semester">
             <tr>
-                    <th colspan=2 class="table-primary">Semester 1</th>
-                    <th colspan=2 class="table-primary">Semester 2</th>
-                    <th colspan=2 class="table-primary">Semester 1</th>
-                    <th colspan=2 class="table-primary">Semester 2</th>
+                    <th colspan=2 class="table-info">Semester 1</th>
+                    <th colspan=2 class="table-info">Semester 2</th>
+                    <th colspan=2 class="table-info">Semester 1</th>
+                    <th colspan=2 class="table-info">Semester 2</th>
             </tr>
         </div>
 
         <div class="jenis_nilai">
             <tr>
-                    <th class="table-primary">Praktik</th>
-                    <th class="table-primary">Teori</th>
-                    <th class="table-primary">Praktik</th>
-                    <th class="table-primary">Teori</th>
-                    <th class="table-primary">Praktik</th>
-                    <th class="table-primary">Teori</th>
-                    <th class="table-primary">Praktik</th>
-                    <th class="table-primary">Teori</th>
+                    <th class="table-info">Praktik</th>
+                    <th class="table-info">Teori</th>
+                    <th class="table-info">Praktik</th>
+                    <th class="table-info">Teori</th>
+                    <th class="table-info">Praktik</th>
+                    <th class="table-info">Teori</th>
+                    <th class="table-info">Praktik</th>
+                    <th class="table-info">Teori</th>
             </tr>
         </div>
 

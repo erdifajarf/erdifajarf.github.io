@@ -219,7 +219,7 @@ class MainController extends Controller
         
         // Hitung CR kriteria
         $CR = $kelasFuzzyAhp->hitungConsistencyRatio($bobotAwalKriteria);
-        dump($CR);
+        // dump($CR);
         
         if($CR<=0.1){
             Alert::success('Berhasil','Lihat hasil seleksi');

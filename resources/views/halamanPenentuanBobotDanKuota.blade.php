@@ -154,12 +154,13 @@
         <a href="{{('/')}}" class="previous round">&#8249;</a>
     </div>
 
-    <div class="tombolLihatKeterangan">
-        <button type="button" class="next round" id="tombolKeterangan" onclick="showTable()">&#8250;</button>
+    <div class="tombolLihatKeterangan ">
+        <button type="button" class="btn btn-success " id="tombolLihatKeterangan" onclick="showTable()">&#8658;</button>
     </div>
 
-    <div class="tagKeteranganInput">
-        <h5>Lihat keterangan input algoritma AHP </h5> 
+ 
+    <div class="tagKeteranganInput ">
+        <h5 >Lihat keterangan setiap bobot input </h5> 
     </div>
 
 
@@ -167,8 +168,8 @@
     
 <table class="table tabelKeterangan" id="tabelKeterangan" style="visibility:hidden">
     <tr>
-        <th class="table-light">Input (AHP)</th>
-        <th class="table-light">Keterangan</th>
+        <th class="table-info">Input (AHP)</th>
+        <th class="table-info">Keterangan</th>
     </tr>
 
 
@@ -211,13 +212,19 @@
 
      <script>
          function showTable(){
-            var tabelKeterangan=document.getElementById("tabelKeterangan")
-            
-            if(tabelKeterangan.style.visibility != "hidden")
+            var tabelKeterangan= document.getElementById("tabelKeterangan");
+            var tombolLihatKeterangan = document.getElementById("tombolLihatKeterangan");
+
+            if(tabelKeterangan.style.visibility != "hidden"){
                 tabelKeterangan.style.visibility = "hidden";
+                tombolLihatKeterangan.innerHTML ='&#8658;';
+            }
+
             else{
                 tabelKeterangan.style.visibility = "visible";
+                tombolLihatKeterangan.innerHTML ='&#8659;';
             }
+            
 
          }
          
