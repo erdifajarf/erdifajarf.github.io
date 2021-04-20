@@ -154,11 +154,23 @@
         <a href="{{('/')}}" class="previous round">&#8249;</a>
     </div>
 
-    <table class="table tabelKeterangan">
+    <div class="tombolLihatKeterangan">
+        <button type="button" class="next round" id="tombolKeterangan" onclick="showTable()">&#8250;</button>
+    </div>
+
+    <div class="tagKeteranganInput">
+        <h5>Lihat keterangan input algoritma AHP </h5> 
+    </div>
+
+
+
+    
+<table class="table tabelKeterangan" id="tabelKeterangan" style="visibility:hidden">
     <tr>
         <th class="table-light">Input (AHP)</th>
         <th class="table-light">Keterangan</th>
     </tr>
+
 
     <tr>
         <td>1 </td>
@@ -195,7 +207,21 @@
         <td>Kebalikan, dibaca kriteria 2 &lt;penilaian&gt; kriteria 1 </td>
     </tr>
 </table>
-    
+
+
+     <script>
+         function showTable(){
+            var tabelKeterangan=document.getElementById("tabelKeterangan")
+            
+            if(tabelKeterangan.style.visibility != "hidden")
+                tabelKeterangan.style.visibility = "hidden";
+            else{
+                tabelKeterangan.style.visibility = "visible";
+            }
+
+         }
+         
+    </script>
 </div>
 
 </body>

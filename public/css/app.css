@@ -81,14 +81,14 @@
   
   
   
-  .tombolNextPrev a {
+  .tombolNextPrev a ,.tombolLihatKeterangan button {
       text-decoration: none;
       /* display: inline-block; */
       padding: 10px 18px;
       float:right ;
     }
     
-  .tombolNextPrev a:hover {
+  .tombolNextPrev a:hover, .tombolLihatKeterangan button:hover {
       background-color:darkgreen;
       color:white;
     }
@@ -100,12 +100,12 @@
       float:left;
     }
     
-  .tombolNextPrev .next {
+  .tombolNextPrev .next  {
       background-color: green;
       color: white;
     }
     
-  .tombolNextPrev .round {
+  .tombolNextPrev .round{
       border-radius: 50%;
     }
   
@@ -197,10 +197,25 @@
   }
   
   
-  .tabelKeterangan{
+  .tabelKeterangan {
     width:42%;
     margin-left:75%;
+    margin-top:-35%;
+  }
+
+  .tombolLihatKeterangan{
+    float:right;
     margin-top:-40%;
+    margin-right:21%;
+    display:inline-block;
+  }
+
+  .tagKeteranganInput h5{
+    float:right;
+
+    margin-top:-39%;
+    margin-right:-7%;
+
   }
   
   .tabelKeterangan th{
