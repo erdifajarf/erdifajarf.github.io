@@ -8,10 +8,16 @@ use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithColumnWidths;
 
+use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
+use Maatwebsite\Excel\Concerns\WithStyles;
 
 
 
-class DataExport implements FromCollection, WithHeadings,WithColumnWidths
+
+
+
+
+class DataExport implements FromCollection, WithHeadings,WithColumnWidths,WithStyles
 {
     public function collection()
     {
@@ -22,8 +28,25 @@ class DataExport implements FromCollection, WithHeadings,WithColumnWidths
     public function headings(): array
     {
         return [
-            ['No','No_pmb','Nama','Asal_Sekolah','Peringkat_Sekolah','Rata_Rata_Nilai','Rata_Rata_Ipk','Bobot_Akhir'],
+            ['No','No.PMB','Nama','Asal Sekolah','Peringkat Sekolah','Rata-Rata Nilai','Rata-Rata Ipk','Bobot Akhir (AHP)'],
         ];
+    }
+
+    public function styles(Worksheet $sheet)
+    {
+        return [
+
+            'A1'  => ['font' => ['bold' => true,'size' => 12]],
+            'B1'  => ['font' => ['bold' => true,'size' => 12]],
+            'C1'  => ['font' => ['bold' => true,'size' => 12]],
+            'D1'  => ['font' => ['bold' => true,'size' => 12]],
+            'E1'  => ['font' => ['bold' => true,'size' => 12]],
+            'F1'  => ['font' => ['bold' => true,'size' => 12]],
+            'G1'  => ['font' => ['bold' => true,'size' => 12]],
+            'H1'  => ['font' => ['bold' => true,'size' => 12]],
+
+        ];
+
     }
 
 
@@ -38,9 +61,9 @@ class DataExport implements FromCollection, WithHeadings,WithColumnWidths
             'F' => 20,
             'G' => 20,  
             'H' => 20,               
-     
         ];
     }
+
 }
 
 
