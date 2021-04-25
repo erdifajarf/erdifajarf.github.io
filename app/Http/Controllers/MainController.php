@@ -286,14 +286,30 @@ class MainController extends Controller
             
 
             HasilSeleksi::truncate();
-            for($i=0; $i<$kuotaPmdk; $i++){
+           
+           if($kuotaPmdk<=count($hasilSeleksiKkm)){
 
-                DB::insert('insert into hasil_seleksi(no_pmb,nama,asal_sekolah,peringkat_sekolah,rata_rata_nilai,rata_rata_ipk,bobot_akhir) 
-                values (?,?,?,?,?,?,?)', 
-                [$hasilPMDK[$i][0]->getNoPmb()->id_siswa,$hasilPMDK[$i][0]->getNamaSiswa()->nama_siswa, 
-                $hasilPMDK[$i][0]->getSekolah()->getNamaSekolah()->nama_sekolah, $hasilPMDK[$i][0]->getSekolah()->getPeringkat()->peringkat_sekolah,
-                $hasilPMDK[$i][1],$hasilPMDK[$i][2],$hasilPMDK[$i][3]]);
-            }
+                for($i=0; $i<$kuotaPmdk; $i++){
+
+                    DB::insert('insert into hasil_seleksi(no_pmb,nama,asal_sekolah,peringkat_sekolah,rata_rata_nilai,rata_rata_ipk,bobot_akhir) 
+                    values (?,?,?,?,?,?,?)', 
+                    [$hasilPMDK[$i][0]->getNoPmb()->id_siswa,$hasilPMDK[$i][0]->getNamaSiswa()->nama_siswa, 
+                    $hasilPMDK[$i][0]->getSekolah()->getNamaSekolah()->nama_sekolah, $hasilPMDK[$i][0]->getSekolah()->getPeringkat()->peringkat_sekolah,
+                    $hasilPMDK[$i][1],$hasilPMDK[$i][2],$hasilPMDK[$i][3]]);
+                }
+                            
+           }
+           else{
+                for($i=0; $i<count($hasilSeleksiKkm); $i++){
+
+                    DB::insert('insert into hasil_seleksi(no_pmb,nama,asal_sekolah,peringkat_sekolah,rata_rata_nilai,rata_rata_ipk,bobot_akhir) 
+                    values (?,?,?,?,?,?,?)', 
+                    [$hasilPMDK[$i][0]->getNoPmb()->id_siswa,$hasilPMDK[$i][0]->getNamaSiswa()->nama_siswa, 
+                    $hasilPMDK[$i][0]->getSekolah()->getNamaSekolah()->nama_sekolah, $hasilPMDK[$i][0]->getSekolah()->getPeringkat()->peringkat_sekolah,
+                    $hasilPMDK[$i][1],$hasilPMDK[$i][2],$hasilPMDK[$i][3]]);
+                }
+                    
+           }
 
 
             return view('halamanHasilSeleksi',['hasilPMDK'=>$hasilPMDK,'kuotaPMDK'=>$kuotaPmdk,'jumlahPeminat'=>$jumlah_peminat_PMDK,'jumlahLolosKKM'=>count($hasilSeleksiKkm)]);

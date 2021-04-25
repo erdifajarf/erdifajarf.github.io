@@ -59,7 +59,9 @@
 
     </div>
 
-        @for($i=0; $i<$kuotaPMDK; $i++)
+
+
+     @for($i=0; $i<$kuotaPMDK; $i++)
 
             <tr>    
             @if($i<count($hasilPMDK))
@@ -87,6 +89,9 @@
             </tr>
 
         @endfor
+
+
+
 
         
 

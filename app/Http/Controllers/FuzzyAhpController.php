@@ -496,10 +496,6 @@ class FuzzyAhpController extends Controller
 
 
 
-
-
-
-
     function hasilPemeringkatan(array $bobotPrioKrit, array $bobotPrioAlt1, array $bobotPrioAlt2, array $bobotPrioAlt3){
         $bobotBerdasarkanKriteria;
 

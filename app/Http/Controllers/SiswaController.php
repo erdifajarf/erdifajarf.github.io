@@ -23,14 +23,13 @@ class SiswaController extends Controller
         $this->skl = $skl;
         $this->nilai = $nilai;
     }
+  
     function getNoPmb(){
         return $this->noPmb;
     }
     function getNamaSiswa(){
         return $this->namaSiswa;
     }
-
-
 
     function getSekolah(){
         //Mengembalikan tipe data sekolah seorang siswa

@@ -154,7 +154,11 @@
         </li>
 
         <li class="page-item">
-            <a class="page-link" id="pageNext" href="#" onclick="changeLink();" >Next</a>
+            <a class="page-link" id="pageNext" href="?page=" onclick="changeLink();" >Next</a>
+        </li>
+
+        <li class="page-item">
+            <a class="page-link" id="lastPage" href="?page=11" >Last</a>
         </li>
         
     </ul>
@@ -165,18 +169,31 @@
         function changeLink() {
             var id = window.location.href;
             var lastChar = id.substr(id.length - 1);
+            var lastBefChar = id.substr(id.length - 2);
             
             var next = parseInt(lastChar)+1;
             var pageNext = document.getElementById('pageNext');
 
-            pageNext.setAttribute('href', '?page='+next);
 
+
+
+            if(lastChar==0){
+                pageNext.setAttribute('href', '?page=1'+next);
+            }
+            else{
+                pageNext.setAttribute('href', pageNext+next);
+
+            }
+
+            if(lastBefChar==11){
+                    pageNext.style.display= 'none';
+                    pageNext.removeAttribute("href");
+                }
             
 
-            // if(pageNext=='?page=4'){
-            //     pageNext.style.visibility = "hidden";
-            // }
 
+            
+          
             return false;
         }
   

@@ -8,7 +8,7 @@ class KriteriaController extends Controller
 {
     private $hasilSeleksiKkm; // Array Siswa, dari yang sudah di seleksiKKM
     private $alumniSekolah; //Array kumpulan mahasiswa di DB
-    private $ipkAlumni; //Array ipk para alumni sekolah yg sama dengan peminat PMDK
+    // private $ipkAlumni; //Array ipk para alumni sekolah yg sama dengan peminat PMDK
 
     function __construct($hasilSeleksiKkm,$alumniSekolah){
         $this->hasilSeleksiKkm = $hasilSeleksiKkm;

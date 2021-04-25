@@ -1,20 +1,20 @@
 <?php
 
-namespace App\Http\Controllers;
+// namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+// use Illuminate\Http\Request;
 
-class MataPelajaranController extends Controller
-{
-    //
+// class MataPelajaranController extends Controller
+// {
+//     //
 
-    private $namaMataPelajaran;
+//     private $namaMataPelajaran;
 
-    function __construct($namaMataPelajaran){
-        $this->namaMataPelajaran = $namaMataPelajaran;
-    }
+//     function __construct($namaMataPelajaran){
+//         $this->namaMataPelajaran = $namaMataPelajaran;
+//     }
 
-    function getMataPelajaran(){
-        return $this->namaMataPelajaran;
-    }
-}
+//     function getMataPelajaran(){
+//         return $this->namaMataPelajaran;
+//     }
+// }
