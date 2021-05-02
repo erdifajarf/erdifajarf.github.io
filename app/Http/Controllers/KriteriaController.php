@@ -7,12 +7,12 @@ use Illuminate\Http\Request;
 class KriteriaController extends Controller
 {
     private $hasilSeleksiKkm; // Array Siswa, dari yang sudah di seleksiKKM
-    private $alumniSekolah; //Array kumpulan mahasiswa di DB
+    private $mahasiswa; //Array kumpulan mahasiswa di DB
     // private $ipkAlumni; //Array ipk para alumni sekolah yg sama dengan peminat PMDK
 
-    function __construct($hasilSeleksiKkm,$alumniSekolah){
+    function __construct($hasilSeleksiKkm,$mahasiswa){
         $this->hasilSeleksiKkm = $hasilSeleksiKkm;
-        $this->alumniSekolah = $alumniSekolah;
+        $this->mahasiswa = $mahasiswa;
     }
 
 
@@ -29,10 +29,10 @@ class KriteriaController extends Controller
         $jumlahIPK=0;
         $rataRataIPK=0;
 
-             for ($j = 0; $j < count($this->alumniSekolah); $j++) 
+             for ($j = 0; $j < count($this->mahasiswa); $j++) 
                 {
-                    if($this->hasilSeleksiKkm[$idx]->getSekolah()->getNamaSekolah()->nama_sekolah == $this->alumniSekolah[$j]->getSekolah()->getNamaSekolah()->nama_sekolah){
-                         $jumlahIPK+=$this->alumniSekolah[$j]->getIpk()->IPK;
+                    if($this->hasilSeleksiKkm[$idx]->getSekolah()->getNamaSekolah()->nama_sekolah == $this->mahasiswa[$j]->getSekolah()->getNamaSekolah()->nama_sekolah){
+                         $jumlahIPK+=$this->mahasiswa[$j]->getIpk()->IPK;
                          $hitungJumlahAlumni+=1;
                     }   
                 }

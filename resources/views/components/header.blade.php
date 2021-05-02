@@ -6,7 +6,7 @@
 
     <div class="judulWeb">
         <h1>Sistem Seleksi PMDK</h1>
-        <h1> Teknik Informatika UNPAR </h1>
+        <h1> Teknik Informatika UNPAR</h1>
     </div>
 
 

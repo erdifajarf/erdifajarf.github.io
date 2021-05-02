@@ -8,7 +8,7 @@ class SeleksiNilaiKkmController extends Controller
 {
     //
     private $peminatPmdk;
-    private $hasilSeleksiPeminat;
+    private $hasilSeleksiKkm;
 
     public function __construct($peminatPMDK){
         $this->peminatPmdk=$peminatPMDK;
@@ -66,25 +66,22 @@ class SeleksiNilaiKkmController extends Controller
                 }
                 else{
                     $idx[$i]=-1;
-                }
-                   
-            
-
-        }
+                }       
+            }
 
         //Deklarasi ukuran array hasil seleksi menggunakan variabel jumlah lolos
         //$mark adalah index untuk mengisi array hasilSeleksi tersebut berdasarkan array $idx
 
-        $this->hasilSeleksiPeminat= array($jumlahLolos);
+        $this->hasilSeleksiKkm= array($jumlahLolos);
         $mark=0;
 
         for ($i=0; $i<count($this->peminatPmdk); $i++){
             if($idx[$i]!=-1){
-                $this->hasilSeleksiPeminat[$mark]=$this->peminatPmdk[$idx[$i]];
+                $this->hasilSeleksiKkm[$mark]=$this->peminatPmdk[$idx[$i]];
                 $mark+=1;
             }
         }
 
-        return $this->hasilSeleksiPeminat;
+        return $this->hasilSeleksiKkm;
     } 
 }

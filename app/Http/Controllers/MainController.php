@@ -354,7 +354,7 @@ class MainController extends Controller
 
     public function exportData() 
     {
-        return Excel::download(new dataExport, 'hasilSeleksiPMDK.xlsx');
+        return Excel::download(new DataExport, 'hasilSeleksiPMDK.xlsx');
     }
 
 
