@@ -18,20 +18,17 @@ use App\Http\Controllers\MainController;
 |
 */
 
-// Route::get('/', function () {
-//     return view('halamanUtama');
-// });
+Route::get('/', function () {
+    return view('halamanLogin');
+});
 
-// Route::get('/', function () {
-//     return view('import');
-// });
 
-// Route::get('export', [MyController::class, 'export'])->name('export');
+Route::get('/halamanLogin', [MainController::class, 'pindahHalamanLogin']);
+Route::post('/halamanLogin',[MainController::class, 'login'])->name('jalankanLogin');
 
-Route::get('/', [MainController::class, 'pindahHalamanImport']);
-Route::post('/', [MainController::class,'importData'])->name('importData');
-Route::get('/',[MainController::class,'showDataPeminat']);
-
+Route::get('/halamanUtama',[MainController::class,'pindahHalamanImport']);
+Route::post('/halamanUtama', [MainController::class,'importData'])->name('importData');
+Route::get('/halamanUtama',[MainController::class,'showDataPeminat']);
 
 Route::get('/halamanPenentuanBobotDanKuota',[MainController::class,'pindahHalamanPenentuanBobot']);
 Route::post('/halamanHasilSeleksi',[MainController::class,'main'])->name('jalankanSeleksi');

@@ -2,7 +2,7 @@
 <html>
 <x-header/>
 <head>
-    <title>Laravel</title>
+    <title>Halaman Utama</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" 
         integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
     <link rel="stylesheet" href="\css\app.css" >
@@ -13,6 +13,7 @@
 <body>
 
 <div class="container">
+    @include('sweetalert::alert')
         <div class="headerUpload">
             <h4> Unggah data sekolah peminat PMDK dengan format file Excel. </h4>
         </div>
@@ -22,8 +23,7 @@
 
         <form action="{{ route('importData') }}"  enctype="multipart/form-data" method="POST" class="tabelUpload">
             @csrf
-       
-
+    
             <input type="file" name="file" id="fileInput">
             <label for="fileInput"> <img src="/img/logo_browse.png" class="logoBrowse"> </label>
             
@@ -56,14 +56,6 @@
             </button>
 
         </form>
-
-
-
-
-    
-
-    @include('sweetalert::alert')
-
 
     <div class="kolom">
         <table class="table">
@@ -164,8 +156,8 @@
     </ul>
     </nav>
 
-    <script>
-           
+
+    <script>    
         function changeLink() {
             var id = window.location.href;
             var lastChar = id.substr(id.length - 1);
@@ -190,13 +182,8 @@
                     pageNext.removeAttribute("href");
                 }
             
-
-
-            
-          
             return false;
         }
-  
     </script>
 
 

@@ -2,7 +2,7 @@
 <html>
 <x-header/>
 <head>
-    <title>Laravel</title>
+    <title>Halaman Penentuan Bobot dan Kuota</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" 
         integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
     <link rel="stylesheet" href="\css\app.css" >
@@ -151,7 +151,7 @@
 
 
     <div class="tombolNextPrev">
-        <a href="{{('/')}}" class="previous round">&#8249;</a>
+        <a href="{{('/halamanUtama')}}" class="previous round">&#8249;</a>
     </div>
 
     <div class="tombolLihatKeterangan ">

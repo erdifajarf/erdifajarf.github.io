@@ -2,6 +2,10 @@
 namespace App\Http\Controllers;
 use App\Models\Nilai;
 use App\Models\HasilSeleksi;
+use App\Models\Mahasiswa;
+use App\Models\MataPelajaran;
+use App\Models\Siswa;
+
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -13,7 +17,6 @@ use Alert;
 use App\Imports\DataExport;
 
 
-
 class MainController extends Controller
 {
 
@@ -21,23 +24,23 @@ class MainController extends Controller
         
         $count_ing=1;
         $count_mat=2;
-        // $count_id_sekolah=1;
         $count_id_nilai=2;
-        $jumlah_peminat_PMDK = count(DB::table('siswa')->select('id_siswa')->get()->toArray());
+
+        $jumlah_peminat_PMDK = count(Siswa::select('id_siswa')->get()->toArray());
         $kumpulanPeminatPMDK= array();
 
 
         for($i=0; $i<$jumlah_peminat_PMDK; $i++){
+            $matpel_ing = MataPelajaran::select('nama_mata_pelajaran')->where('id_mata_pelajaran','=','1')->first();
+            $matpel_mat = MataPelajaran::select('nama_mata_pelajaran')->where('id_mata_pelajaran','=','2')->first();
+
             
-            $matpel_ing = DB::table('mata_pelajaran')->select('nama_mata_pelajaran')->where('id_mata_pelajaran','=','1')->first();
-            $matpel_mat = DB::table('mata_pelajaran')->select('nama_mata_pelajaran')->where('id_mata_pelajaran','=','2')->first();
-            
-            $noPmb=DB::table('nilai')->select('id_siswa')->where('id_nilai','=',$count_id_nilai)->first(); 
+            $noPmb=Nilai::select('id_siswa')->where('id_nilai','=',$count_id_nilai)->first(); 
            
-            $nama_sekolah= DB::table('siswa')->join('sekolah', 'siswa.id_sekolah', '=', 'sekolah.id_sekolah')
+            $nama_sekolah= Siswa::join('sekolah', 'siswa.id_sekolah', '=', 'sekolah.id_sekolah')
             ->select('sekolah.nama_sekolah')->where('siswa.id_siswa','=',$noPmb->id_siswa)->first(); 
             
-            $peringkat_sekolah= DB::table('siswa')->join('sekolah', 'siswa.id_sekolah', '=', 'sekolah.id_sekolah')
+            $peringkat_sekolah= Siswa::join('sekolah', 'siswa.id_sekolah', '=', 'sekolah.id_sekolah')
             ->select('sekolah.peringkat_sekolah')->where('siswa.id_siswa','=',$noPmb->id_siswa)->first();
 
 
@@ -45,39 +48,39 @@ class MainController extends Controller
             $sma_siswa = new SekolahController($nama_sekolah, $peringkat_sekolah);
 
             //NILAI MATEMATIKA
-            $x1_mat_kkm=DB::table('nilai')->select('101_KKM')->where('id_nilai','=',$count_mat)->first();
-            $x1_mat_p=DB::table('nilai')->select('101_p')->where('id_nilai','=',$count_mat)->first();
-            $x1_mat_t=DB::table('nilai')->select('101_t')->where('id_nilai','=',$count_mat)->first();
+            $x1_mat_kkm=Nilai::select('101_KKM')->where('id_nilai','=',$count_mat)->first();
+            $x1_mat_p=Nilai::select('101_p')->where('id_nilai','=',$count_mat)->first();
+            $x1_mat_t=Nilai::select('101_t')->where('id_nilai','=',$count_mat)->first();
 
-            $x2_mat_kkm=DB::table('nilai')->select('102_KKM')->where('id_nilai','=',$count_mat)->first();
-            $x2_mat_p=DB::table('nilai')->select('102_p')->where('id_nilai','=',$count_mat)->first();
-            $x2_mat_t=DB::table('nilai')->select('102_t')->where('id_nilai','=',$count_mat)->first();
+            $x2_mat_kkm=Nilai::select('102_KKM')->where('id_nilai','=',$count_mat)->first();
+            $x2_mat_p=Nilai::select('102_p')->where('id_nilai','=',$count_mat)->first();
+            $x2_mat_t=Nilai::select('102_t')->where('id_nilai','=',$count_mat)->first();
 
-            $xi1_mat_kkm=DB::table('nilai')->select('111_KKM')->where('id_nilai','=',$count_mat)->first();
-            $xi1_mat_p=DB::table('nilai')->select('111_p')->where('id_nilai','=',$count_mat)->first();
-            $xi1_mat_t=DB::table('nilai')->select('111_t')->where('id_nilai','=',$count_mat)->first();
+            $xi1_mat_kkm=Nilai::select('111_KKM')->where('id_nilai','=',$count_mat)->first();
+            $xi1_mat_p=Nilai::select('111_p')->where('id_nilai','=',$count_mat)->first();
+            $xi1_mat_t=Nilai::select('111_t')->where('id_nilai','=',$count_mat)->first();
 
-            $xi2_mat_kkm=DB::table('nilai')->select('112_KKM')->where('id_nilai','=',$count_mat)->first();
-            $xi2_mat_p=DB::table('nilai')->select('112_p')->where('id_nilai','=',$count_mat)->first();
-            $xi2_mat_t=DB::table('nilai')->select('112_t')->where('id_nilai','=',$count_mat)->first();
+            $xi2_mat_kkm=Nilai::select('112_KKM')->where('id_nilai','=',$count_mat)->first();
+            $xi2_mat_p=Nilai::select('112_p')->where('id_nilai','=',$count_mat)->first();
+            $xi2_mat_t=Nilai::select('112_t')->where('id_nilai','=',$count_mat)->first();
 
 
             //NILAI B.Inggriss
-            $x1_ing_kkm=DB::table('nilai')->select('101_KKM')->where('id_nilai','=',$count_ing)->first();
-            $x1_ing_p=DB::table('nilai')->select('101_p')->where('id_nilai','=',$count_ing)->first();
-            $x1_ing_t=DB::table('nilai')->select('101_t')->where('id_nilai','=',$count_ing)->first();
+            $x1_ing_kkm=Nilai::select('101_KKM')->where('id_nilai','=',$count_ing)->first();
+            $x1_ing_p=Nilai::select('101_p')->where('id_nilai','=',$count_ing)->first();
+            $x1_ing_t=Nilai::select('101_t')->where('id_nilai','=',$count_ing)->first();
 
-            $x2_ing_kkm=DB::table('nilai')->select('102_KKM')->where('id_nilai','=',$count_ing)->first();
-            $x2_ing_p=DB::table('nilai')->select('102_p')->where('id_nilai','=',$count_ing)->first();
-            $x2_ing_t=DB::table('nilai')->select('102_t')->where('id_nilai','=',$count_ing)->first();
+            $x2_ing_kkm=Nilai::select('102_KKM')->where('id_nilai','=',$count_ing)->first();
+            $x2_ing_p=Nilai::select('102_p')->where('id_nilai','=',$count_ing)->first();
+            $x2_ing_t=Nilai::select('102_t')->where('id_nilai','=',$count_ing)->first();
 
-            $xi1_ing_kkm=DB::table('nilai')->select('111_KKM')->where('id_nilai','=',$count_ing)->first();
-            $xi1_ing_p=DB::table('nilai')->select('111_p')->where('id_nilai','=',$count_ing)->first();
-            $xi1_ing_t=DB::table('nilai')->select('111_t')->where('id_nilai','=',$count_ing)->first();
+            $xi1_ing_kkm=Nilai::select('111_KKM')->where('id_nilai','=',$count_ing)->first();
+            $xi1_ing_p=Nilai::select('111_p')->where('id_nilai','=',$count_ing)->first();
+            $xi1_ing_t=Nilai::select('111_t')->where('id_nilai','=',$count_ing)->first();
 
-            $xi2_ing_kkm=DB::table('nilai')->select('112_KKM')->where('id_nilai','=',$count_ing)->first();
-            $xi2_ing_p=DB::table('nilai')->select('112_p')->where('id_nilai','=',$count_ing)->first();
-            $xi2_ing_t=DB::table('nilai')->select('112_t')->where('id_nilai','=',$count_ing)->first();
+            $xi2_ing_kkm=Nilai::select('112_KKM')->where('id_nilai','=',$count_ing)->first();
+            $xi2_ing_p=Nilai::select('112_p')->where('id_nilai','=',$count_ing)->first();
+            $xi2_ing_t=Nilai::select('112_t')->where('id_nilai','=',$count_ing)->first();
 
 
 
@@ -96,7 +99,7 @@ class MainController extends Controller
             //nilai kedua matpel siswa
             $nilai=array($siswa_ing,$siswa_mat);
 
-            $nama_siswa=DB::table('siswa')->join('nilai', 'siswa.id_siswa', '=', 'nilai.id_siswa')
+            $nama_siswa=Siswa::join('nilai', 'siswa.id_siswa', '=', 'nilai.id_siswa')
             ->select('nama_siswa')->where('id_nilai','=',$count_id_nilai)->first(); 
 
             $siswa = new SiswaController($noPmb,$nama_siswa,$sma_siswa,$nilai);
@@ -109,23 +112,23 @@ class MainController extends Controller
 
 
 
-        $jumlahMahasiswa = count(DB::table('mahasiswa')->get()->toArray());
+        $jumlahMahasiswa = count(Mahasiswa::get()->toArray());
         $kumpulanMahasiswa= array();
-        $arrayNpm= DB::table('mahasiswa')->select('id_mahasiswa')->orderBy('id_mahasiswa','asc')->get()->toArray(); //sebagai index saja untuk menginsert mahasiswa ke array kumpulan mahasiswa
+        $arrayNpm= Mahasiswa::select('id_mahasiswa')->orderBy('id_mahasiswa','asc')->get()->toArray(); //sebagai index saja untuk menginsert mahasiswa ke array kumpulan mahasiswa
 
         for($i=0; $i<$jumlahMahasiswa; $i++){
     
-            $npm=DB::table('mahasiswa')->select('id_mahasiswa')->where('id_mahasiswa','=',$arrayNpm[$i]->id_mahasiswa)->first();
-            $namaMahasiswa=DB::table('mahasiswa')->select('nama_mahasiswa')->where('id_mahasiswa','=',$arrayNpm[$i]->id_mahasiswa)->first();
+            $npm=Mahasiswa::select('id_mahasiswa')->where('id_mahasiswa','=',$arrayNpm[$i])->first();
+            $namaMahasiswa=Mahasiswa::select('nama_mahasiswa')->where('id_mahasiswa','=',$arrayNpm[$i])->first();
 
-            $namaSekolahMahasiswa=DB::table('mahasiswa')->join('sekolah','mahasiswa.id_sekolah','=','sekolah.id_sekolah')->
-            select('sekolah.nama_sekolah')->where('mahasiswa.id_mahasiswa','=',$arrayNpm[$i]->id_mahasiswa)->first();
-            $peringkatSekolah= DB::table('mahasiswa')->join('sekolah','mahasiswa.id_sekolah','=','sekolah.id_sekolah')->
-            select('peringkat_sekolah')->where('id_mahasiswa','=',$arrayNpm[$i]->id_mahasiswa)->first();
+            $namaSekolahMahasiswa=Mahasiswa::join('sekolah','mahasiswa.id_sekolah','=','sekolah.id_sekolah')->
+            select('sekolah.nama_sekolah')->where('mahasiswa.id_mahasiswa','=',$arrayNpm[$i])->first();
+            $peringkatSekolah= Mahasiswa::join('sekolah','mahasiswa.id_sekolah','=','sekolah.id_sekolah')->
+            select('peringkat_sekolah')->where('id_mahasiswa','=',$arrayNpm[$i])->first();
 
             $sekolahMahasiswa = new SekolahController($namaSekolahMahasiswa,$peringkat_sekolah);
 
-            $ipk= DB::table('mahasiswa')->select('IPK')->where('id_mahasiswa','=',$arrayNpm[$i]->id_mahasiswa)->first();;
+            $ipk= Mahasiswa::select('IPK')->where('id_mahasiswa','=',$arrayNpm[$i])->first();;
 
             $mahasiswa = new MahasiswaController($npm, $namaMahasiswa,$sekolahMahasiswa,$ipk);
             array_push($kumpulanMahasiswa,$mahasiswa); 
@@ -145,8 +148,6 @@ class MainController extends Controller
         // }
         // echo count($kumpulanPeminatPMDK);
 
-        
-        
         
         //PRINT HASIL SELEKSI KKM PENDAFTAR PMDK
         $kelasSeleksi = new SeleksiNilaiKkmController($kumpulanPeminatPMDK);
@@ -313,7 +314,7 @@ class MainController extends Controller
 
 
             return view('halamanHasilSeleksi',['hasilPMDK'=>$hasilPMDK,'kuotaPMDK'=>$kuotaPmdk,'jumlahPeminat'=>$jumlah_peminat_PMDK,'jumlahLolosKKM'=>count($hasilSeleksiKkm)]);
-
+ 
         }
         else{
             Alert::error('Penilaian salah','Silakan ulangi penilaian');
@@ -331,6 +332,10 @@ class MainController extends Controller
 
         return view('halamanUtama',['nilais'=>$data]);
 
+    }
+
+    public function pindahHalamanLogin(){
+        return view('halamanLogin');
     }
 
     public function pindahHalamanImport(){
@@ -351,6 +356,34 @@ class MainController extends Controller
         Alert::success('Import data siswa berhasil','Lanjutkan ke halaman selanjutnya');
         return back();
     }
+
+    public function login(Request $request) 
+    {   
+        $userName = $request->username;
+        $pass = $request->password;
+
+        $cekUser=count(DB::table('pengguna')->select('userName')->where('userName','=',$userName)->get()->toArray());
+
+        if($cekUser==1){
+            $cekPass=DB::table('pengguna')->select('password')->where('username','=',$userName)->first();
+
+            if($pass == $cekPass->password){
+                return redirect()->intended('halamanUtama'); 
+            }
+            else{
+                Alert::error('Login gagal','password yang dimasukkan salah!');
+                return back();
+            }
+
+        }
+        else{
+            Alert::warning('Login gagal','username tidak terdaftar pada sistem!');
+
+            return back();
+        }
+
+    }
+    
 
     public function exportData() 
     {

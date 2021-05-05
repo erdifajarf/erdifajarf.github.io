@@ -11,9 +11,9 @@
 
 
 <body>
-    
+@include('sweetalert::alert')
+
 <div class="container">
-    @include('sweetalert::alert')
 
     <div class="headerHasilSeleksi">
         <div class="keteranganHasil">
