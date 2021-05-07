@@ -260,6 +260,25 @@
   .tombolLogin{
     margin-left: 40%;
   }
+
+  .tombolLogout {
+    margin-left:93%;
+    margin-top:-7.5%;
+    position:absolute;
+ 
+  }
+
+  .formLogin{
+    padding:7%;
+  }
+
+  .frameLogin{
+    margin-top:13%;
+  }
+
+
+
+
   :root {
     --input-padding-x: 1.5rem;
     --input-padding-y: .75rem;

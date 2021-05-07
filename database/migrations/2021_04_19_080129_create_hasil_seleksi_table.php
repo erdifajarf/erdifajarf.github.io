@@ -21,7 +21,7 @@ class CreateHasilSeleksiTable extends Migration
             $table->bigInteger('peringkat_sekolah');
             $table->float('rata_rata_nilai');
             $table->float('rata_rata_ipk');
-            $table->float('bobot_akhir');
+            $table->decimal('bobot_akhir', 10, 6);
 
         });
     }
@@ -33,6 +33,6 @@ class CreateHasilSeleksiTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('hasil_seleksis');
+        Schema::dropIfExists('hasil_seleksi');
     }
 }

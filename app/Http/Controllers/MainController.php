@@ -282,11 +282,12 @@ class MainController extends Controller
                 $hasilPMDK[$i][0]=$hasilKriteria[0][$hasilPemeringkatan[$i][0]];    // data siswa
                 $hasilPMDK[$i][1]=number_format($hasilKriteria[1][$hasilPemeringkatan[$i][0]],3);    // rata-rata nilai akhir
                 $hasilPMDK[$i][2]=number_format($hasilKriteria[2][$hasilPemeringkatan[$i][0]],2);    // rata-rata ipk alumni
-                $hasilPMDK[$i][3]=number_format($hasilPemeringkatan[$i][1],5);
+                $hasilPMDK[$i][3]=number_format($hasilPemeringkatan[$i][1],6);
             }
             
+            // dump($hasilPMDK);
 
-            HasilSeleksi::truncate();
+           HasilSeleksi::truncate();
            
            if($kuotaPmdk<=count($hasilSeleksiKkm)){
 

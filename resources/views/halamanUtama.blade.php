@@ -3,17 +3,27 @@
 <x-header/>
 <head>
     <title>Halaman Utama</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" 
-        integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"  integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    
     <link rel="stylesheet" href="\css\app.css" >
+
+
 
 </head>
 
 
 <body>
+<div class="tombolLogout">
 
+        <a href="{{ url('halamanLogin') }}" class="btn btn-info btn-lg"> Keluar </a>
+
+</div>
 <div class="container">
+
     @include('sweetalert::alert')
+
+
         <div class="headerUpload">
             <h4> Unggah data sekolah peminat PMDK dengan format file Excel. </h4>
         </div>
@@ -150,7 +160,7 @@
         </li>
 
         <li class="page-item">
-            <a class="page-link" id="lastPage" href="?page=11" >Last</a>
+            <a class="page-link" id="lastPage" href="?page=25" >Last</a>
         </li>
         
     </ul>
@@ -177,7 +187,7 @@
 
             }
 
-            if(lastBefChar==11){
+            if(lastBefChar==25){
                     pageNext.style.display= 'none';
                     pageNext.removeAttribute("href");
                 }
