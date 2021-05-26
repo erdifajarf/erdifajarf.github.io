@@ -14,11 +14,11 @@ class CreateMahasiswaTable extends Migration
     public function up()
     {
         Schema::create('mahasiswa', function (Blueprint $table) {
-            $table->bigIncrements('id_mahasiswa');
-            $table->unsignedBigInteger('id_sekolah')->nullable();
+            $table->increments('id_mahasiswa');
+            $table->unsignedInteger('id_sekolah')->nullable();
             $table->foreign('id_sekolah')->references('id_sekolah')->on('sekolah');
-            $table->String('nama_mahasiswa');
-            $table->float('IPK');
+            $table->string('nama_mahasiswa',50);
+            $table->double('IPK');
 
         });
     }

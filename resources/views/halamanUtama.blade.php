@@ -14,11 +14,10 @@
 
 
 <body>
-<div class="tombolLogout">
-
-        <a href="{{ url('halamanLogin') }}" class="btn btn-info btn-lg"> Keluar </a>
-
+<div class="tombolLogout">  
+    <a href="{{ url('halamanLogin') }}" type="button" class="btn btn-success"> <img src="/img/logo_logout.png">  Keluar </a>
 </div>
+
 <div class="container">
 
     @include('sweetalert::alert')
@@ -104,6 +103,7 @@
 
         @php
         $index=0;
+        $anonim=1;
         @endphp
         @foreach($nilais as $nilai)
             <tr>
@@ -111,8 +111,9 @@
                     <td rowspan=2>{{$nilai['id_siswa']}}</td>
                     <div class="tes">
                     <td rowspan=2>{{$nilai['nama_siswa']}}</td>
-
+                    <!-- <td rowspan=2>Siswa {{$anonim}}</td> -->
                     </div>
+                    @php $anonim++ @endphp
                 @endif
                 
 

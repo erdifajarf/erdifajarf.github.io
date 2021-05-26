@@ -13,11 +13,16 @@
 <body>
 @include('sweetalert::alert')
 
+
+<div class="tombolLogout">  
+    <a href="{{ url('halamanLogin') }}" class="btn btn-success"> <img src="/img/logo_logout.png">  Keluar </a>
+</div>
+
 <div class="container">
 
     <div class="headerHasilSeleksi">
         <div class="keteranganHasil">
-            <h2>Hasil Seleksi PMDK Siswa Tahun 2019</h2>
+            <h2>Hasil Seleksi PMDK Siswa</h2>
             <p>Total pendaftar : {{$jumlahPeminat}} orang </p> 
             <p>Total lolos KKM : {{$jumlahLolosKKM}} orang  </p>
 
@@ -59,53 +64,32 @@
 
     </div>
 
+        @foreach($hasilPMDK as $atribut)
+                <tr>
+                    <td>{{$atribut->no}}</td>
+                    <td>{{$atribut->no_pmb}}</td>
+                    <td>{{$atribut->nama}}</td>
+                    <!-- <td>Siswa {{$atribut->no}}</td> -->
+                    <td>{{$atribut->asal_sekolah}}</td>
+                    @if($atribut->peringkat_sekolah>1000)
+                        <td>>1000</td>
+                    @else
+                        <td>{{$atribut->peringkat_sekolah}}</td>
+                    @endif
+                    <td>{{$atribut->rata_rata_nilai}}</td>
+                    @if($atribut->rata_rata_ipk>0)
+                        <td>{{$atribut->rata_rata_ipk}}</td>
+                    @else
+                        <td>-</td>
+                    @endif
+                 
+                    <td>{{$atribut->bobot_akhir}}</td>
+                </tr>
+        @endforeach
 
-
-     @for($i=0; $i<$kuotaPMDK; $i++)
-
-            <tr>    
-            @if($i<count($hasilPMDK))
-                    <td>{{$i+1}}</td>
-                    <td>{{$hasilPMDK[$i][0]->getNoPmb()->id_siswa}}</td>
-                    <td>{{$hasilPMDK[$i][0]->getNamaSiswa()->nama_siswa}}</td>
-                    <td>{{$hasilPMDK[$i][0]->getSekolah()->getNamaSekolah()->nama_sekolah}}</td>
-                @if ($hasilPMDK[$i][0]->getSekolah()->getPeringkat()->peringkat_sekolah > '1000')
-                    <td>>1000</td>
-                @else
-                    <td>{{$hasilPMDK[$i][0]->getSekolah()->getPeringkat()->peringkat_sekolah}}</td>
-                @endif
-                    <td>{{$hasilPMDK[$i][1]}}</td>
-                @if ($hasilPMDK[$i][2]== '0')
-                    <td>-</td>
-                @else
-                    <td>{{$hasilPMDK[$i][2]}}</td>
-                @endif
-                
-                    <td>{{$hasilPMDK[$i][3]}}</td>
-
-            @endif
-
-
-            </tr>
-
-        @endfor
-
-
-
+    </table>
 
         
-
-
-
-             
-
-     
-                    
-               
-            
-
-        </table>
-
 
         <div class="tombolNextPrev">
             <a href="{{('\halamanPenentuanBobotDanKuota')}}" class="previous round">&#8249;</a>

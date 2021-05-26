@@ -37,81 +37,117 @@ class FuzzyController extends Controller
     
     function hitungNilaiKeanggotaanRaport($x){
         $arrHasil;
-
-        if($x==70){
+        //Dibagi menjadi 4 kategori, cukup, baik, sangat baik, luar biasa
+        //kategori cukup
+        if($x<=70 && $x <=75){
             $arrHasil[0]=1;
         }
-        elseif($x>70 && $x<80){
-            $arrHasil[0]=(80-$x)/(80-70);
+        elseif($x>75 && $x<80){
+            $arrHasil[0]=(80-$x)/(80-75);
         }
         else{
             $arrHasil[0]=0;
         }
 
+        //kategori baik
         if($x==80){
             $arrHasil[1]=1;
         }
-        elseif($x>80 && $x<90){
-            $arrHasil[1]=(90-$x)/(90-80);
+        elseif($x>80 && $x<85){
+            $arrHasil[1]=(85-$x)/(85-80);
         }
-        elseif($x>70 && $x<80){
-            $arrHasil[1]=($x-70)/(80-70);
+        elseif($x>75 && $x<80){
+            $arrHasil[1]=($x-75)/(80-75);
         }
         else{
             $arrHasil[1]=0;
         }
 
-        if($x>=90){
+        //kategori sangat baik
+        if($x==85){
             $arrHasil[2]=1;
         }
-        elseif($x>80 && $x<90){
-            $arrHasil[2]=($x-80)/(90-80);
+        elseif($x>85 && $x<90){
+            $arrHasil[2]=(90-$x)/(90-85);
+        }
+        elseif($x>80 && $x<85){
+            $arrHasil[2]=($x-80)/(85-80);
         }
         else{
             $arrHasil[2]=0;
         }
+       
+
+        //kategori luar biasa
+        if($x>=90){
+            $arrHasil[3]=1;
+        }
+        elseif($x>85 && $x<90){
+            $arrHasil[3]=($x-85)/(90-85);
+        }
+        else{
+            $arrHasil[3]=0;
+        }
+
+
 
         return $arrHasil;
     }
 
     function hitungNilaiKeanggotaanPeringkat($x){
         $arrHasil;
-        //Dibagi menjadi 3 kategori, cukup,bagus,dan sangat bagus
+        //Dibagi menjadi 4 kategori, cukup, baik, sangat baik, luar biasa
         
+        //Kategori cukup
         if($x<=1)
         {
             $arrHasil[0]=1;
         }
-        else if($x>1 && $x<500){
-            $arrHasil[0]=(500-$x)/(500-1); 
+        else if($x>1 && $x<250){
+            $arrHasil[0]=(250-$x)/(250-1); 
         }
         else{
             $arrHasil[0]=0;
         }
-        
-        
-        if($x==500){
+
+
+        //Kategori baik
+        if($x==250){
             $arrHasil[1]=1;
         }
-        else if($x>500 && $x<1000){
-            $arrHasil[1]=(1000-$x)/(1000-500);
+        else if($x>250 && $x<500){
+            $arrHasil[1]=(500-$x)/(500-250);
         }
-        else if($x>0 && $x<500){
-            $arrHasil[1]=($x-0)/(500-0);
+        else if($x>1 && $x<250){
+            $arrHasil[1]=($x-1)/(250-1);
         }
         else{
             $arrHasil[1]=0;
         }
         
-        
-        if($x>=1000){
-            $arrHasil[2]= 1;
+        //Kategori sangat baik
+        if($x==500){
+            $arrHasil[2]=1;
         }
-        else if($x>500 && $x<1000){
-            $arrHasil[2]= ($x-500)/(1000-500);
+        else if($x>500 && $x<750){
+            $arrHasil[2]=(750-$x)/(750-500);
+        }
+        else if($x>250 && $x<500){
+            $arrHasil[2]=($x-250)/(500-250);
         }
         else{
-            $arrHasil[2]= 0;
+            $arrHasil[2]=0;
+        }
+        
+        //Kategori luar biasa
+        if($x>=750){
+            $arrHasil[3]= 1;
+        }
+        else if($x>500 && $x<750){
+            $arrHasil[3]= ($x-500)/(750-500);
+        }
+        else{
+            $arrHasil[3]= 0;
         }
         
         return $arrHasil;
@@ -119,42 +155,61 @@ class FuzzyController extends Controller
 
     function hitungNilaiKeanggotaanIPK($x){
         $arrHasil;
-        //Dibagi menjadi 3 kategori, cukup,bagus,dan sangat bagus
+        //Dibagi menjadi 4 kategori, cukup, baik, sangat baik, luar biasa
         
-        if($x<=2.5)
+        //Kategori cukup
+        if($x<=2.75)
         {
             $arrHasil[0]=1;
         }
-        else if($x>2.5 && $x<3.0){
-            $arrHasil[0]=(3.0-$x)/(3.0-2.5); 
+        else if($x>2.75 && $x<3.0){
+            $arrHasil[0]=(3.0-$x)/(3.0-2.75); 
         }
         else{
             $arrHasil[0]=0;
         }
         
         
+        //Kategori baik
         if($x==3.0){
             $arrHasil[1]=1;
         }
-        else if($x>3.0 && $x<3.5){
-            $arrHasil[1]=(3.5-$x)/(3.5-3.0);
+        else if($x>3.0 && $x<3.25){
+            $arrHasil[1]=(3.25-$x)/(3.25-3.0);
         }
-        else if($x>2.5 && $x<3.0){
-            $arrHasil[1]=($x-2.5)/(3.0-2.5);
+        else if($x>2.75 && $x<3.0){
+            $arrHasil[1]=($x-2.75)/(3.0-2.75);
         }
         else{
             $arrHasil[1]=0;
         }
-        
-        
-        if($x>=3.5){
-            $arrHasil[2]= 1;
+
+
+        //Kategori sangat baik
+        if($x==3.25){
+            $arrHasil[2]=1;
         }
-        else if($x>3.0 && $x<3.5){
-            $arrHasil[2]= ($x-3.0)/(3.5-3.0);
+        else if($x>3.25 && $x<3.5){
+            $arrHasil[2]=(3.5-$x)/(3.5-3.25);
+        }
+        else if($x>3.0 && $x<3.25){
+            $arrHasil[2]=($x-3.0)/(3.25-3.0);
         }
         else{
-            $arrHasil[2]= 0;
+            $arrHasil[2]=0;
+        }
+        
+        
+        
+        //Kategori luar biasa
+        if($x>=3.5){
+            $arrHasil[3]= 1;
+        }
+        else if($x>3.25 && $x<3.5){
+            $arrHasil[3]= ($x-3.25)/(3.5-3.25);
+        }
+        else{
+            $arrHasil[3]= 0;
         }
         
         return $arrHasil;
@@ -189,11 +244,17 @@ class FuzzyController extends Controller
                 else if($hasil==2){
                     $this->hasilKategori[$i][$j]="SB";
                 }
+                else if($hasil==3){
+                    $this->hasilKategori[$i][$j]="LB";
+                }
                 else if($hasil==0.5){
                     $this->hasilKategori[$i][$j]="C-B";
                 }
                 else if($hasil==1.5){
                     $this->hasilKategori[$i][$j]="B-SB";
+                }
+                else if($hasil==2.5){
+                    $this->hasilKategori[$i][$j]="SB-LB";
                 }
 
                 if($j==0){

@@ -14,8 +14,8 @@ class CreateMataPelajaranTable extends Migration
     public function up()
     {
         Schema::create('mata_pelajaran', function (Blueprint $table) {
-            $table->bigIncrements('id_mata_pelajaran');
-            $table->String('nama_mata_pelajaran');
+            $table->increments('id_mata_pelajaran');
+            $table->string('nama_mata_pelajaran',20);
    
         });
     }

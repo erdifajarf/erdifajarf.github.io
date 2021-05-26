@@ -11,9 +11,14 @@
 
 
 <body>
-    
+<div class="tombolLogout">  
+    <a href="{{ url('halamanLogin') }}" class="btn btn-success"> <img src="/img/logo_logout.png">  Keluar </a>
+</div>
+
 <div class="container">
 @include('sweetalert::alert')
+
+
 
     <div class="headerPenentuanBobot">
          <h3>Penentuan Bobot Antar Kriteria (Nilai Raport, Peringkat Sekolah, IPK)</h3>
@@ -28,10 +33,15 @@
                 <!-- <h5>Nilai Raport Peringkat Sekolah<h5>  -->
                 
                 <div class="logoPenentuanBobot">
+                    <div class="tagOpsi1">
+                        <p>Nilai Raport</p>
+                        <p>Sekolah</p>
+                    </div>
                     <img src="/img/logo_nilai_raport.png" class="logoNilai">
                     <svg xmlns="http://www.w3.org/2000/svg" width="100" height="80"  fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
                     <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
                     </svg>
+
                     <img src="/img/logo_sekolah.png" class="logoSekolah">
                 </div>
 
@@ -63,9 +73,12 @@
             
             
             <div class="opsi2">
-                <!-- <h5>Nilai Raport -> IPK Alumni</h5> -->
 
                 <div class="logoPenentuanBobot">
+                    <div class="tagOpsi2">
+                        <p>Nilai Raport</p>
+                        <p>IPK Alumni</p>
+                    </div>
                     <img src="/img/logo_nilai_raport.png" class="logoNilai">
                     <svg xmlns="http://www.w3.org/2000/svg" width="100" height="80"  fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
                     <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
@@ -99,7 +112,10 @@
             </div>
 
             <div class="opsi3">
-                <!-- <h5>Peringkat Sekolah -> IPK Alumni</h5> -->
+                    <div class="tagOpsi3">
+                        <p>Sekolah</p>
+                        <p>IPK Alumni</p>
+                    </div>
                 <div class="logoPenentuanBobot">
                     <img src="/img/logo_sekolah.png" class="logoSekolah">
                     <svg xmlns="http://www.w3.org/2000/svg" width="100" height="80" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
@@ -175,27 +191,27 @@
 
     <tr>
         <td>1 </td>
-        <td>Kriteria 1 sama penting dengan kriteria 2 </td>
+        <td> &lt;Kriteria1&gt; sama penting dengan &lt;kriteria2&lt; </td>
     </tr>
 
     <tr>
         <td>3 </td>
-        <td>Kriteria 1 sedikit lebih penting dari kriteria 2 </td>
+        <td>&lt;Kriteria1&gt; sedikit lebih penting dari kriteria2 </td>
     </tr>
 
     <tr>
         <td>5 </td>
-        <td>Kriteria 1 cukup lebih penting dari kriteria 2 </td>
+        <td>&lt;Kriteria1&gt; cukup lebih penting dari &lt;Kriteria2&gt; </td>
     </tr>
 
     <tr>
         <td>7 </td>
-        <td>Kriteria 1 sangat lebih penting dari kriteria 2 </td>
+        <td>&lt;Kriteria1&gt; sangat lebih penting dari &lt;Kriteria2&gt; </td>
     </tr>
 
     <tr>
         <td>9 </td>
-        <td>Kriteria 1 mutlak lebih penting dari kriteria 2 </td>
+        <td>&lt;Kriteria1&gt; mutlak lebih penting dari &lt;Kriteria2&gt; </td>
     </tr>
 
     <tr>
@@ -205,7 +221,7 @@
 
     <tr>
         <td>-</td>
-        <td>Kebalikan, dibaca kriteria 2 &lt;penilaian&gt; kriteria 1 </td>
+        <td>Kebalikan, dibaca &lt;Kriteria2&gt; &lt;input&gt; &lt;Kriteria1&gt; </td>
     </tr>
 </table>
 

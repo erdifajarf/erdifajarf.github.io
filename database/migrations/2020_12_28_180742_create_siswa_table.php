@@ -14,10 +14,10 @@ class CreateSiswaTable extends Migration
     public function up()
     {
         Schema::create('siswa', function (Blueprint $table) {
-            $table->bigIncrements('id_siswa');
-            $table->unsignedBigInteger('id_sekolah')->nullable();
+            $table->increments('id_siswa');
+            $table->unsignedInteger('id_sekolah')->nullable();
             $table->foreign('id_sekolah')->references('id_sekolah')->on('sekolah');
-            $table->String('nama_siswa');
+            $table->string('nama_siswa',50);
 
         });
 

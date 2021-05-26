@@ -16,6 +16,7 @@ use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
 
 
+
 use Alert;
 
 
@@ -47,8 +48,7 @@ class DataImport implements ToModel, WithHeadingRow
         //     return array($dataMatpel);
         // }
         
-        //STEP 2
-                
+        //STEP 2              
         // $nama_sekolah_sama = Sekolah::where('nama_sekolah','=',$row['asal_sma'])->get()->count();
         // if($nama_sekolah_sama===0)
         // {
@@ -66,7 +66,6 @@ class DataImport implements ToModel, WithHeadingRow
 
 
         //STEP 3
-        
     //     $nama_mahasiswa_sama= Mahasiswa::where('id_mahasiswa','=',$row['npm'])->get()->count();
     //     if($nama_mahasiswa_sama==0){
 
@@ -112,38 +111,42 @@ class DataImport implements ToModel, WithHeadingRow
 
 
         //STEP 5 
+      
+            if(isset($row['101_p'])){
+                $dataNilai=new Nilai([
+                        'id_siswa' => DB::table('siswa')->
+                                    select('id_siswa')->
+                                    where('nama_siswa','=',$row['nama'])->
+                                    value('id_siswa'),
+                        'id_mata_pelajaran' => DB::table('mata_pelajaran')->
+                                    select('id_mata_pelajaran')->
+                                    where('nama_mata_pelajaran','=',$row['mata_pelajaran'])->
+                                    value('id_mata_pelajaran'),
+                            
+                        '101_KKM'=>$row['101_kkm'],
+                        '101_p'=>$row['101_p'],
+                        '101_t'=>$row['101_t'],
+                        '102_KKM'=>$row['102_kkm'],
+                        '102_p'=>$row['102_p'],
+                        '102_t'=>$row['102_t'],
+                        '111_KKM'=>$row['111_kkm'],
+                        '111_p'=>$row['111_p'],
+                        '111_t'=>$row['111_t'],
+                        '112_KKM'=>$row['112_kkm'],
+                        '112_p'=>$row['112_p'],
+                        '112_t'=>$row['112_t'],
+                    ]);
 
-            $dataNilai=new Nilai([
-                'id_siswa' => DB::table('siswa')->
-                                select('id_siswa')->
-                                where('nama_siswa','=',$row['nama'])->
-                                value('id_siswa'),
-    
-                'id_mata_pelajaran' => DB::table('mata_pelajaran')->
-                                select('id_mata_pelajaran')->
-                                where('nama_mata_pelajaran','=',$row['mata_pelajaran'])->
-                                value('id_mata_pelajaran'),
-                 
-                '101_KKM'=>$row['101_kkm'],
-                '101_p'=>$row['101_p'],
-                '101_t'=>$row['101_t'],
-                '102_KKM'=>$row['102_kkm'],
-                '102_p'=>$row['102_p'],
-                '102_t'=>$row['102_t'],
-                '111_KKM'=>$row['111_kkm'],
-                '111_p'=>$row['111_p'],
-                '111_t'=>$row['111_t'],
-                '112_KKM'=>$row['112_kkm'],
-                '112_p'=>$row['112_p'],
-                '112_t'=>$row['112_t'],
-            ]);
+                if($dataNilai!=null){
+                    Alert::success('Import data nilai siswa berhasil','Silakan proses di halaman selanjutnya');
+                    return array($dataNilai);
+                }
+            }
+            else{
+                Alert::warning('Import gagal','Silakan gunakan file yang sesuai');
+            }
+
+     
         
-
-        if($dataNilai!=null){
-            return array($dataNilai);
-        }
-
     }
-
-    
 }

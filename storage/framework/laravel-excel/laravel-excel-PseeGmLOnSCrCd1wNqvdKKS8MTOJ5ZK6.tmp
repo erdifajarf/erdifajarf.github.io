@@ -1,0 +1,273 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Mon Feb 22 16:44:42 2021
+
+@author: Erdi
+"""
+
+import pandas as pd
+
+
+#--------------------------------DATA FRAME SISWA 2013-2017 ----------------------------------------------------------
+
+
+df=pd.read_excel(open('Data asli.xlsx', 'rb'), sheet_name='Data') 
+
+
+
+# MENGUBAH TIPE DATA ATRIBUT NPM KE STRING
+df['NPM']=df.NPM.astype('str')
+
+# MENGUBAH STYLE HURUF PADA DATA DI KOLOM NAMA
+df['Nama']=df['Nama'].str.title()
+
+
+
+# MENGHAPUS RECORD PADA KOLOM NPM YANG TIDAK MENGANDUNG TEXT TERTENTU
+df = df[df['NPM'].str.contains('730', na=False)]
+
+
+
+
+# MERESET INDEX BARIS SETELAH PENGHAPUSAN RECORD
+df.reset_index(drop=True, inplace=True)
+
+
+
+# INDEX UNTUK MENANDAI
+count=0
+
+
+# INDEX UNTUK MEMASUKKAN NILAI-NILAI SETIAP SEMESTER PADA KOLOM 101,102,103, DAN 104
+idx_101=0
+idx_102=0
+idx_111=0
+idx_112=0
+
+
+
+# INDEX UNTUK MENDAPATKAN NILAI PADA SETIAP SEMESTER DARI DATA ASLI
+nl_101=0
+nl_102=2
+nl_111=4
+nl_112=6
+
+
+
+
+# MENDAPATKAN INDEX KOLOM NILAI
+Index_Kolom_Nilai = df.columns.get_loc("Nilai")
+
+
+# MELAKUKAN ITERASI SEBANYAK BARIS PADA DATA
+# DF.AT[] MELAKUKAN INSERT DATA TERHADAP KOLOM (101,102,dst)
+# DF.AT[] DIISI DENGAN NILAI nl_101 / nl_102.dst YANG DIDAPAT MENGGUNAKAN FUNGSI df.iloc[]
+for i in df.iterrows():
+    
+    if count>=0:
+        df.at[idx_101,'101']=df.iloc[nl_101,Index_Kolom_Nilai]
+        nl_101+=1
+        idx_101+=1
+        
+    if count>=2:
+        df.at[idx_102,'102']=df.iloc[nl_102,Index_Kolom_Nilai]
+        nl_102+=1
+        idx_102+=1
+    
+    if count>=4:
+        df.at[idx_111,'111']=df.iloc[nl_111,Index_Kolom_Nilai]
+        nl_111+=1
+        idx_111+=1
+        
+    if count>=6:
+        df.at[idx_112,'112']=df.iloc[nl_112,Index_Kolom_Nilai]
+        nl_112+=1
+        idx_112+=1
+
+
+    count+=1    
+
+
+
+
+# MEMBUANG KOLOM KELAS, SEMESTER, DAN NILAI KARENA SELURUH NILAI TELAH DITAMPUNG PADA KOLOM 101,dst.    
+df.drop(['Kelas','Semester','Nilai','Tahun','No. PMB', 'Provinsi Asal Provinsi',
+         'Prodi Diterima','Jenis Nilai','Kode Prodi', 'N_KELAS', 'V_KODE_MATAPEL',
+         '20131','20132','20141','20142','20151','20152','20161','20162','20171','20172','20181','20182']
+        ,axis=1,inplace=True)
+
+
+
+
+# MEMASUKKAN DATA KOLOM KE SEBUAH LIST / ARRAY
+cols = list(df)
+
+
+# MEMINDAHKAN SUATU KOLOM KE HEAD BERDASARKAN INDEX DENGAN POP LALU OTOMATIS MENGINSERT KOLOM TERSEBUT
+cols.insert(5, cols.pop(cols.index('112')))
+cols.insert(5, cols.pop(cols.index('111')))
+cols.insert(5, cols.pop(cols.index('102')))
+cols.insert(5, cols.pop(cols.index('101')))
+
+df = df.loc[:, cols]
+
+
+
+# MENGHAPUS RECORD YANG DUPLIKAT BERDASARKAN KOLOM NAMA DAN MATAPELAJARAN, LALU PRINT KE LAYAR
+# print(df[~df.duplicated(subset=['Nama','Mata Pelajaran'])])
+
+
+
+# MENGHAPUS RECORD YG DUPLIKAT BERDASARKAN KOLOM NAMA DAN MATPEL, LALU CONVERT KE FILE EXCEL
+df[~df.duplicated(subset=['Nama','Mata Pelajaran'])].to_excel('.xlsx',index=False)
+
+
+
+
+
+
+
+
+
+#--------------------------------DATA FRAME SISWA 2018----------------------------------------------------------
+
+
+# df2=pd.read_excel(open('Data asli.xlsx', 'rb'),sheet_name='Data') 
+
+
+
+# # MENGUBAH TIPE DATA ATRIBUT NPM KE STRING
+# df2['NPM']=df2.NPM.astype('str')
+
+# # MENGUBAH STYLE HURUF PADA DATA DI KOLOM NAMA
+# df2['Nama']=df2['Nama'].str.title()
+
+# # MENGHAPUS RECORD PADA KOLOM NPM YANG TIDAK MENGANDUNG TEXT TERTENTU
+# df2= df2[df2['NPM'].str.contains('6181', na=False)]
+
+
+
+# # MERESET INDEX BARIS SETELAH PENGHAPUSAN RECORD
+# df2.reset_index(drop=True, inplace=True)
+
+
+# # DROP BARIS YANG MENGANDUNG MATA PELAJARAN TERTENTU
+# df2.drop(df2.index[df2['Mata Pelajaran'] == 'Fisika'], inplace = True)
+# df2.drop(df2.index[df2['Mata Pelajaran'] == 'Kewarganegaraan'], inplace = True)
+# df2.drop(df2.index[df2['Mata Pelajaran'] == 'Bahasa Indonesia'], inplace = True)
+
+
+# # DROP BARIS YANG MENGANDUNG NILAI KKM PADA JENIS NILAI
+# df2.drop(df2.index[df2['Jenis Nilai'] == 'KKM'], inplace = True)
+
+
+# # DROP BARIS PADA KOLOM JENIS NILAI YG BERNILAI NULL
+# df2 = df2.dropna(axis=0, subset=['Jenis Nilai'])
+
+
+
+# # MERESET INDEX BARIS SETELAH PENGHAPUSAN RECORD
+# df2.reset_index(drop=True, inplace=True)
+
+
+
+# # INDEX BARIS NILAI PADA KOLOM SEMESTER
+# idx_nl_101=0
+# idx_nl_102=0
+# idx_nl_111=0
+# idx_nl_112=0
+
+# # INDEX UNTUK MEMASUKKAN NILAI-NILAI SETIAP SEMESTER PADA KOLOM 101,102,103, DAN 104
+# idx_101=0
+# idx_102=8
+# idx_111=2
+# idx_112=10
+
+
+
+
+
+
+# # MENDAPATKAN INDEX KOLOM NILAI
+# Index_Kolom_Nilai = df2.columns.get_loc("Nilai")
+
+
+
+
+
+
+# # MELAKUKAN PERULANGAN BERDASARKAN UKURAN DF2
+# # KONDISI KETIKA UKURAN KURANG DARI 1, KARENA INDEX DIMULAI DARI 0
+# # DF.AT MEMBUAT KOLOM BARU BERNAMA 101,102,dst, PADA INDEX KE "idx_nl_101"
+# # DF ILOC MENGAMBIL DATA PADA INDEX KE i, untuk kolom nilai (diisi dengan index)
+
+# for i in range(len(df2.index)):
+    
+#     if i<len(df2.index)-1:
+        
+#         if i==idx_101:
+#             df2.at[idx_nl_101,'101']=(df2.iloc[i,Index_Kolom_Nilai]+df2.iloc[i+1,Index_Kolom_Nilai])/2
+#             idx_101+=4
+#             idx_nl_101+=4
+
+        
+#         if i==idx_102:
+#             df2.at[idx_nl_102,'102']=(df2.iloc[i,Index_Kolom_Nilai]+df2.iloc[i+1,Index_Kolom_Nilai])/2
+#             idx_102+=4
+#             idx_nl_102+=4
+
+            
+#         if i==idx_111:
+#             df2.at[idx_nl_111,'111']=(df2.iloc[i,Index_Kolom_Nilai]+df2.iloc[i+1,Index_Kolom_Nilai])/2
+#             idx_111+=4
+#             idx_nl_111+=4
+
+            
+#         if i==idx_112:
+#             df2.at[idx_nl_112,'112']=(df2.iloc[i,Index_Kolom_Nilai]+df2.iloc[i+1,Index_Kolom_Nilai])/2
+#             idx_112+=4
+#             idx_nl_112+=4
+        
+
+            
+
+
+
+# # MEMBUANG KOLOM KELAS, SEMESTER, DAN NILAI KARENA SELURUH NILAI TELAH DITAMPUNG PADA KOLOM 101,dst.    
+# df2.drop(['Kelas','Semester','Nilai','Tahun','No. PMB', 'Provinsi Asal Provinsi',
+#           'Prodi Diterima','Jenis Nilai','Kode Prodi', 'N_KELAS', 'V_KODE_MATAPEL',
+#           '20131','20132','20141','20142','20151','20152','20161','20162','20171','20172','20181','20182']
+#         ,axis=1,inplace=True)
+
+
+
+
+# # MEMASUKKAN DATA KOLOM KE SEBUAH LIST / ARRAY
+# cols = list(df2)
+
+
+# # MEMINDAHKAN SUATU KOLOM KE HEAD BERDASARKAN INDEX DENGAN POP LALU OTOMATIS MENGINSERT KOLOM TERSEBUT
+# cols.insert(5, cols.pop(cols.index('112')))
+# cols.insert(5, cols.pop(cols.index('111')))
+# cols.insert(5, cols.pop(cols.index('102')))
+# cols.insert(5, cols.pop(cols.index('101')))
+
+
+# df2 = df2.loc[:, cols]
+
+
+
+# #MENYATUKAN 2 DATA FRAME
+# frames = [df, df2]
+# result = pd.concat(frames)
+# print(result)
+
+# #MENGHAPUS RECORD YG DUPLIKAT BERDASARKAN KOLOM NAMA DAN MATPEL, LALU CONVERT KE FILE EXCEL
+# result[~result.duplicated(subset=['Nama','Mata Pelajaran'])].to_excel('z.xlsx',index=False)
+
+
+
+
+
+
+

@@ -14,14 +14,14 @@ class CreateHasilSeleksiTable extends Migration
     public function up()
     {
         Schema::create('hasil_seleksi', function (Blueprint $table) {
-            $table->bigIncrements('no');
-            $table->bigInteger('no_pmb');
-            $table->String('nama');
-            $table->String('asal_sekolah');
-            $table->bigInteger('peringkat_sekolah');
-            $table->float('rata_rata_nilai');
-            $table->float('rata_rata_ipk');
-            $table->decimal('bobot_akhir', 10, 6);
+            $table->increments('no');
+            $table->integer('no_pmb');
+            $table->string('nama',50);
+            $table->string('asal_sekolah',50);
+            $table->integer('peringkat_sekolah');
+            $table->double('rata_rata_nilai');
+            $table->double('rata_rata_ipk');
+            $table->double('bobot_akhir', 6);
 
         });
     }

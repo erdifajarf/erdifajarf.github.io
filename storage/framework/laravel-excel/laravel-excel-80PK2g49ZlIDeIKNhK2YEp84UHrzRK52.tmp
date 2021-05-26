@@ -1,0 +1,53 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Thu May  6 03:27:22 2021
+
+@author: Erdi
+"""
+
+# -*- coding: utf-8 -*-
+"""
+Created on Thu Mar 25 15:09:26 2021
+
+@author: Erdi
+"""
+
+
+import pandas as pd
+import numpy as np
+
+#--------------------------------DATA FRAME PEMINAT PMDK 2019----------------------------------------------------------
+
+df=pd.read_excel('tessss.xlsx')
+
+# df = df[df['Tahun'].str.contains('2016', na=False)]
+df.drop(df.columns[26],axis=1,inplace=True)
+
+df.drop(df.columns[25],axis=1,inplace=True)
+df.drop(df.columns[24],axis=1,inplace=True)
+
+df.drop(df.columns[23],axis=1,inplace=True)
+df.drop(df.columns[22],axis=1,inplace=True)
+df.drop(df.columns[21],axis=1,inplace=True)
+df.drop(df.columns[20],axis=1,inplace=True)
+df.drop(df.columns[19],axis=1,inplace=True)
+df.drop(df.columns[18],axis=1,inplace=True)
+
+
+
+df['Tahun']=df.Tahun.astype('str')
+
+
+for i in range(len(df.index)):
+    if df.loc[i,df.columns[0]]=="2016":
+        df.loc[i, df.columns[1]]= 70
+        df.loc[i, df.columns[2]]= df.iloc[i,0]
+   
+        
+
+
+
+
+
+
+print(df)

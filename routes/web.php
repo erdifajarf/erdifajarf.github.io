@@ -37,3 +37,4 @@ Route::post('/halamanHasilSeleksi',[MainController::class,'main'])->name('jalank
 Route::post('/halamanPenentuaBobotDanKuota',[MainController::class,'exportData'])->name('exportData');
 
 
+

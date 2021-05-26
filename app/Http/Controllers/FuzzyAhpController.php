@@ -68,57 +68,6 @@ class FuzzyAhpController extends Controller
     }
 
 
-
-
-    function hitungConsistencyRatio(array $arrKriteria){
-        $totalKolom=array_fill(0,count($arrKriteria),0);        //array 1 dimensi menjumlahkan setiap kolom
-        
-        for ($i = 0; $i<count($arrKriteria); $i++) {
-            for ($j = 0; $j < count($arrKriteria); $j++) {
-                $totalKolom[$j]+=$arrKriteria[$i][$j];
-            }
-        }
-        
-        // $normalisasi;
-        for ($i = 0; $i <count($arrKriteria); $i++){ //array 2 dimensi untuk menampung hasil normalisasi
-            for ($j = 0; $j < count($arrKriteria[0]); $j++) {
-                $normalisasi[$i][$j]= $arrKriteria[$i][$j]/$totalKolom[$j];
-            }
-        }
-        
-        $totalBaris=array_fill(0,count($arrKriteria),0); //array 1 dimensi menjumlahkan setiap baris
-        for ($i = 0; $i <count($totalBaris); $i++) {
-            for ($j = 0; $j<count($totalBaris); $j++) {
-                $totalBaris[$j]+=$normalisasi[$j][$i];
-            }
-        }
-        
-        $rataRata; //array 1 dimensi menyimpan rata-rata setiap baris
-        for ($i = 0; $i <count($totalBaris) ; $i++) {
-           $rataRata[$i]=$totalBaris[$i]/count($totalBaris);
-        }
-        
-        $lambdaMax=0; //nilai lambda max
-        for ($i=0; $i<count($rataRata);$i++){
-            $lambdaMax+= $totalKolom[$i]*$rataRata[$i];
-        }
-        
-        $CI= ($lambdaMax-count($arrKriteria))/(count($arrKriteria)-1); //nilai consistency index
-        
-        $RI= array(0=>0.0, 1=> 0.0, 2=> 0.58, 3=>0.90, 4=>1.12, 5=>1.24, 6=>1.32,
-        7=>1.41, 8=>1.45, 9=>1.49, 10=>1.51, 11=>1.53, 12=> 1.56, 13=>1.57, 14=>1.59,
-        15=>1.60, 16=>1.61, 17=> 1.62, 18=>1.63, 19=>1.634, 20=>1.641, 21=>1.65, 22=>1.653);  //nilai random index
-
-        $CR= $CI/$RI[count($arrKriteria)-1]; //nilai consistency ratio
-        
-
-        return number_format($CR,2);
-
-
-      
-    }
-
-
     function susunBobotAwalKriteria():void{
         for ($i = 0; $i < 3; $i++) {
             for ($j = 0; $j < 3; $j++) {
@@ -174,6 +123,54 @@ class FuzzyAhpController extends Controller
         } 
     }
 
+    
+    function hitungConsistencyRatio(array $arrKriteria){
+        $totalKolom=array_fill(0,count($arrKriteria),0);        //array 1 dimensi menjumlahkan setiap kolom
+        
+        for ($i = 0; $i<count($arrKriteria); $i++) {
+            for ($j = 0; $j < count($arrKriteria); $j++) {
+                $totalKolom[$j]+=$arrKriteria[$i][$j];
+            }
+        }
+        
+        // $normalisasi;
+        for ($i = 0; $i <count($arrKriteria); $i++){ //array 2 dimensi untuk menampung hasil normalisasi
+            for ($j = 0; $j < count($arrKriteria[0]); $j++) {
+                $normalisasi[$i][$j]= $arrKriteria[$i][$j]/$totalKolom[$j];
+            }
+        }
+        
+        $totalBaris=array_fill(0,count($arrKriteria),0); //array 1 dimensi menjumlahkan setiap baris
+        for ($i = 0; $i <count($totalBaris); $i++) {
+            for ($j = 0; $j<count($totalBaris); $j++) {
+                $totalBaris[$j]+=$normalisasi[$j][$i];
+            }
+        }
+        
+        $rataRata; //array 1 dimensi menyimpan rata-rata setiap baris
+        for ($i = 0; $i <count($totalBaris) ; $i++) {
+           $rataRata[$i]=$totalBaris[$i]/count($totalBaris);
+        }
+        
+        $lambdaMax=0; //nilai lambda max
+        for ($i=0; $i<count($rataRata);$i++){
+            $lambdaMax+= $totalKolom[$i]*$rataRata[$i];
+        }
+        
+        $CI= ($lambdaMax-count($arrKriteria))/(count($arrKriteria)-1); //nilai consistency index
+        
+        $RI= array(0=>0.0, 1=> 0.0, 2=> 0.58, 3=>0.90, 4=>1.12, 5=>1.24, 6=>1.32,
+        7=>1.41, 8=>1.45, 9=>1.49, 10=>1.51, 11=>1.53, 12=> 1.56, 13=>1.57, 14=>1.59,
+        15=>1.60, 16=>1.61, 17=> 1.62, 18=>1.63, 19=>1.634, 20=>1.641, 21=>1.65, 22=>1.653);  //nilai random index
+
+        $CR= $CI/$RI[count($arrKriteria)-1]; //nilai consistency ratio
+
+        return number_format($CR,2);
+    }
+
+
+    
+
 
 
 
@@ -185,7 +182,7 @@ class FuzzyAhpController extends Controller
             if($this->hasilKategori[$i][$idxKriteria]=='C'){
                 $pemetaanKategori[$i]=1;
             }
-            if($this->hasilKategori[$i][$idxKriteria]=='C-B'){
+            else if($this->hasilKategori[$i][$idxKriteria]=='C-B'){
                 $pemetaanKategori[$i]=2;
             }
             else if($this->hasilKategori[$i][$idxKriteria]=='B'){
@@ -197,8 +194,14 @@ class FuzzyAhpController extends Controller
             else if($this->hasilKategori[$i][$idxKriteria]=='SB'){
                 $pemetaanKategori[$i]=5;
             }
+            else if($this->hasilKategori[$i][$idxKriteria]=='SB-LB'){
+                $pemetaanKategori[$i]=6;
+            }
+            else if($this->hasilKategori[$i][$idxKriteria]=='LB'){
+                $pemetaanKategori[$i]=7;
+            }
+            
         }
-
 
         $perbandinganHasilPemetaan;
         $idx=0;
@@ -215,11 +218,7 @@ class FuzzyAhpController extends Controller
                     $idx++;
                 }
             }
-        }
-
-
-
-        
+        }        
         //SUSUN BILANGAN SECARA PERBANDINGAN BERPASANGAN
         $idxIsi=0;
         for ($i = 0; $i < count($this->hasilKategori); $i++) {
@@ -237,7 +236,7 @@ class FuzzyAhpController extends Controller
                 else{
                     if($this->bobotAwalAlternatif[$j][$i]>1){
                         $this->bobotAwalAlternatif[$i][$j]=1/$this->bobotAwalAlternatif[$j][$i];
-                        $this->tempTfnAlternatif[$i][$j]=-$this->bobotAwalAlternatif[$j][$i];
+                        $this->tempTfnAlternatif[$i][$j]=-($this->bobotAwalAlternatif[$j][$i]);
                     }
                     else{
                         $this->bobotAwalAlternatif[$i][$j]=abs($this->bobotAwalAlternatif[$j][$i]);
@@ -257,8 +256,7 @@ class FuzzyAhpController extends Controller
                 }
             }
         }
-        
-          
+            
     }
 
 
@@ -268,7 +266,6 @@ class FuzzyAhpController extends Controller
        $delta = 1;
        $tfn;
        $countJ=0;
-
 
         //bentuk triangular fuzzy number
         for ($i = 0; $i < count($this->tempTfnKriteria); $i++) {
@@ -320,9 +317,9 @@ class FuzzyAhpController extends Controller
         $jumlahNilaiGeo=array_fill(0,3,0);
         
             for ($i = 0; $i < count($jumlahNilaiGeo); $i++) {
-            for ($j = 0; $j < count($rataRataGeo); $j++) {
-                $jumlahNilaiGeo[$i]+=$rataRataGeo[$j][$i];
-            }
+                for ($j = 0; $j < count($rataRataGeo); $j++) {
+                    $jumlahNilaiGeo[$i]+=$rataRataGeo[$j][$i];
+                }
             
             }
 
@@ -358,6 +355,7 @@ class FuzzyAhpController extends Controller
             $hasilNormalisasi[$i]=number_format($hasilDefuzzifikasi[$i]/$jumlahBobot,3);
         }
         
+        // dump($hasilNormalisasi);
         return $hasilNormalisasi;
     }
 
@@ -440,7 +438,6 @@ class FuzzyAhpController extends Controller
             }
         }
         
-    
         
         //  menghitung hasil jumlah nilai geometris
         $jumlahNilaiGeo=array_fill(0,3,0);
@@ -451,7 +448,7 @@ class FuzzyAhpController extends Controller
             }
          }
 
-        //  dump($jumlahNilaiGeo);
+
  
          //menghitung bobot fuzzy untuk setiap alternatif
          $bobotFuzzy;
@@ -487,8 +484,31 @@ class FuzzyAhpController extends Controller
             $hasilNormalisasi[$i]=number_format($hasilDefuzzifikasi[$i]/$jumlahBobot,3);
         }
         
-        return $hasilNormalisasi; 
+        // LIHAT PROSES
+        // for($i=0; $i<count($tfn); $i++){
+        //     for($j=0; $j<count($tfn[0]); $j++){
+        //         echo number_format($tfn[$i][$j],3). " ";
+        //     }
+        //     echo '<br>';
+        // }
+        // echo '<br>';
 
+        // for($i=0; $i<count($rataRataGeo); $i++){
+        //     for($j=0; $j<count($rataRataGeo[0]); $j++){
+        //         echo number_format($rataRataGeo[$i][$j],3). " ";
+        //     }
+        //     echo '<br>';
+        // }
+        // echo '<br>';
+
+        // for($i=0; $i<count($jumlahNilaiGeo); $i++){
+        //     echo number_format($jumlahNilaiGeo[$i],3). " ";
+        //     echo '<br>';
+        // }
+        // echo '<br>';
+
+        return $hasilNormalisasi;
+  
 
     }
 
@@ -513,6 +533,8 @@ class FuzzyAhpController extends Controller
             }
         }
 
+        // dump($bobotBerdasarkanKriteria);
+
         $idxBobotAkhir=array_fill(0,count($bobotBerdasarkanKriteria),0);
         for($i=0; $i<count($bobotBerdasarkanKriteria); $i++){
             for($j=0; $j<count($bobotBerdasarkanKriteria[0]); $j++){
@@ -535,6 +557,7 @@ class FuzzyAhpController extends Controller
 
 
         return $res;
+
     }
  
 

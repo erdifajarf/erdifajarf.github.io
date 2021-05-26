@@ -14,10 +14,10 @@ class CreateNilaiTable extends Migration
     public function up()
     {
         Schema::create('nilai', function (Blueprint $table) {
-            $table->bigIncrements('id_nilai');
-            $table->unsignedBigInteger('id_siswa')->nullable();
+            $table->increments('id_nilai');
+            $table->unsignedInteger('id_siswa')->nullable();
             $table->foreign('id_siswa')->references('id_siswa')->on('siswa');
-            $table->unsignedBigInteger('id_mata_pelajaran')->nullable();
+            $table->unsignedInteger('id_mata_pelajaran')->nullable();
             $table->foreign('id_mata_pelajaran')->references('id_mata_pelajaran')->on('mata_pelajaran');
             $table->double('101_KKM');
             $table->double('101_p');

@@ -16,6 +16,8 @@ use Alert;
 
 use App\Imports\DataExport;
 
+use Maatwebsite\Excel\Exceptions\NoTypeDetectedException;
+
 
 class MainController extends Controller
 {
@@ -24,13 +26,14 @@ class MainController extends Controller
         
         $count_ing=1;
         $count_mat=2;
-        $count_id_nilai=2;
+        $count_id_nilai=(Nilai::select('id_nilai')->first())->id_nilai;
 
-        $jumlah_peminat_PMDK = count(Siswa::select('id_siswa')->get()->toArray());
+        $jumlah_peminat_PMDK = count(Nilai::select('id_siswa')->get()->toArray())/2;
         $kumpulanPeminatPMDK= array();
 
 
         for($i=0; $i<$jumlah_peminat_PMDK; $i++){
+
             $matpel_ing = MataPelajaran::select('nama_mata_pelajaran')->where('id_mata_pelajaran','=','1')->first();
             $matpel_mat = MataPelajaran::select('nama_mata_pelajaran')->where('id_mata_pelajaran','=','2')->first();
 
@@ -102,6 +105,8 @@ class MainController extends Controller
             $nama_siswa=Siswa::join('nilai', 'siswa.id_siswa', '=', 'nilai.id_siswa')
             ->select('nama_siswa')->where('id_nilai','=',$count_id_nilai)->first(); 
 
+
+
             $siswa = new SiswaController($noPmb,$nama_siswa,$sma_siswa,$nilai);
 
             $count_mat+=2;
@@ -109,6 +114,8 @@ class MainController extends Controller
             $count_id_nilai+=2;
             array_push($kumpulanPeminatPMDK,$siswa);                  
         }
+
+
 
 
 
@@ -225,7 +232,6 @@ class MainController extends Controller
         if($CR<=0.1){
             Alert::success('Berhasil','Lihat hasil seleksi');
 
-            //hitungBobotPrioritasKriteria
             $bobotPrioritasAntarKriteria = $kelasFuzzyAhp->hitungBobotPrioritasAntarKriteria();
             // dump($bobotPrioritasAntarKriteria);
             
@@ -237,7 +243,7 @@ class MainController extends Controller
 
 
             //Bobot Awal alternatif Raport
-            // $bobotAwalAlternatifRaport = $kelasFuzzyAhp->getBobotAwalAlternatif(0);
+            // $bobotAwalAlternatifRaport = $kelasFuzzyAhp->getBobotAwalAlternatif(1);
 
             // for($i=0; $i<count($hasilKategoriAlternatif); $i++){
             //     for($j=0; $j<count($hasilKategoriAlternatif); $j++){
@@ -247,6 +253,8 @@ class MainController extends Controller
             // }
 
             // echo '<br>';
+
+           
 
             // $tfnAlternatifRaport= $kelasFuzzyAhp->getTfnAlternatif(0);
 
@@ -295,8 +303,10 @@ class MainController extends Controller
 
                     DB::insert('insert into hasil_seleksi(no_pmb,nama,asal_sekolah,peringkat_sekolah,rata_rata_nilai,rata_rata_ipk,bobot_akhir) 
                     values (?,?,?,?,?,?,?)', 
-                    [$hasilPMDK[$i][0]->getNoPmb()->id_siswa,$hasilPMDK[$i][0]->getNamaSiswa()->nama_siswa, 
-                    $hasilPMDK[$i][0]->getSekolah()->getNamaSekolah()->nama_sekolah, $hasilPMDK[$i][0]->getSekolah()->getPeringkat()->peringkat_sekolah,
+                    [$hasilPMDK[$i][0]->getNoPmb()->id_siswa,
+                    $hasilPMDK[$i][0]->getNamaSiswa()->nama_siswa, 
+                    $hasilPMDK[$i][0]->getSekolah()->getNamaSekolah()->nama_sekolah, 
+                    $hasilPMDK[$i][0]->getSekolah()->getPeringkat()->peringkat_sekolah,
                     $hasilPMDK[$i][1],$hasilPMDK[$i][2],$hasilPMDK[$i][3]]);
                 }
                             
@@ -306,16 +316,22 @@ class MainController extends Controller
 
                     DB::insert('insert into hasil_seleksi(no_pmb,nama,asal_sekolah,peringkat_sekolah,rata_rata_nilai,rata_rata_ipk,bobot_akhir) 
                     values (?,?,?,?,?,?,?)', 
-                    [$hasilPMDK[$i][0]->getNoPmb()->id_siswa,$hasilPMDK[$i][0]->getNamaSiswa()->nama_siswa, 
-                    $hasilPMDK[$i][0]->getSekolah()->getNamaSekolah()->nama_sekolah, $hasilPMDK[$i][0]->getSekolah()->getPeringkat()->peringkat_sekolah,
+                    [$hasilPMDK[$i][0]->getNoPmb()->id_siswa,
+                    $hasilPMDK[$i][0]->getNamaSiswa()->nama_siswa, 
+                    $hasilPMDK[$i][0]->getSekolah()->getNamaSekolah()->nama_sekolah,
+                    $hasilPMDK[$i][0]->getSekolah()->getPeringkat()->peringkat_sekolah,
                     $hasilPMDK[$i][1],$hasilPMDK[$i][2],$hasilPMDK[$i][3]]);
                 }
-                    
            }
 
 
-            return view('halamanHasilSeleksi',['hasilPMDK'=>$hasilPMDK,'kuotaPMDK'=>$kuotaPmdk,'jumlahPeminat'=>$jumlah_peminat_PMDK,'jumlahLolosKKM'=>count($hasilSeleksiKkm)]);
- 
+
+           $data=HasilSeleksi::all(); 
+           return view('halamanHasilSeleksi',['hasilPMDK'=>$data,'kuotaPMDK'=>$kuotaPmdk,
+            'jumlahPeminat'=>$jumlah_peminat_PMDK,'jumlahLolosKKM'=>count($hasilSeleksiKkm)]);
+
+    
+
         }
         else{
             Alert::error('Penilaian salah','Silakan ulangi penilaian');
@@ -328,8 +344,7 @@ class MainController extends Controller
     
     //MENAMPILKAN DATA PEMINAT PMDK DI HALAMAN UTAMA
     function showDataPeminat(){
-        $data=Nilai::join('siswa','nilai.id_siswa','=','siswa.id_siswa')->
-        paginate(14);
+        $data=Nilai::join('siswa','nilai.id_siswa','=','siswa.id_siswa')->paginate(14);
 
         return view('halamanUtama',['nilais'=>$data]);
 
@@ -344,7 +359,16 @@ class MainController extends Controller
     }
 
     public function pindahHalamanPenentuanBobot(){
-        return view('halamanPenentuanBobotDanKuota');
+        $dataNilai = count(Nilai::select('id_nilai')->get()->toArray());
+
+        if($dataNilai>0){
+            return view('halamanPenentuanBobotDanKuota');
+        }
+        else{
+            Alert::error('Data nilai masih kosong','Silakan import data terlebih dahulu');
+            return back();
+        }
+      
     }
 
     public function pindahHalamanHasilSeleksi(){
@@ -352,11 +376,19 @@ class MainController extends Controller
     }
 
     public function importData() 
-    {   
-        Excel::import(new DataImport,request()->file('file'));
-        Alert::success('Import data siswa berhasil','Lanjutkan ke halaman selanjutnya');
-        return back();
+    {
+
+        try {
+            Nilai::truncate();
+            Excel::import(new DataImport,request()->file('file'));
+            return back();
+        } catch (NoTypeDetectedException $e) {
+            Alert::warning('Import gagal','Silakan gunakan file yang sesuai');
+            return back();
+        }
+
     }
+
 
     public function login(Request $request) 
     {   
@@ -379,7 +411,6 @@ class MainController extends Controller
         }
         else{
             Alert::warning('Login gagal','username tidak terdaftar pada sistem!');
-
             return back();
         }
 

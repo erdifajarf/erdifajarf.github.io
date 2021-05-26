@@ -14,9 +14,9 @@ class CreateSekolahTable extends Migration
     public function up()
     {
         Schema::create('sekolah', function (Blueprint $table) {
-            $table->bigIncrements('id_sekolah');
-            $table->String('nama_sekolah');
-            $table->bigInteger('peringkat_sekolah');
+            $table->increments('id_sekolah');
+            $table->string('nama_sekolah',50);
+            $table->integer('peringkat_sekolah');
         });
 
         
