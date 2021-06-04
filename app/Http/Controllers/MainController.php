@@ -341,12 +341,28 @@ class MainController extends Controller
     }
 
 
-    
+    public function importData() 
+    {
+
+        try {
+            Nilai::truncate();
+            Excel::import(new DataImport,request()->file('file'));
+            return back();
+        } catch (NoTypeDetectedException $e) {
+            Alert::warning('Import gagal','Silakan gunakan file yang sesuai');
+            return back();
+        }
+
+    }
+
     //MENAMPILKAN DATA PEMINAT PMDK DI HALAMAN UTAMA
     function showDataPeminat(){
         $data=Nilai::join('siswa','nilai.id_siswa','=','siswa.id_siswa')->paginate(14);
 
-        return view('halamanUtama',['nilais'=>$data]);
+        $jumlahNilai = count(Nilai::all());
+
+        // dump($jumlahNilai/2);
+        return view('halamanUtama',['nilais'=>$data,'jumlahNilai'=>$jumlahNilai]);
 
     }
 
@@ -375,19 +391,7 @@ class MainController extends Controller
         return view('halamanHasilSeleksi');
     }
 
-    public function importData() 
-    {
 
-        try {
-            Nilai::truncate();
-            Excel::import(new DataImport,request()->file('file'));
-            return back();
-        } catch (NoTypeDetectedException $e) {
-            Alert::warning('Import gagal','Silakan gunakan file yang sesuai');
-            return back();
-        }
-
-    }
 
 
     public function login(Request $request) 

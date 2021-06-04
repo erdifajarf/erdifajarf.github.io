@@ -220,6 +220,12 @@ body{
     float:right;
     margin-top:-50.5%;
     margin-right:11%;
+    width:3.7%;
+  }
+
+  .tombolLihatKeterangan img{
+    width:135%;
+    margin-left:-16%;
   }
 
   .tagKeteranganInput h5{

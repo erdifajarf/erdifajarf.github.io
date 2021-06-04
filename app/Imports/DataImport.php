@@ -12,8 +12,9 @@ use Illuminate\Support\Facades\DB;
 
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
-
-
+use Illuminate\Contracts\Queue\ShouldQueue;
+use Maatwebsite\Excel\Concerns\WithChunkReading;
+use Maatwebsite\Excel\Concerns\WithBatchInserts;
 
 
 
@@ -34,75 +35,59 @@ class DataImport implements ToModel, WithHeadingRow
         $dataSekolah=null;
         $dataSiswa=null;
         $dataNilai=null;
-        $dataMatpel=null;
         $dataMahasiswa=null;
         
-         //STEP 1
-        //  $nama_matpel_sama= MataPelajaran::where('nama_mata_pelajaran','=',$row['mata_pelajaran'])->get()->count();
-        //  if($nama_matpel_sama===0){
-        //      $dataMatpel=new MataPelajaran([
-        //          'nama_mata_pelajaran'=> $row['mata_pelajaran'],
-        //      ]);
-        //  }
-        // if($dataMatpel!=null){
-        //     return array($dataMatpel);
-        // }
-        
-        //STEP 2              
-        // $nama_sekolah_sama = Sekolah::where('nama_sekolah','=',$row['asal_sma'])->get()->count();
-        // if($nama_sekolah_sama===0)
-        // {
-        //     $dataSekolah=new Sekolah([
-        //         'nama_sekolah'  => $row['asal_sma'],
-        //         'peringkat_sekolah'=> $row['peringkat_sekolah'],
-        //     ]);
+        // //STEP 1              
+    //     $nama_sekolah_sama = Sekolah::where('nama_sekolah','=',$row['asal_sma'])->get()->count();
+    //     if($nama_sekolah_sama===0)
+    //     {
+    //         $dataSekolah=new Sekolah([
+    //             'nama_sekolah'  => $row['asal_sma'],
+    //             'peringkat_sekolah'=> $row['peringkat_sekolah'],
+    //         ]);
               
-        // }
+    //     }
 
-        // if($dataSekolah!=null){
-        //     return array($dataSekolah);
-        // }
+    //     if($dataSekolah!=null){
+    //         return array($dataSekolah);
+    //     }
         
 
-
-        //STEP 3
-    //     $nama_mahasiswa_sama= Mahasiswa::where('id_mahasiswa','=',$row['npm'])->get()->count();
-    //     if($nama_mahasiswa_sama==0){
-
-    //     $dataMahasiswa=new Mahasiswa([
-      
-    //        'id_mahasiswa'=> $row['npm'],
-
-    //        'id_sekolah'=>  DB::table('sekolah')->
-    //                        select('id_sekolah')->
-    //                        where('nama_sekolah','=',$row['asal_sma'])->
-    //                        value('id_sekolah'),
-
-    //        'nama_mahasiswa'=> $row['nama'],
-    //        'IPK'=> $row['ipk_terakhir'],
-    //     ]);
+    //     if(isset($row['npm'])){  
+    //         $nama_mahasiswa_sama= Mahasiswa::where('id_mahasiswa','=',$row['npm'])->get()->count();
+    //         if($nama_mahasiswa_sama==0){
+    //                 $dataMahasiswa=new Mahasiswa([
+    //                 'id_mahasiswa'=> $row['npm'],
+    //                 'id_sekolah'=>  DB::table('sekolah')->
+    //                                 select('id_sekolah')->
+    //                                 where('nama_sekolah','=',$row['asal_sma'])->
+    //                                 value('id_sekolah'),
+    //                 'nama_mahasiswa'=> $row['nama'],
+    //                 'IPK'=> $row['ipk_terakhir'],
+    //             ]);
+    //         }
     //    }
     //     if($dataMahasiswa!=null){
     //         return array($dataMahasiswa);
     //     }
-
-
-
-        //STEP 4
-    //     $nama_siswa_sama = Siswa::where('nama_siswa','=',$row['nama'])->get()->count();
-    //     if ($nama_siswa_sama==0){
         
-    //        $dataSiswa=new Siswa([
-    //            'id_siswa'=>$row['no_pmb'],
-    //            'id_sekolah' => DB::table('sekolah')->
-    //                            select('id_sekolah')->
-    //                            where('nama_sekolah','=',$row['asal_sma'])->
-    //                            value('id_sekolah'),
-               
-    //            'nama_siswa' => $row['nama'],
-               
-    //        ]) ;
-    //    }
+
+
+    //     if(isset($row['no_pmb'])){
+    //         $nama_siswa_sama = Siswa::where('nama_siswa','=',$row['nama'])->get()->count();
+    //         if ($nama_siswa_sama==0){
+    //                 $dataSiswa=new Siswa([
+    //                     'id_siswa'=>$row['no_pmb'],
+    //                     'id_sekolah' => DB::table('sekolah')->
+    //                                     select('id_sekolah')->
+    //                                     where('nama_sekolah','=',$row['asal_sma'])->
+    //                                     value('id_sekolah'),
+                        
+    //                     'nama_siswa' => $row['nama'],
+                        
+    //                 ]) ;
+    //             }   
+    //     }
 
     //     if($dataSiswa!=null){
     //         return array($dataSiswa);
@@ -110,9 +95,9 @@ class DataImport implements ToModel, WithHeadingRow
 
 
 
-        //STEP 5 
+        //STEP 2 
       
-            if(isset($row['101_p'])){
+            if(isset($row['101_p']) && isset($row['asal_sma']) && isset($row['peringkat_sekolah'])){
                 $dataNilai=new Nilai([
                         'id_siswa' => DB::table('siswa')->
                                     select('id_siswa')->
@@ -144,9 +129,9 @@ class DataImport implements ToModel, WithHeadingRow
             }
             else{
                 Alert::warning('Import gagal','Silakan gunakan file yang sesuai');
-            }
-
-     
-        
+            }   
     }
+
+
+
 }

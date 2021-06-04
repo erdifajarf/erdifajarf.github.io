@@ -69,6 +69,7 @@
     <div class="kolom">
         <table class="table">
             <tr>
+                <th rowspan=3 class="table-info">No</th>
                 <th rowspan=3 class="table-info">No.PMB</th>
                 <th rowspan=3 class="table-info">Nama</th>
                 <th rowspan=3 class="table-info">Mata Pelajaran</th>
@@ -102,18 +103,26 @@
 
 
         @php
-        $index=0;
-        $anonim=1;
+            $index=0;
+            $anonim=1;
+
+            $linkPage = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+            $angkaTerakhir=substr($linkPage, -1); 
+            $angkaTerakhirKeDua=substr($linkPage, -2, 1);
+            
+            $urutan = (7*$angkaTerakhir)-6;
         @endphp
         @foreach($nilais as $nilai)
             <tr>
+
                 @if($index%2=='0')
+      
+                    <td rowspan=2>{{$urutan}}</td>
                     <td rowspan=2>{{$nilai['id_siswa']}}</td>
-                    <div class="tes">
                     <td rowspan=2>{{$nilai['nama_siswa']}}</td>
                     <!-- <td rowspan=2>Siswa {{$anonim}}</td> -->
-                    </div>
-                    @php $anonim++ @endphp
+        
+                    @php $anonim++; $urutan++; @endphp
                 @endif
                 
 
@@ -136,13 +145,34 @@
         $index++;
         @endphp
         @endforeach
+
     </table>
+    
+        
+    @if($jumlahNilai>14)
+        @php
+            $halamanTerakhir = number_format(ceil($jumlahNilai/14),0);
+
+            $link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+            $charTerakhir=substr($link, -1); 
+            $charTerakhirKeDua=substr($link, -2, 1);
+            
+            $halamanSaatIni=0;
+            if($charTerakhirKeDua>0){
+                $halamanSaatIni = $charTerakhirKeDua.$charTerakhir;
+            }
+            else{
+                $halamanSaatIni = $charTerakhir;               
+            }
+        @endphp
 
     <nav aria-label="...">
     <ul class="pagination">
+        @if($halamanSaatIni>1)
         <li class="page-item">
-            <a class="page-link" id="pagePrev" href="?page=1" tabindex="-1">Previous</a>
+            <a class="page-link" id="pagePrev" href="?page=" onclick="halamanSebelumnya();">Previous</a>
         </li>
+        @endif
 
         <li class="page-item">
             <a class="page-link" href="?page=1">1</a> 
@@ -155,50 +185,77 @@
         <li class="page-item">
             <a class="page-link" href="?page=3">3</a>
         </li>
+        
+        @if($halamanSaatIni<$halamanTerakhir || $charTerakhir=='a')
+            <li class="page-item">
+                <a class="page-link" id="pageNext" href="?page=" onclick="halamanSelanjutnya();" >Next</a>
+            </li>
+        @endif
+        
 
+        @if($halamanSaatIni!=$halamanTerakhir)
         <li class="page-item">
-            <a class="page-link" id="pageNext" href="?page=" onclick="changeLink();" >Next</a>
+            <a class="page-link" id="lastPage" href="?page=<?= $halamanTerakhir ?>">>></a>
         </li>
-
-        <li class="page-item">
-            <a class="page-link" id="lastPage" href="?page=25" >Last</a>
-        </li>
+        @endif
         
     </ul>
     </nav>
+    @endif
 
 
     <script>    
-        function changeLink() {
+        function halamanSelanjutnya() {
             var id = window.location.href;
             var lastChar = id.substr(id.length - 1);
             var lastBefChar = id.substr(id.length - 2);
             
             var next = parseInt(lastChar)+1;
             var pageNext = document.getElementById('pageNext');
-
-
-
-
-            if(lastChar==0){
+           
+            if(lastChar=='a'){
+                pageNext.setAttribute('href', '?page=2');
+            }
+            else if(lastChar==0){
                 pageNext.setAttribute('href', '?page=1'+next);
             }
             else{
                 pageNext.setAttribute('href', pageNext+next);
-
             }
 
-            if(lastBefChar==25){
-                    pageNext.style.display= 'none';
-                    pageNext.removeAttribute("href");
-                }
-            
             return false;
         }
+
+        function halamanSebelumnya() {
+            var id = window.location.href;
+            var lastChar = id.substr(id.length - 1);
+            var lastBefChar = id.substr(id.length - 2);
+            
+            var prev = parseInt(lastChar)-1;
+            var pagePrev = document.getElementById('pagePrev');
+           
+            if(lastChar=='a'){
+                pagePrev.setAttribute('href', '?page=1');
+            }
+            else if(lastChar==0){
+                pagePrev.setAttribute('href', '?page=1'+prev);
+            }
+            else{
+                if(prev>0){
+                    pagePrev.setAttribute('href', pagePrev+prev);
+                }
+                else{
+                    pagePrev.setAttribute('href', '?page=1');
+                }
+            }
+
+            return false;
+        }
+
     </script>
 
 
-
+   
 
 
 

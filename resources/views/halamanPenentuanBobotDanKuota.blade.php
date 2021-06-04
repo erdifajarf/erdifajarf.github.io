@@ -171,7 +171,7 @@
     </div>
 
     <div class="tombolLihatKeterangan ">
-        <button type="button" class="btn btn-success " id="tombolLihatKeterangan" onclick="showTable()">&#8658;</button>
+        <button type="button" class="btn btn-success " id="tombolLihatKeterangan" onclick="showTable()">   <img src="/img/logo_help.png"></button>
     </div>
 
  
@@ -182,7 +182,7 @@
 
 
     
-<table class="table tabelKeterangan" id="tabelKeterangan" style="visibility:hidden">
+<table class="table tabelKeterangan" id="tabelKeterangan" style="display:none;">
     <tr>
         <th class="table-info">Input (AHP)</th>
         <th class="table-info">Keterangan</th>
@@ -225,27 +225,26 @@
     </tr>
 </table>
 
+</div>
 
-     <script>
+<script>
          function showTable(){
             var tabelKeterangan= document.getElementById("tabelKeterangan");
             var tombolLihatKeterangan = document.getElementById("tombolLihatKeterangan");
 
-            if(tabelKeterangan.style.visibility != "hidden"){
-                tabelKeterangan.style.visibility = "hidden";
-                tombolLihatKeterangan.innerHTML ='&#8658;';
+            if(tabelKeterangan.style.display != "none"){
+                tabelKeterangan.style.display = "none";
+                // tombolLihatKeterangan.innerHTML =' <img src="/img/logo_help.png">';
             }
 
             else{
-                tabelKeterangan.style.visibility = "visible";
-                tombolLihatKeterangan.innerHTML ='&#8659;';
+                tabelKeterangan.style.display = "";
+                // tombolLihatKeterangan.innerHTML ='&#8659;';
             }
-            
-
-         }
+        
+        }
          
     </script>
-</div>
 
 </body>
 </html>
