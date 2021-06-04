@@ -110,13 +110,23 @@
             $angkaTerakhir=substr($linkPage, -1); 
             $angkaTerakhirKeDua=substr($linkPage, -2, 1);
             
-            $urutan = (7*$angkaTerakhir)-6;
+            if($angkaTerakhir=='a'){
+                $urutan = 1;
+            }
+            else if($angkaTerakhirKeDua>0){
+                $totalPage = $angkaTerakhirKeDua.$angkaTerakhir;
+                $urutan = (7*totalPage)-6;
+            }
+            else{
+                $urutan = (7*$angkaTerakhir)-6;
+            }
+       
         @endphp
         @foreach($nilais as $nilai)
             <tr>
 
                 @if($index%2=='0')
-      
+                
                     <td rowspan=2>{{$urutan}}</td>
                     <td rowspan=2>{{$nilai['id_siswa']}}</td>
                     <td rowspan=2>{{$nilai['nama_siswa']}}</td>

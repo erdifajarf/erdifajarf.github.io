@@ -140,66 +140,14 @@ class MainController extends Controller
             $mahasiswa = new MahasiswaController($npm, $namaMahasiswa,$sekolahMahasiswa,$ipk);
             array_push($kumpulanMahasiswa,$mahasiswa); 
         }
-
-        // dump($kumpulanMahasiswa);
-
-
-        // PRINT PARA PENDAFTAR PMDK
-        // for($i=0; $i<count($kumpulanPeminatPMDK); $i++){
-        //     echo 'No.Pmb: '. $kumpulanPeminatPMDK[$i]->getNoPmb()->id_siswa. '<br>';
-        //     echo 'Nama: '. $kumpulanPeminatPMDK[$i]->getNamaSiswa()->nama_siswa . '<br>';
-        //     echo 'Sekolah: '. $kumpulanPeminatPMDK[$i]->getSekolah()->getNamaSekolah()->nama_sekolah;
-        //     echo '<br>';
-        //     echo '<br>';
-        //     echo '<br>';
-        // }
-        // echo count($kumpulanPeminatPMDK);
-
-        
-        //PRINT HASIL SELEKSI KKM PENDAFTAR PMDK
         $kelasSeleksi = new SeleksiNilaiKkmController($kumpulanPeminatPMDK);
         $hasilSeleksiKkm = $kelasSeleksi->getHasilSeleksiKkm();
-
-        // for($i=0; $i<count($hasilSeleksiKkm); $i++){
-        //     echo 'Nama: '. $hasilSeleksiKkm[$i]->getNamaSiswa()->nama_siswa . '<br>';
-        //     echo 'Sekolah: '.$hasilSeleksiKkm[$i]->getSekolah()->getNamaSekolah()->nama_sekolah;
-        //     echo '<br>';
-        //     echo 'Avg_Ing: '.$hasilSeleksiKkm[$i]->getNilai()[0]->hitungRataRata();
-        //     echo '<br>';
-        //     echo 'Avg_Mat: '.$hasilSeleksiKkm[$i]->getNilai()[1]->hitungRataRata();
-        //     echo '<br>';
-        //     echo '<br>';
-        // }
-        // echo count($hasilSeleksiKkm);
-
-        // dump($hasilSeleksiKkm);
-
-
-
 
         $kelasKriteria = new KriteriaController($hasilSeleksiKkm,$kumpulanMahasiswa);
         $hasilKriteria = $kelasKriteria->getHasilKriteria();
 
-        // dump($hasilKriteria);
-
-        // for($i=0; $i<count($hasilKriteria[0]); $i++){
-        //     echo $i+1;
-        //     echo '<br>';
-        //     echo 'Nama: '. $hasilKriteria[0][$i]->getNamaSiswa()->nama_siswa . '<br>';
-        //     echo '<br>';
-        //     echo 'Nilai Akhir: '. $hasilKriteria[1][$i] . '<br>';
-        //     echo '<br>';
-        //     echo 'IPK Alumni: '. $hasilKriteria[2][$i] . '<br>';
-        //     echo '<br>';
-        //     echo '<br>';
-        // }
-        
-
         $kelasFuzzy = new FuzzyController($hasilKriteria);
         $hasilKategori = $kelasFuzzy->getHasilKategori();
-
-        // dump($hasilKategori);
-
 
         $selectNtp = $req->ntp;
         $selectNti = $req->nti;
@@ -210,81 +158,24 @@ class MainController extends Controller
         $cekNilaiNti = $kelasFuzzyAhp->getNti();
         $cekNilaiPti = $kelasFuzzyAhp->getPti();
 
-        // dump($cekNilaiNtp);
-        // dump($cekNilaiNti);
-        // dump($cekNilaiPti);
-
-        
         $bobotAwalKriteria = $kelasFuzzyAhp->getBobotAwalkriteria();
-        //LIHAT HASIL PERHITUNG BOBOT AWAL KRITERIA
-        // for($i=0; $i<3; $i++){
-        //     for($j=0; $j<3; $j++){
-        //         echo number_format($bobotAwalKriteria[$i][$j],1). " ";
-        //     }
-        //     echo '<br>';
-        // }
-        // dump($bobotAwalKriteria);
-        
+    
         // Hitung CR kriteria
         $CR = $kelasFuzzyAhp->hitungConsistencyRatio($bobotAwalKriteria);
-        // dump($CR);
-        
+          
         if($CR<=0.1){
             Alert::success('Berhasil','Lihat hasil seleksi');
-
             $bobotPrioritasAntarKriteria = $kelasFuzzyAhp->hitungBobotPrioritasAntarKriteria();
-            // dump($bobotPrioritasAntarKriteria);
-            
-            
             //Cek hasil kategori
             $hasilKategoriAlternatif = $kelasFuzzyAhp->getHasilKategori();
-            // dump($hasilKategoriAlternatif);
-            
-
-
-            //Bobot Awal alternatif Raport
-            // $bobotAwalAlternatifRaport = $kelasFuzzyAhp->getBobotAwalAlternatif(1);
-
-            // for($i=0; $i<count($hasilKategoriAlternatif); $i++){
-            //     for($j=0; $j<count($hasilKategoriAlternatif); $j++){
-            //         echo number_format($bobotAwalAlternatifRaport[$i][$j],1). " ";
-            //     }
-            //     echo '<br>';
-            // }
-
-            // echo '<br>';
-
-           
-
-            // $tfnAlternatifRaport= $kelasFuzzyAhp->getTfnAlternatif(0);
-
-            // for($i=0; $i<count($hasilKategoriAlternatif); $i++){
-            //     for($j=0; $j<count($hasilKategoriAlternatif); $j++){
-            //         echo number_format($tfnAlternatifRaport[$i][$j],1). " ";
-            //     }
-            //     echo '<br>';
-            // }
-
-
+        
             $bobotPrioAltNilaiRaport = $kelasFuzzyAhp->hitungBobotPrioritasAntarAlternatif(0);
             $bobotPrioAltPeringkatSekolah = $kelasFuzzyAhp->hitungBobotPrioritasAntarAlternatif(1);
             $bobotPrioAltfIpk = $kelasFuzzyAhp->hitungBobotPrioritasAntarAlternatif(2);
-
-            // dump($bobotPrioAltNilaiRaport);
-            // dump($bobotPrioAltPeringkatSekolah);
-            // dump($bobotPrioAltfIpk);
-
-            
             $hasilPemeringkatan= $kelasFuzzyAhp->hasilPemeringkatan($bobotPrioritasAntarKriteria,
                                                                 $bobotPrioAltNilaiRaport,
                                                                 $bobotPrioAltPeringkatSekolah,
                                                                 $bobotPrioAltfIpk);
-
-            // dump($hasilPemeringkatan);
-            
-    
-
-            
             $hasilPMDK;
             for($i=0; $i<count($hasilPemeringkatan); $i++){
                 $hasilPMDK[$i][0]=$hasilKriteria[0][$hasilPemeringkatan[$i][0]];    // data siswa
@@ -292,9 +183,126 @@ class MainController extends Controller
                 $hasilPMDK[$i][2]=number_format($hasilKriteria[2][$hasilPemeringkatan[$i][0]],2);    // rata-rata ipk alumni
                 $hasilPMDK[$i][3]=number_format($hasilPemeringkatan[$i][1],6);
             }
-            
-            // dump($hasilPMDK);
 
+                        
+        
+        // dump($kumpulanPeminatPMDK);
+        // dump($hasilSeleksiKkm);
+        // for ($i=0; $i<count($kumpulanPeminatPMDK); $i++){
+        //     echo $kumpulanPeminatPMDK[$i]->getNamaSiswa();
+        //     echo '<br>';
+        //     echo 'B.Inggriss:';
+        //     echo '<br>';
+        //     echo $kumpulanPeminatPMDK[$i]->getNilai()[0]->getX1_KKM();
+        //     echo '<br>';
+        //     echo $kumpulanPeminatPMDK[$i]->getNilai()[0]->getX1_p(); 
+        //     echo '<br>';
+        //     echo $kumpulanPeminatPMDK[$i]->getNilai()[0]->getX1_t(); 
+        //     echo '<br>';
+        //     echo '<br>';
+        //     echo $kumpulanPeminatPMDK[$i]->getNilai()[0]->getX2_KKM();
+        //     echo '<br>';
+        //     echo $kumpulanPeminatPMDK[$i]->getNilai()[0]->getX2_p(); 
+        //     echo '<br>';
+        //     echo $kumpulanPeminatPMDK[$i]->getNilai()[0]->getX2_t(); 
+        //     echo '<br>';
+        //     echo '<br>';
+        //     echo $kumpulanPeminatPMDK[$i]->getNilai()[0]->getXI1_KKM();
+        //     echo '<br>';
+        //     echo $kumpulanPeminatPMDK[$i]->getNilai()[0]->getXI1_p(); 
+        //     echo '<br>';
+        //     echo $kumpulanPeminatPMDK[$i]->getNilai()[0]->getXI1_t(); 
+        //     echo '<br>';
+        //     echo '<br>';
+        //     echo $kumpulanPeminatPMDK[$i]->getNilai()[0]->getXI2_KKM();
+        //     echo '<br>';
+        //     echo $kumpulanPeminatPMDK[$i]->getNilai()[0]->getXI2_p(); 
+        //     echo '<br>';
+        //     echo $kumpulanPeminatPMDK[$i]->getNilai()[0]->getXI2_t(); 
+        //     echo '<br>';
+        //     echo '<br>';
+        //     echo 'Matematika:';
+        //     echo '<br>';
+        //     echo $kumpulanPeminatPMDK[$i]->getNilai()[1]->getX1_KKM();
+        //     echo '<br>';
+        //     echo $kumpulanPeminatPMDK[$i]->getNilai()[1]->getX1_p(); 
+        //     echo '<br>';
+        //     echo $kumpulanPeminatPMDK[$i]->getNilai()[1]->getX1_t(); 
+        //     echo '<br>';
+        //     echo '<br>';
+        //     echo $kumpulanPeminatPMDK[$i]->getNilai()[1]->getX2_KKM();
+        //     echo '<br>';
+        //     echo $kumpulanPeminatPMDK[$i]->getNilai()[1]->getX2_p(); 
+        //     echo '<br>';
+        //     echo $kumpulanPeminatPMDK[$i]->getNilai()[1]->getX2_t(); 
+        //     echo '<br>';
+        //     echo '<br>';
+        //     echo $kumpulanPeminatPMDK[$i]->getNilai()[1]->getXI1_KKM();
+        //     echo '<br>';
+        //     echo $kumpulanPeminatPMDK[$i]->getNilai()[1]->getXI1_p(); 
+        //     echo '<br>';
+        //     echo $kumpulanPeminatPMDK[$i]->getNilai()[1]->getXI1_t(); 
+        //     echo '<br>';
+        //     echo '<br>';
+        //     echo $kumpulanPeminatPMDK[$i]->getNilai()[1]->getXI2_KKM();
+        //     echo '<br>';
+        //     echo $kumpulanPeminatPMDK[$i]->getNilai()[1]->getXI2_p(); 
+        //     echo '<br>';
+        //     echo $kumpulanPeminatPMDK[$i]->getNilai()[1]->getXI2_t(); 
+        //     echo '<br>';
+        //     echo '<br>';
+        //     echo '<br>';
+        // }
+
+        // dump($kumpulanMahasiswa);
+        // dump($hasilKriteria);
+        // dump($hasilKategori);
+
+        
+        // dump($cekNilaiNtp);
+        // dump($cekNilaiNti);
+        // dump($cekNilaiPti);
+        // dump($bobotAwalKriteria);
+        // //LIHAT HASIL PERHITUNG BOBOT AWAL KRITERIA
+        // for($i=0; $i<3; $i++){
+        //     for($j=0; $j<3; $j++){
+        //         echo number_format($bobotAwalKriteria[$i][$j],1). " ";
+        //     }
+        //     echo '<br>';
+        // }
+
+        // dump($CR);
+        // dump($bobotPrioritasAntarKriteria);
+
+        // dump($hasilKategoriAlternatif);
+
+        // $bobotAwalAlternatifRaport = $kelasFuzzyAhp->getBobotAwalAlternatif(0);
+
+        //     for($i=0; $i<count($hasilKategoriAlternatif); $i++){
+        //         for($j=0; $j<count($hasilKategoriAlternatif); $j++){
+        //             echo number_format($bobotAwalAlternatifRaport[$i][$j],1). " ";
+        //         }
+        //         echo '<br>';
+        //     }
+
+        //     echo '<br>';
+
+        // $tfnAlternatifRaport= $kelasFuzzyAhp->getTfnAlternatif(0);
+            // for($i=0; $i<count($hasilKategoriAlternatif); $i++){
+            //     for($j=0; $j<count($hasilKategoriAlternatif); $j++){
+            //         echo number_format($tfnAlternatifRaport[$i][$j],1). " ";
+            //     }
+            //     echo '<br>';
+            // }
+
+            // dump($bobotPrioAltNilaiRaport);
+            // dump($bobotPrioAltPeringkatSekolah);
+            // dump($bobotPrioAltfIpk);
+            
+            // dump($hasilSeleksiKkm);
+            // dump($hasilPemeringkatan);
+
+            
            HasilSeleksi::truncate();
            
            if($kuotaPmdk<=count($hasilSeleksiKkm)){
@@ -308,8 +316,7 @@ class MainController extends Controller
                     $hasilPMDK[$i][0]->getSekolah()->getNamaSekolah()->nama_sekolah, 
                     $hasilPMDK[$i][0]->getSekolah()->getPeringkat()->peringkat_sekolah,
                     $hasilPMDK[$i][1],$hasilPMDK[$i][2],$hasilPMDK[$i][3]]);
-                }
-                            
+                }                 
            }
            else{
                 for($i=0; $i<count($hasilSeleksiKkm); $i++){
@@ -324,20 +331,15 @@ class MainController extends Controller
                 }
            }
 
-
-
            $data=HasilSeleksi::all(); 
            return view('halamanHasilSeleksi',['hasilPMDK'=>$data,'kuotaPMDK'=>$kuotaPmdk,
             'jumlahPeminat'=>$jumlah_peminat_PMDK,'jumlahLolosKKM'=>count($hasilSeleksiKkm)]);
-
-    
 
         }
         else{
             Alert::error('Penilaian salah','Silakan ulangi penilaian');
             return back();
         }
-
     }
 
 
