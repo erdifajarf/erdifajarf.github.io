@@ -57,7 +57,7 @@
                 <th class="table-info">Asal Sekolah</th>
                 <th class="table-info">Peringkat Sekolah</th>
                 <th class="table-info">Rata-rata Nilai Raport</th>
-                <th class="table-info">Rata-rata IPK</th>
+                <th class="table-info">Rata-rata IPK Alumni</th>
                 <th class="table-info">Bobot Akhir (AHP)</th>
 
             </tr>

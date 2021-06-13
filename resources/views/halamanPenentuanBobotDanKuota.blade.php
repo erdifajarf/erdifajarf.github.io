@@ -191,12 +191,12 @@
 
     <tr>
         <td>1 </td>
-        <td> &lt;Kriteria1&gt; sama penting dengan &lt;kriteria2&lt; </td>
+        <td> &lt;Kriteria1&gt; sama penting dengan &lt;Kriteria2&gt; </td>
     </tr>
 
     <tr>
         <td>3 </td>
-        <td>&lt;Kriteria1&gt; sedikit lebih penting dari kriteria2 </td>
+        <td>&lt;Kriteria1&gt; sedikit lebih penting dari &lt;Kriteria2&gt; </td>
     </tr>
 
     <tr>

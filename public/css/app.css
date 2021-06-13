@@ -242,25 +242,28 @@ body{
   .tagOpsi1 p {
     display:inline-block;
     margin-right:30%;
-    margin-left:-4%;
+    margin-left:-4.5%;
     padding-bottom:-5%;
     margin-bottom:-5%;
+    font-weight: 650;
   }
 
   .tagOpsi2 p{
     display:inline-block;
     margin-right:28.5%;
-    margin-left:-4%;
+    margin-left:-4.5%;
     padding-bottom:-5%;
     margin-bottom:-5%;
+    font-weight: 650;
 
   }
 
   .tagOpsi3 p{
     display:inline-block;
     margin-right:30.3%;
-    margin-left:-3%;
+    margin-left:-3.3%;
     margin-bottom:-5%;
+    font-weight: 650;
 
   }
 
@@ -304,7 +307,7 @@ body{
 
   .tombolLogout {
     margin-left:90%;
-    margin-top:-7.5%;
+    margin-top:-6.3%;
     position:absolute;
     width:7%;
 

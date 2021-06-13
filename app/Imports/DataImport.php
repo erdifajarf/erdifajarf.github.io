@@ -38,60 +38,60 @@ class DataImport implements ToModel, WithHeadingRow
         $dataMahasiswa=null;
         
         // //STEP 1              
-    //     $nama_sekolah_sama = Sekolah::where('nama_sekolah','=',$row['asal_sma'])->get()->count();
-    //     if($nama_sekolah_sama===0)
-    //     {
-    //         $dataSekolah=new Sekolah([
-    //             'nama_sekolah'  => $row['asal_sma'],
-    //             'peringkat_sekolah'=> $row['peringkat_sekolah'],
-    //         ]);
+        $nama_sekolah_sama = Sekolah::where('nama_sekolah','=',$row['asal_sma'])->get()->count();
+        if($nama_sekolah_sama===0)
+        {
+            $dataSekolah=new Sekolah([
+                'nama_sekolah'  => $row['asal_sma'],
+                'peringkat_sekolah'=> $row['peringkat_sekolah'],
+            ]);
               
-    //     }
+        }
 
-    //     if($dataSekolah!=null){
-    //         return array($dataSekolah);
-    //     }
+        if($dataSekolah!=null){
+            return array($dataSekolah);
+        }
         
 
-    //     if(isset($row['npm'])){  
-    //         $nama_mahasiswa_sama= Mahasiswa::where('id_mahasiswa','=',$row['npm'])->get()->count();
-    //         if($nama_mahasiswa_sama==0){
-    //                 $dataMahasiswa=new Mahasiswa([
-    //                 'id_mahasiswa'=> $row['npm'],
-    //                 'id_sekolah'=>  DB::table('sekolah')->
-    //                                 select('id_sekolah')->
-    //                                 where('nama_sekolah','=',$row['asal_sma'])->
-    //                                 value('id_sekolah'),
-    //                 'nama_mahasiswa'=> $row['nama'],
-    //                 'IPK'=> $row['ipk_terakhir'],
-    //             ]);
-    //         }
-    //    }
-    //     if($dataMahasiswa!=null){
-    //         return array($dataMahasiswa);
-    //     }
+        if(isset($row['npm'])){  
+            $nama_mahasiswa_sama= Mahasiswa::where('id_mahasiswa','=',$row['npm'])->get()->count();
+            if($nama_mahasiswa_sama==0){
+                    $dataMahasiswa=new Mahasiswa([
+                    'id_mahasiswa'=> $row['npm'],
+                    'id_sekolah'=>  DB::table('sekolah')->
+                                    select('id_sekolah')->
+                                    where('nama_sekolah','=',$row['asal_sma'])->
+                                    value('id_sekolah'),
+                    'nama_mahasiswa'=> $row['nama'],
+                    'IPK'=> $row['ipk_terakhir'],
+                ]);
+            }
+       }
+        if($dataMahasiswa!=null){
+            return array($dataMahasiswa);
+        }
         
 
 
-    //     if(isset($row['no_pmb'])){
-    //         $nama_siswa_sama = Siswa::where('nama_siswa','=',$row['nama'])->get()->count();
-    //         if ($nama_siswa_sama==0){
-    //                 $dataSiswa=new Siswa([
-    //                     'id_siswa'=>$row['no_pmb'],
-    //                     'id_sekolah' => DB::table('sekolah')->
-    //                                     select('id_sekolah')->
-    //                                     where('nama_sekolah','=',$row['asal_sma'])->
-    //                                     value('id_sekolah'),
+        if(isset($row['no_pmb'])){
+            $nama_siswa_sama = Siswa::where('nama_siswa','=',$row['nama'])->get()->count();
+            if ($nama_siswa_sama==0){
+                    $dataSiswa=new Siswa([
+                        'id_siswa'=>$row['no_pmb'],
+                        'id_sekolah' => DB::table('sekolah')->
+                                        select('id_sekolah')->
+                                        where('nama_sekolah','=',$row['asal_sma'])->
+                                        value('id_sekolah'),
                         
-    //                     'nama_siswa' => $row['nama'],
+                        'nama_siswa' => $row['nama'],
                         
-    //                 ]) ;
-    //             }   
-    //     }
+                    ]) ;
+                }   
+        }
 
-    //     if($dataSiswa!=null){
-    //         return array($dataSiswa);
-    //     }
+        if($dataSiswa!=null){
+            return array($dataSiswa);
+        }
 
 
 

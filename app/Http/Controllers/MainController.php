@@ -272,7 +272,7 @@ class MainController extends Controller
         // }
 
         // dump($CR);
-        // dump($bobotPrioritasAntarKriteria);
+        dump($bobotPrioritasAntarKriteria);
 
         // dump($hasilKategoriAlternatif);
 
