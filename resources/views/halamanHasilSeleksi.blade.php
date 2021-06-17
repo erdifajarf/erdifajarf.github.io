@@ -15,7 +15,7 @@
 
 
 <div class="tombolLogout">  
-    <a href="{{ url('halamanLogin') }}" class="btn btn-success"> <img src="/img/logo_logout.png">  Keluar </a>
+    <a href="{{ url('halamanLogin') }}" class="btn"> <img src="/img/logo_logout.png">  Keluar </a>
 </div>
 
 <div class="container">
@@ -39,7 +39,7 @@
         <div class="tombolDownload">
             <form action="{{ route('exportData') }}"  enctype="multipart/form-data" method="POST" class="tabelDownload">
                 @csrf
-                <button class="submit btn btn-success"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
+                <button class="submit btn"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
                 <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
                 <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
                 </svg></button>
@@ -51,14 +51,14 @@
         <table class="table table-striped">
 
             <tr>
-                <th class="table-info">No</th>
-                <th class="table-info">No.PMB</th>
-                <th class="table-info">Nama</th>
-                <th class="table-info">Asal Sekolah</th>
-                <th class="table-info">Peringkat Sekolah</th>
-                <th class="table-info">Rata-rata Nilai Raport</th>
-                <th class="table-info">Rata-rata IPK Alumni</th>
-                <th class="table-info">Bobot Akhir (AHP)</th>
+                <th class="table-primary">No</th>
+                <th class="table-primary">No.PMB</th>
+                <th class="table-primary">Nama</th>
+                <th class="table-primary">Asal Sekolah</th>
+                <th class="table-primary">Peringkat Sekolah</th>
+                <th class="table-primary">Rata-rata Nilai Raport</th>
+                <th class="table-primary">Rata-rata IPK Alumni</th>
+                <th class="table-primary">Bobot Akhir (AHP)</th>
 
             </tr>
 

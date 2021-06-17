@@ -33,7 +33,6 @@ Route::get('/halamanUtama',[MainController::class,'showDataPeminat']);
 Route::get('/halamanPenentuanBobotDanKuota',[MainController::class,'pindahHalamanPenentuanBobot']);
 Route::post('/halamanHasilSeleksi',[MainController::class,'main'])->name('jalankanSeleksi');
 
-
 Route::post('/halamanPenentuaBobotDanKuota',[MainController::class,'exportData'])->name('exportData');
 
 

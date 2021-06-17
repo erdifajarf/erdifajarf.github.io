@@ -19,7 +19,7 @@
       <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
         <div class="card card-signin my-5">
           <div class="card-body">
-            <h5 class="card-title text-center">Masuk ke sistem PMDK menggunakan username dan password</h5>
+            <h4 class="text-center">Masuk ke sistem PMDK menggunakan username dan password</h4>
             
             <form class="form-signin formLogin" action="{{ route('jalankanLogin') }}" method="POST" >
             @csrf
@@ -33,7 +33,7 @@
                 <label for="inputPassword">Password</label>
               </div>
 
-              <button class="btn btn-lg btn-success btn-block text-uppercase tombolLogin" >Login</button>
+              <button class="btn btn-lg btn-block text-uppercase tombolLogin" >Login</button>
             </form>
 
           </div>

@@ -13,8 +13,6 @@ use Maatwebsite\Excel\Concerns\WithStyles;
 
 
 
-
-
 class DataExport implements FromCollection, WithHeadings,WithColumnWidths,WithStyles
 {
     public function collection()

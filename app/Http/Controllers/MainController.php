@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 use App\Imports\DataImport;
+use App\Imports\DataImport2;
 use Maatwebsite\Excel\Facades\Excel;
 use Alert;
 
@@ -37,15 +38,13 @@ class MainController extends Controller
             $matpel_ing = MataPelajaran::select('nama_mata_pelajaran')->where('id_mata_pelajaran','=','1')->first();
             $matpel_mat = MataPelajaran::select('nama_mata_pelajaran')->where('id_mata_pelajaran','=','2')->first();
 
-            
             $noPmb=Nilai::select('id_siswa')->where('id_nilai','=',$count_id_nilai)->first(); 
-           
+        
             $nama_sekolah= Siswa::join('sekolah', 'siswa.id_sekolah', '=', 'sekolah.id_sekolah')
             ->select('sekolah.nama_sekolah')->where('siswa.id_siswa','=',$noPmb->id_siswa)->first(); 
             
             $peringkat_sekolah= Siswa::join('sekolah', 'siswa.id_sekolah', '=', 'sekolah.id_sekolah')
             ->select('sekolah.peringkat_sekolah')->where('siswa.id_siswa','=',$noPmb->id_siswa)->first();
-
 
 
             $sma_siswa = new SekolahController($nama_sekolah, $peringkat_sekolah);
@@ -272,7 +271,7 @@ class MainController extends Controller
         // }
 
         // dump($CR);
-        dump($bobotPrioritasAntarKriteria);
+        // dump($bobotPrioritasAntarKriteria);
 
         // dump($hasilKategoriAlternatif);
 
@@ -342,28 +341,36 @@ class MainController extends Controller
         }
     }
 
-
     public function importData() 
     {
-
+        DB::statement('SET FOREIGN_KEY_CHECKS=0');
+        Nilai::truncate();
+        Siswa::truncate();
         try {
-            Nilai::truncate();
             Excel::import(new DataImport,request()->file('file'));
+            Excel::import(new DataImport2,request()->file('file'));
             return back();
         } catch (NoTypeDetectedException $e) {
             Alert::warning('Import gagal','Silakan gunakan file yang sesuai');
             return back();
         }
-
     }
 
     //MENAMPILKAN DATA PEMINAT PMDK DI HALAMAN UTAMA
     function showDataPeminat(){
-        $data=Nilai::join('siswa','nilai.id_siswa','=','siswa.id_siswa')->paginate(14);
-
         $jumlahNilai = count(Nilai::all());
 
-        // dump($jumlahNilai/2);
+        //Proses menyensor nama siswa
+        $isiNilai = count(Nilai::select('id_nilai')->get()->toArray());
+        if($isiNilai>0){
+            $noPmb= DB::table('siswa')->select('id_siswa')->get()->toArray();
+            sort($noPmb);
+            for($i=0; $i<count($noPmb); $i++){
+                Siswa::where('id_siswa',$noPmb[$i]->id_siswa)->update(['nama_siswa'=>'siswa_'.($i+1)]);
+            }
+        }
+        $data=Nilai::join('siswa','nilai.id_siswa','=','siswa.id_siswa')->paginate(14);
+
         return view('halamanUtama',['nilais'=>$data,'jumlahNilai'=>$jumlahNilai]);
 
     }

@@ -9,21 +9,28 @@ body{
 }
 
 .header .judulWeb{
-    margin-left:15%;
+    margin-left:23%;
     margin-top:-12%;
     padding:2.5%;
   }
   
   .header .judulWeb h1{
-    font-size: 350%;
+    font-size: 360%;
+    font-weight:600;
   }
+
   
   
   .header .logoUnpar{
-    width:11%;
-    margin-left:5%;
+    width:9%;
+    margin-left:3%;
+
   }
   
+  .logoIfUnpar{
+    width:10%;
+    
+  }
   
   
   .w-5{
@@ -79,7 +86,22 @@ body{
     position: relative;
     float:right;
     margin-top:0.2%;
+    background-color:cornflowerblue;
   }
+
+  .tombolUpload .btn{
+    color:white;
+    fill:white;
+  }
+
+  .tombolUpload:hover{
+    cursor:pointer;
+    background-color:lightskyblue;
+  }
+
+
+
+
 
     
   .areaNamaFile{
@@ -98,19 +120,19 @@ body{
     }
     
   .tombolNextPrev a:hover{
-      background-color:darkgreen;
+      background-color:lightskyblue;
       color:white;
     }
     
   .tombolNextPrev .previous {
       margin-top:5%;
-      background-color: green;
+      background-color: cornflowerblue;
       color: white;
       float:left;
     }
     
   .tombolNextPrev .next  {
-      background-color: green;
+      background-color: cornflowerblue;
       color: white;
     }
     
@@ -207,6 +229,20 @@ body{
   .tombolSeleksi{
     margin-left:41%;
     margin-top:-6%;
+    background-color:cornflowerblue;
+    border-radius: 20px;
+    width:13%;
+  }
+
+  .tombolSeleksi:hover{
+    background-color:lightskyblue;
+  }
+
+  .tombolSeleksi .btn{
+    color:white;
+    font-size:110%;
+    font-weight: 400;
+    margin-left:5%;
   }
   
   
@@ -214,18 +250,26 @@ body{
     width:42%;
     margin-left:79%;
     margin-top:-43%;
-  }
+ 
+}
+  
 
   .tombolLihatKeterangan{
     float:right;
     margin-top:-50.5%;
     margin-right:11%;
     width:3.7%;
+    background-color:cornflowerblue;
+  }
+
+  .tombolLihatKeterangan:hover{
+  background-color:lightskyblue;
   }
 
   .tombolLihatKeterangan img{
     width:135%;
     margin-left:-16%;
+
   }
 
   .tagKeteranganInput h5{
@@ -237,6 +281,7 @@ body{
   
   .tabelKeterangan th{
     height:2px;
+    
   }
 
   .tagOpsi1 p {
@@ -290,19 +335,37 @@ body{
   .tombolDownload{
     float:right;
     margin-top:-2%;
+    background-color:cornflowerblue;
+    height: 3%;
   }
+
+  .tombolDownload .btn{
+    color:white;
+    width:20%;
+  }
+
+  .tombolDownload:hover{
+    cursor:pointer;
+    background-color:lightskyblue;
+  }
+
+
 
   .tabelHasilSeleksi{
     margin-top:5%;
   }
   
   
-  
-
-
-
+  .frameLogin h4{
+    font-weight: 600;
+  }
   .tombolLogin{
     margin-left: 40%;
+    background-color: cornflowerblue;
+  }
+
+  .tombolLogin:hover{
+    background-color:lightskyblue;
   }
 
   .tombolLogout {
@@ -310,7 +373,15 @@ body{
     margin-top:-6.3%;
     position:absolute;
     width:7%;
+    background-color:cornflowerblue;
+    border-radius: 20px;
+  }
 
+  .tombolLogout a{
+    color:white;
+    text-decoration:none;
+    font-size:130%;
+    font-weight: 400;
   }
 
   .tombolLogout img{

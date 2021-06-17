@@ -12,7 +12,7 @@
 
 <body>
 <div class="tombolLogout">  
-    <a href="{{ url('halamanLogin') }}" class="btn btn-success"> <img src="/img/logo_logout.png">  Keluar </a>
+    <a href="{{ url('halamanLogin') }}" class="btn"> <img src="/img/logo_logout.png">  Keluar </a>
 </div>
 
 <div class="container">
@@ -156,7 +156,7 @@
         </div>
 
         <div class="tombolSeleksi">
-            <button type="submit" class="btn btn-success" href="{{ route('jalankanSeleksi') }}">Jalankan Seleksi </a>
+            <button type="submit" class="btn" href="{{ route('jalankanSeleksi') }}">Jalankan Seleksi </a>
         </div>
 
     </form>
@@ -171,7 +171,7 @@
     </div>
 
     <div class="tombolLihatKeterangan ">
-        <button type="button" class="btn btn-success " id="tombolLihatKeterangan" onclick="showTable()">   <img src="/img/logo_help.png"></button>
+        <button type="button" class="btn" id="tombolLihatKeterangan" onclick="showTable()">   <img src="/img/logo_help.png"></button>
     </div>
 
  
@@ -184,8 +184,8 @@
     
 <table class="table tabelKeterangan" id="tabelKeterangan" style="display:none;">
     <tr>
-        <th class="table-info">Input (AHP)</th>
-        <th class="table-info">Keterangan</th>
+        <th class="table-primary">Input (AHP)</th>
+        <th class="table-primary">Keterangan</th>
     </tr>
 
 
