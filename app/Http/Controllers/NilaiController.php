@@ -82,7 +82,6 @@ class NilaiController extends Controller
     }
 
 
-
     function getX1_p() {
         return $this->X1_p;
     }

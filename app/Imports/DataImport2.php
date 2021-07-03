@@ -65,7 +65,7 @@ class DataImport2 implements ToModel, WithHeadingRow
                 }
             }
             else{
-                Alert::warning('Import gagal','Silakan gunakan file yang sesuai');
+                // Alert::warning('Import gagal','Silakan gunakan file yang sesuai');
             }   
 
     }

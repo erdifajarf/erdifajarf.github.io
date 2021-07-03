@@ -161,7 +161,7 @@ class MainController extends Controller
     
         // Hitung CR kriteria
         $CR = $kelasFuzzyAhp->hitungConsistencyRatio($bobotAwalKriteria);
-          
+        // dump($CR);
         if($CR<=0.1){
             Alert::success('Berhasil','Lihat hasil seleksi');
             $bobotPrioritasAntarKriteria = $kelasFuzzyAhp->hitungBobotPrioritasAntarKriteria();
@@ -348,12 +348,14 @@ class MainController extends Controller
         Siswa::truncate();
         try {
             Excel::import(new DataImport,request()->file('file'));
-            Excel::import(new DataImport2,request()->file('file'));
-            return back();
         } catch (NoTypeDetectedException $e) {
-            Alert::warning('Import gagal','Silakan gunakan file yang sesuai');
+            // Alert::warning('Import gagal','Silakan gunakan file yang sesuai');
             return back();
         }
+
+        Excel::import(new DataImport2,request()->file('file'));
+        return back();
+     
     }
 
     //MENAMPILKAN DATA PEMINAT PMDK DI HALAMAN UTAMA
