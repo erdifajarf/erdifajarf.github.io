@@ -64,9 +64,7 @@ class DataImport2 implements ToModel, WithHeadingRow
                     return array($dataNilai);
                 }
             }
-            else{
-                // Alert::warning('Import gagal','Silakan gunakan file yang sesuai');
-            }   
+
 
     }
 

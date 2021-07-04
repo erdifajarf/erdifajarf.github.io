@@ -349,7 +349,7 @@ class MainController extends Controller
         try {
             Excel::import(new DataImport,request()->file('file'));
         } catch (NoTypeDetectedException $e) {
-            // Alert::warning('Import gagal','Silakan gunakan file yang sesuai');
+            Alert::warning('Import gagal','Silakan gunakan file yang sesuai');
             return back();
         }
 
