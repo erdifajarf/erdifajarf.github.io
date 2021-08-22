@@ -7,6 +7,7 @@ use App\Models\Sekolah;
 use App\Models\Nilai;
 use App\Models\MataPelajaran;
 use App\Models\Mahasiswa;
+use App\Models\KKM;
 
 use Illuminate\Support\Facades\DB;
 
@@ -32,42 +33,41 @@ class DataImport2 implements ToModel, WithHeadingRow
 
     public function model(array $row)
     {
-        $dataNilai=null;
+        $dataKKM=null;
 
-            if(isset($row['101_p']) && isset($row['asal_sma']) && isset($row['peringkat_sekolah'])){
-                $dataNilai=new Nilai([
-                        'id_siswa' => DB::table('siswa')->
-                                    select('id_siswa')->
-                                    where('nama_siswa','=',$row['nama'])->
-                                    value('id_siswa'),
-                        'id_mata_pelajaran' => DB::table('mata_pelajaran')->
+        if(isset($row['101_kkm'])){  
+        $a=DB::table('sekolah')->select('id_sekolah')->where('nama_sekolah','=',$row['asal_sma'])->value('id_sekolah');
+        $b=DB::table('KKM')->select('id_sekolah')->where('id_sekolah','=',$a)->get()->count();
+        if($b<=1){
+        $dataKKM=new KKM([
+            'id_sekolah'=>  DB::table('sekolah')->
+                                    select('id_sekolah')->
+                                    where('nama_sekolah','=',$row['asal_sma'])->
+                                    value('id_sekolah'),
+            'id_mata_pelajaran'=> DB::table('mata_pelajaran')->
                                     select('id_mata_pelajaran')->
                                     where('nama_mata_pelajaran','=',$row['mata_pelajaran'])->
-                                    value('id_mata_pelajaran'),
-                            
-                        '101_KKM'=>$row['101_kkm'],
-                        '101_p'=>$row['101_p'],
-                        '101_t'=>$row['101_t'],
-                        '102_KKM'=>$row['102_kkm'],
-                        '102_p'=>$row['102_p'],
-                        '102_t'=>$row['102_t'],
-                        '111_KKM'=>$row['111_kkm'],
-                        '111_p'=>$row['111_p'],
-                        '111_t'=>$row['111_t'],
-                        '112_KKM'=>$row['112_kkm'],
-                        '112_p'=>$row['112_p'],
-                        '112_t'=>$row['112_t'],
-                    ]);
+                                    value('id_mata_pelajaran'),                
+            '101_KKM'  => $row['101_kkm'],
+            '102_KKM'  => $row['102_kkm'],
+            '111_KKM'  => $row['111_kkm'],
+            '112_KKM'  => $row['112_kkm'],
+            ]);
+        }
+    }
 
-                if($dataNilai!=null ){
-                    Alert::success('Import data nilai siswa berhasil','Silakan proses di halaman selanjutnya');
-                    return array($dataNilai);
-                }
-            }
-
-
+        if($dataKKM!=null){
+            return array($dataKKM);
+        }
+             
+                
     }
 
 
+     
 
+            
 }
+
+
+

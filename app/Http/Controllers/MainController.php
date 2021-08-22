@@ -5,6 +5,7 @@ use App\Models\HasilSeleksi;
 use App\Models\Mahasiswa;
 use App\Models\MataPelajaran;
 use App\Models\Siswa;
+use App\Models\KKM;
 
 
 use Illuminate\Http\Request;
@@ -12,6 +13,7 @@ use Illuminate\Support\Facades\DB;
 
 use App\Imports\DataImport;
 use App\Imports\DataImport2;
+use App\Imports\DataImport3;
 use Maatwebsite\Excel\Facades\Excel;
 use Alert;
 
@@ -50,37 +52,73 @@ class MainController extends Controller
             $sma_siswa = new SekolahController($nama_sekolah, $peringkat_sekolah);
 
             //NILAI MATEMATIKA
-            $x1_mat_kkm=Nilai::select('101_KKM')->where('id_nilai','=',$count_mat)->first();
+            // $x1_mat_kkm=Nilai::select('101_KKM')->where('id_nilai','=',$count_mat)->first();
+        //coba
+            $siswa_mat= Nilai::select('id_siswa')->where('id_nilai','=',$count_mat)->first();
+            $siswa_mat_idsekolah= Siswa::select('id_sekolah')->where('id_siswa','=',$siswa_mat->id_siswa)->first();
+            $x1_mat_kkm=KKM::select('101_KKM')->where('id_sekolah','=',$siswa_mat_idsekolah->id_sekolah)->where('id_mata_pelajaran','=','2')->first();
+            $x1_mat_kkm=$x1_mat_kkm->{'101_KKM'};
+        //
             $x1_mat_p=Nilai::select('101_p')->where('id_nilai','=',$count_mat)->first();
             $x1_mat_t=Nilai::select('101_t')->where('id_nilai','=',$count_mat)->first();
 
-            $x2_mat_kkm=Nilai::select('102_KKM')->where('id_nilai','=',$count_mat)->first();
+            // $x2_mat_kkm=Nilai::select('102_KKM')->where('id_nilai','=',$count_mat)->first();
+            //coba
+            $x2_mat_kkm=KKM::select('102_KKM')->where('id_sekolah','=',$siswa_mat_idsekolah->id_sekolah)->where('id_mata_pelajaran','=','2')->first();
+            $x2_mat_kkm=$x2_mat_kkm->{'102_KKM'};
+            //
             $x2_mat_p=Nilai::select('102_p')->where('id_nilai','=',$count_mat)->first();
             $x2_mat_t=Nilai::select('102_t')->where('id_nilai','=',$count_mat)->first();
 
-            $xi1_mat_kkm=Nilai::select('111_KKM')->where('id_nilai','=',$count_mat)->first();
+            // $xi1_mat_kkm=Nilai::select('111_KKM')->where('id_nilai','=',$count_mat)->first();
+            //coba
+            $xi1_mat_kkm=KKM::select('111_KKM')->where('id_sekolah','=',$siswa_mat_idsekolah->id_sekolah)->where('id_mata_pelajaran','=','2')->first();
+            $xi1_mat_kkm=$xi1_mat_kkm->{'111_KKM'};
+            //            
             $xi1_mat_p=Nilai::select('111_p')->where('id_nilai','=',$count_mat)->first();
             $xi1_mat_t=Nilai::select('111_t')->where('id_nilai','=',$count_mat)->first();
 
-            $xi2_mat_kkm=Nilai::select('112_KKM')->where('id_nilai','=',$count_mat)->first();
+            // $xi2_mat_kkm=Nilai::select('112_KKM')->where('id_nilai','=',$count_mat)->first();
+            //coba
+            $xi2_mat_kkm=KKM::select('112_KKM')->where('id_sekolah','=',$siswa_mat_idsekolah->id_sekolah)->where('id_mata_pelajaran','=','2')->first();
+            $xi2_mat_kkm=$xi2_mat_kkm->{'112_KKM'};
+            // 
             $xi2_mat_p=Nilai::select('112_p')->where('id_nilai','=',$count_mat)->first();
             $xi2_mat_t=Nilai::select('112_t')->where('id_nilai','=',$count_mat)->first();
 
 
             //NILAI B.Inggriss
-            $x1_ing_kkm=Nilai::select('101_KKM')->where('id_nilai','=',$count_ing)->first();
+            // $x1_ing_kkm=Nilai::select('101_KKM')->where('id_nilai','=',$count_ing)->first();
+            //coba
+            $siswa_ing= Nilai::select('id_siswa')->where('id_nilai','=',$count_ing)->first();
+            $siswa_ing_idsekolah= Siswa::select('id_sekolah')->where('id_siswa','=',$siswa_ing->id_siswa)->first();
+            $x1_ing_kkm=KKM::select('101_KKM')->where('id_sekolah','=',$siswa_ing_idsekolah->id_sekolah)->where('id_mata_pelajaran','=','1')->first();
+            $x1_ing_kkm=$x1_ing_kkm->{'101_KKM'};
+            //            
             $x1_ing_p=Nilai::select('101_p')->where('id_nilai','=',$count_ing)->first();
             $x1_ing_t=Nilai::select('101_t')->where('id_nilai','=',$count_ing)->first();
 
-            $x2_ing_kkm=Nilai::select('102_KKM')->where('id_nilai','=',$count_ing)->first();
+            // $x2_ing_kkm=Nilai::select('102_KKM')->where('id_nilai','=',$count_ing)->first();
+            //coba
+            $x2_ing_kkm=KKM::select('102_KKM')->where('id_sekolah','=',$siswa_ing_idsekolah->id_sekolah)->where('id_mata_pelajaran','=','1')->first();
+            $x2_ing_kkm=$x2_ing_kkm->{'102_KKM'};
+            //  
             $x2_ing_p=Nilai::select('102_p')->where('id_nilai','=',$count_ing)->first();
             $x2_ing_t=Nilai::select('102_t')->where('id_nilai','=',$count_ing)->first();
 
-            $xi1_ing_kkm=Nilai::select('111_KKM')->where('id_nilai','=',$count_ing)->first();
+            // $xi1_ing_kkm=Nilai::select('111_KKM')->where('id_nilai','=',$count_ing)->first();
+            //coba
+            $xi1_ing_kkm=KKM::select('111_KKM')->where('id_sekolah','=',$siswa_ing_idsekolah->id_sekolah)->where('id_mata_pelajaran','=','1')->first();
+            $xi1_ing_kkm=$xi1_ing_kkm->{'111_KKM'};
+            //              
             $xi1_ing_p=Nilai::select('111_p')->where('id_nilai','=',$count_ing)->first();
             $xi1_ing_t=Nilai::select('111_t')->where('id_nilai','=',$count_ing)->first();
 
-            $xi2_ing_kkm=Nilai::select('112_KKM')->where('id_nilai','=',$count_ing)->first();
+            // $xi2_ing_kkm=Nilai::select('112_KKM')->where('id_nilai','=',$count_ing)->first();
+            //coba
+            $xi2_ing_kkm=KKM::select('112_KKM')->where('id_sekolah','=',$siswa_ing_idsekolah->id_sekolah)->where('id_mata_pelajaran','=','1')->first();
+            $xi2_ing_kkm=$xi2_ing_kkm->{'112_KKM'};
+            //            
             $xi2_ing_p=Nilai::select('112_p')->where('id_nilai','=',$count_ing)->first();
             $xi2_ing_t=Nilai::select('112_t')->where('id_nilai','=',$count_ing)->first();
 
@@ -346,14 +384,16 @@ class MainController extends Controller
         DB::statement('SET FOREIGN_KEY_CHECKS=0');
         Nilai::truncate();
         Siswa::truncate();
+        KKM::truncate();
         try {
             Excel::import(new DataImport,request()->file('file'));
         } catch (NoTypeDetectedException $e) {
             Alert::warning('Import gagal','Silakan gunakan file yang sesuai');
             return back();
         }
-
         Excel::import(new DataImport2,request()->file('file'));
+    
+        Excel::import(new DataImport3,request()->file('file'));
         return back();
      
     }
@@ -363,14 +403,15 @@ class MainController extends Controller
         $jumlahNilai = count(Nilai::all());
 
         //Proses menyensor nama siswa
-        $isiNilai = count(Nilai::select('id_nilai')->get()->toArray());
-        if($isiNilai>0){
-            $noPmb= DB::table('siswa')->select('id_siswa')->get()->toArray();
-            sort($noPmb);
-            for($i=0; $i<count($noPmb); $i++){
-                Siswa::where('id_siswa',$noPmb[$i]->id_siswa)->update(['nama_siswa'=>'siswa_'.($i+1)]);
-            }
-        }
+        // $isiNilai = count(Nilai::select('id_nilai')->get()->toArray());
+        // if($isiNilai>0){
+        //     $noPmb= DB::table('siswa')->select('id_siswa')->get()->toArray();
+        //     sort($noPmb);
+        //     for($i=0; $i<count($noPmb); $i++){
+        //         Siswa::where('id_siswa',$noPmb[$i]->id_siswa)->update(['nama_siswa'=>'siswa_'.($i+1)]);
+        //     }
+        // }
+        
         $data=Nilai::join('siswa','nilai.id_siswa','=','siswa.id_siswa')->paginate(14);
 
         return view('halamanUtama',['nilais'=>$data,'jumlahNilai'=>$jumlahNilai]);

@@ -7,6 +7,7 @@ use App\Models\Sekolah;
 use App\Models\Nilai;
 use App\Models\MataPelajaran;
 use App\Models\Mahasiswa;
+use App\Models\KKM;
 
 use Illuminate\Support\Facades\DB;
 
@@ -36,7 +37,8 @@ class DataImport implements ToModel, WithHeadingRow
         $dataSiswa=null;
         $dataNilai=null;
         $dataMahasiswa=null;
-         
+        $dataKKM=null;
+
         $nama_sekolah_sama = Sekolah::where('nama_sekolah','=',$row['asal_sma'])->get()->count();
         if($nama_sekolah_sama===0)
         {
@@ -44,14 +46,15 @@ class DataImport implements ToModel, WithHeadingRow
                 'nama_sekolah'  => $row['asal_sma'],
                 'peringkat_sekolah'=> $row['peringkat_sekolah'],
             ]);
-              
+            
         }
-
+        
         if($dataSekolah!=null){
             return array($dataSekolah);
         }
         
-       
+        
+
         if(isset($row['npm'])){  
             $npm_sama = Mahasiswa::where('id_mahasiswa','=',$row['npm'])->get()->count();
             if($npm_sama==0){
@@ -82,7 +85,6 @@ class DataImport implements ToModel, WithHeadingRow
                                         select('id_sekolah')->
                                         where('nama_sekolah','=',$row['asal_sma'])->
                                         value('id_sekolah'),
-                        
                         'nama_siswa' => $row['nama'],
                         
                     ]) ;

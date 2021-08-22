@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSiswaTable extends Migration
+class CreateKKMTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,18 @@ class CreateSiswaTable extends Migration
      */
     public function up()
     {
-        Schema::create('siswa', function (Blueprint $table) {
-            $table->increments('id_siswa');
+        Schema::create('KKM', function (Blueprint $table) {
+            $table->increments('id_KKM');
             $table->unsignedInteger('id_sekolah')->nullable();
             $table->foreign('id_sekolah')->references('id_sekolah')->on('sekolah');
-            $table->string('nama_siswa',50);
+            $table->unsignedInteger('id_mata_pelajaran')->nullable();
+            $table->foreign('id_mata_pelajaran')->references('id_mata_pelajaran')->on('mata_pelajaran');
+            $table->double('101_KKM');
+            $table->double('102_KKM');
+            $table->double('111_KKM');
+            $table->double('112_KKM');
 
         });
-
-
     }
 
     /**
@@ -31,6 +34,6 @@ class CreateSiswaTable extends Migration
      */
     public function down()
     {
-        Schema::drop('siswa');
+        Schema::dropIfExists('KKM');
     }
 }
